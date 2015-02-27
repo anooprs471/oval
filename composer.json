@@ -1,0 +1,14 @@
+{
+    "name": "creatix/oval",
+    "authors": [
+        {
+            "name": "lijith",
+            "email": "creativequb@gmail.com"
+        }
+    ],
+    "require": {
+        "philo/laravel-blade": "~2.1",
+        "cartalyst/sentry": "~2.1",
+        "illuminate/database": "4.2.*"
+    }
+}
