@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be14d120b3cca3190d2e48cd90e03f7a",
+    "hash": "72fc02a371f9a4e4d4095926b97e5d3c",
     "packages": [
         {
             "name": "cartalyst/sentry",
@@ -385,16 +385,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bb87460c995d97fe55b39e65f6ffb7f64b0a941e"
+                "reference": "48cb9ae6d9436e156316a59d198cb1ca797f8cd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bb87460c995d97fe55b39e65f6ffb7f64b0a941e",
-                "reference": "bb87460c995d97fe55b39e65f6ffb7f64b0a941e",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/48cb9ae6d9436e156316a59d198cb1ca797f8cd8",
+                "reference": "48cb9ae6d9436e156316a59d198cb1ca797f8cd8",
                 "shasum": ""
             },
             "require": {
@@ -421,13 +421,13 @@
                 }
             ],
             "description": "A simple API extension for DateTime.",
-            "homepage": "https://github.com/briannesbitt/Carbon",
+            "homepage": "http://carbon.nesbot.com",
             "keywords": [
                 "date",
                 "datetime",
                 "time"
             ],
-            "time": "2015-02-06 05:07:29"
+            "time": "2015-03-03 03:24:43"
         },
         {
             "name": "philo/laravel-blade",
@@ -468,6 +468,45 @@
                 "laravel"
             ],
             "time": "2014-12-02 20:44:48"
+        },
+        {
+            "name": "railto/flash-messages",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railto/flash-messages.git",
+                "reference": "78dbd2aad98eff6d509e1a7f3be1fc75df6d1f9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railto/flash-messages/zipball/78dbd2aad98eff6d509e1a7f3be1fc75df6d1f9d",
+                "reference": "78dbd2aad98eff6d509e1a7f3be1fc75df6d1f9d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/flash_messages.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Railton",
+                    "email": "marksrailton@gmail.com",
+                    "homepage": "http://railto.io"
+                }
+            ],
+            "description": "Simple flash messages for PHP using bootstrap 3 alerts",
+            "keywords": [
+                "flash",
+                "flash messages",
+                "messages"
+            ],
+            "time": "2014-09-25 21:24:33"
         },
         {
             "name": "symfony/finder",

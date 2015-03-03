@@ -1,0 +1,33 @@
+Hi,
+
+Insert User  (user table - radchek)
+
+INSERT INTO radcheck(id,username,attribute,op,value)VALUES('4','user4','Cleartext-Password',':=','pass4');
+
+Add user to group    (user group mapping table - radusergroup)    (group 4 will be created via optimus web interface previously)
+
+INSERT INTO radusergroup(username,groupname,priority)values('user4','group4','0');
+
+List User   ( optimus web interface user listing table - userinfo)
+
+INSERT INTO userinfo(username,firstname,mobilephone,creationdate)VALUES('user4','UNKNOWN','1234567890','$currentdate');
+
+
+creation date required...must be done through php
+
+Groups
+
+List groups    ( group table radgroupcheck and radgroupreply)
+
+ 	SELECT distinct(groupname) FROM radgroupreply UNION SELECT distinct(groupname) FROM radgroupcheck;
+
+Accounting   ( accounting such as time and data used table - radacct )   [ acctstarttime - time when internet usage started, acctstoptime - time when internet usage stopped, acctinputoctets and acctoutputoctets - how much data is uploaded/downloaded ]
+
+SELECT radacct.username,radacct.acctstarttime.radacct.acctstoptime,radacct.acctsessiontime,radacct.acctinputoctets,radacct.acctoutputoctets,(radacct.acctinputoctets+radacct.acctoutputoctets) from radacct where username = 'user10';
+
+
+
+
+acctsessiontime - seconds to HH:MM:SS or days weeks months etc (function file attached) { pages_common.php }
+acctinputoctets  - bytes  to MB or GB                                              (              "                ) 
+

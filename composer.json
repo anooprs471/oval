@@ -9,6 +9,11 @@
     "require": {
         "philo/laravel-blade": "~2.1",
         "cartalyst/sentry": "~2.1",
-        "illuminate/database": "4.2.*"
+        "illuminate/database": "4.2.*",
+        "railto/flash-messages": "~1.0",
+        "nesbot/carbon": "~1.15"
+    },
+    "autoload": {
+        "classmap": ["App/"]
     }
 }
