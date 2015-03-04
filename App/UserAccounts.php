@@ -110,6 +110,15 @@ class UserAccounts {
 	}
 
 	/**
+	 * return current users id
+	 *
+	 * @return string
+	 **/
+	public function getCurrentId(){
+		return Sentry::getUser()->id;
+	}
+
+	/**
 	 * check if the user is admin
 	 *
 	 * @return boolean
@@ -258,6 +267,71 @@ class UserAccounts {
 		{
 		    //echo 'User was not found.';
 		}
+	}
+
+	/**
+	 * update name of operator
+	 *
+	 * @return void
+	 **/
+	public function updateProfile($first_name,$last_name){
+		//Sentry::getUser()->id
+    try
+		{
+
+		    // Update the user details
+		    $this->user->first_name = $first_name;
+		    $this->user->last_name = $last_name;
+
+		    // Update the user
+		    if ($this->user->save())
+		    {
+		        // User information was updated
+		    }
+		    else
+		    {
+		        // User information was not updated
+		    }
+		}
+		catch (Cartalyst\Sentry\Users\UserExistsException $e)
+		{
+		    echo 'User with this login already exists.';
+		}
+	}
+
+	/**
+	 * get first and lastname of operator
+	 *
+	 * @return array
+	 * @author 
+	 **/
+	public function getOperatorName(){
+		return array(
+			'first-name' => $this->user->first_name,
+			'last-name' => $this->user->last_name
+			);
+	}
+
+	/**
+	 * change password by operator
+	 *
+	 * @return string
+	 * @author 
+	 **/
+	public function operatorChangePassword($old_password,$new_password){
+		$resetCode = $this->user->getResetPasswordCode();
+
+		if($this->user->checkPassword($old_password)){
+        if ($this->user->attemptResetPassword($resetCode, $new_password)){
+          return 'Password reset passed';
+        }
+        else{
+            return 'Password reset failed';
+        }
+    }
+    else{
+        return 'Password does not match.';
+    }
 	}
 
 }

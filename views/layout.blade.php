@@ -97,21 +97,30 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="index.html">
-                        <i class="fa fa-dashboard"></i>
-                        <span>Dashboard</span>
-                    </a>
+                    @if($type == 'admin')
+                        <a class="active" href="{{$site_url}}admin-home.php">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    @elseif($type == 'operator') 
+                        <a class="active" href="{{$site_url}}op-home.php">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    @endif
                 </li>
-                <li class="sub-menu">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>Users</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="boxed_page.html">All Users</a></li>
-                        <li><a href="horizontal_menu.html">Create User</a></li>
-                    </ul>
-                </li>
+                @if($type == 'admin')
+                    <li class="sub-menu">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Users</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{$site_url}}admin-list-users.php">All Users</a></li>
+                            <li><a href="{{$site_url}}admin-create-user.php">Create User</a></li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-laptop"></i>
