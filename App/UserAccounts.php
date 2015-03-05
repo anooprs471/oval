@@ -26,11 +26,16 @@ class UserAccounts {
 		]);
 
 		$this->msg = '';
+		$this->capsule->setAsGlobal();
 
 		$this->capsule->bootEloquent();
 		// Get the Throttle Provider
 		$provider = Sentry::getThrottleProvider();
 
+	}
+
+	public function getCapsule(){
+		return $this->capsule;
 	}
 
 	/**
