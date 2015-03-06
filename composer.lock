@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "72fc02a371f9a4e4d4095926b97e5d3c",
+    "hash": "147bfb8e1b6aaff4099c97290ffcf192",
     "packages": [
         {
             "name": "cartalyst/sentry",
@@ -105,6 +105,46 @@
                 "security"
             ],
             "time": "2014-07-23 20:35:12"
+        },
+        {
+            "name": "hackzilla/password-generator",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackzilla/password-generator.git",
+                "reference": "365b8782f90b021f8f90de71783ee57dfffb0b73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackzilla/password-generator/zipball/365b8782f90b021f8f90de71783ee57dfffb0b73",
+                "reference": "365b8782f90b021f8f90de71783ee57dfffb0b73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hackzilla\\PasswordGenerator\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Platt",
+                    "email": "github@ofdan.co.uk",
+                    "homepage": "http://www.hackzilla.org"
+                }
+            ],
+            "description": "Password Generator Library",
+            "time": "2015-01-10 22:15:10"
         },
         {
             "name": "illuminate/container",

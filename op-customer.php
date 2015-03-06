@@ -37,14 +37,11 @@ if($user->isOperator()){
 	$names = $user->getOperatorName();
 
 	$patient_id = $_GET['patient-id'];
-	//$pat_count = Customers::where('patient_id', '=', $patient_id)->count();
 
 	$customer = Customers::where('patient_id', '=', $patient_id)->first();
 
-	$radcheck = $capsule::table('radgroupreply');
-	$group = $capsule::table('radgroupcheck')->union($radcheck)->get();
+	$current_plans = $capsule::table('couponplans')->get();
 
-	var_dump($group);
 	
 	if($customer != null){
 
@@ -69,9 +66,12 @@ if($user->isOperator()){
 		'msg' => $msg,
 		'form' => $form,
 		'err' => $err,
+		'coupon_plans' => $current_plans,
+		'op_id' => $user->getCurrentId(),
+		'patient_id' => $patient_id,
 		'flash' => $flash_msg
 	);
-	//echo $blade->view()->make('op.customer-page',$data);
+	echo $blade->view()->make('op.customer-page',$data);
 }else{
 	header('Location: '.Config::$site_url.'logout.php');
 }

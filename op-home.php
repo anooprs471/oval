@@ -139,7 +139,7 @@ if($user->isOperator()){
    				$customer->save();
 
    				$flash->add('Successfully added customer');
-   				header('Location: '.Config::$site_url.'op-home.php');
+   				header('Location: '.Config::$site_url.'op-customer.php?patient-id='.$patient_id);
 
    			}
 

@@ -75,8 +75,18 @@
 	                      	</div><!-- /.col-md-6 -->
 	                      	<div class="col-md-6">
 	                      		<form method="POST" action="op-generate-coupon.php">
-	                      			<input type="hidden" name="patient-id" value="" />
-	                      			<input type="hidden" name="customer-id" value="" />
+
+	                      			@foreach($coupon_plans as $plan)
+	                      				<div class="radio">
+		                                <label>
+		                                    <input type="radio" checked="" value="{{$plan['id']}}" name="plan-id">
+		                                    {{$plan['planname']}} <strong>Rs {{$plan['price']}} /-</strong>
+		                                </label>
+		                            </div>
+	                      			@endforeach
+	                      			
+	                      			<input type="hidden" name="patient-id" value="{{$patient_id}}" />
+	                      			<input type="hidden" name="op-id" value="{{$op_id}}" />
 
 	                      			<button class="btn btn-primary btn-lg" type="submit">Generate Coupon</button>
 	                      		</form>
