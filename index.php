@@ -28,7 +28,7 @@ $user = new UserAccounts;
 if(!$user->isLoggedIn()){
 	header('Location: '.Config::$site_url.'login.php');
 }elseif ($user->isOperator()) {
-	header('Location: '.Config::$site_url.'');
+	header('Location: '.Config::$site_url.'op-home.php');
 }elseif ($user->isAdmin()) {
 	header('Location: '.Config::$site_url.'admin-home.php');
 }
