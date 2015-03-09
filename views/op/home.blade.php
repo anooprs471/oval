@@ -113,6 +113,14 @@
 	   							                                </div>
 	   							                            </div>
 	   							                            <div class="form-group">
+	   							                                <label for="mobile-number" class="col-lg-4 col-sm-2 control-label">ID Proof Number</label>
+	   							                                <div class="col-lg-8">
+	   							                                    <input type="text" class="form-control" name="id-proof-number" value="{{$form['id_proof_number']}}">
+	   							                                    <p class="help-block">As given in the ID proof</p>
+	   							                                </div>
+	   							                                
+	   							                            </div>
+	   							                            <div class="form-group">
 	   							                                <label for="mobile-number" class="col-lg-4 col-sm-2 control-label">ID Proof Document Type</label>
 	   							                                <div class="col-lg-8">
 	   							                                    <select class="form-control m-bot15" name="id-proof-type">
@@ -136,7 +144,7 @@
 
 	   							                            <div class="form-group">
 	   							                                <div class="col-lg-offset-2 col-lg-10">
-	   							                                    <button type="submit" class="btn btn-danger">Sign in</button>
+	   							                                    <button type="submit" class="btn btn-danger">Register Customer</button>
 	   							                                </div>
 	   							                            </div>
 	   							                        </form>

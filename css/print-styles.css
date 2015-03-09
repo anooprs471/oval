@@ -1,0 +1,48 @@
+/*print styles*/
+@page {
+	size: A5;
+	margin: 5%;
+} 
+.print-coupon{
+	overflow: hidden;
+	background: #FFF;
+	padding: 3%;
+	border: 1px solid #000;
+	border-radius: 8px;
+}
+
+.print-coupon .logo{
+	width: 20%;
+	float: left;
+}
+
+.print-coupon .coupon-details{
+	width: 80%;
+	float: left;
+}
+
+.pr-items{
+	overflow: hidden;
+	padding-bottom: 10px;
+}
+
+.pr-items .pr-label{
+	width: 30%;
+	text-align: right;
+	padding-right: 5%;
+	float: left;
+	line-height: 150%;
+}
+
+.pr-items .pr-item{
+	width: 65%;
+	text-align: left;
+	float: left;
+}
+.login-credentials .pr-label{
+	line-height: 250%
+}
+.login-credentials .pr-item{
+	font-size: 150%;
+	font-weight: bold;
+}

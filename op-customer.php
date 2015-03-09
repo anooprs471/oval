@@ -20,7 +20,7 @@ $form = array(
 	'mobile_number' => '',
 	'id_proof_type' => ''
 );
-$file_err = false;
+$customer_err = false;
 
 $user = new UserAccounts;
 
@@ -36,23 +36,25 @@ if($flash->hasFlashMessage()){
 if($user->isOperator()){
 	$names = $user->getOperatorName();
 
-	$patient_id = $_GET['patient-id'];
+	$customer_id = $_GET['customer-id'];
 
-	$customer = Customers::where('patient_id', '=', $patient_id)->first();
+	$customer = Customers::where('id', '=', $customer_id)->first();
 
 	$current_plans = $capsule::table('couponplans')->get();
 
 	
 	if($customer != null){
 
-		$form['patient_id'] = $customer->patient_id;
+		$form['customer_id'] = $customer_id;
 		$form['customer_name'] = $customer->customer_name;
 		$form['mobile_number'] = $customer->mobile_number;
+		$form['id_proof_number'] = $customer->id_proof_number;
 		$form['id_proof_type'] = $customer->id_proof_type;
 		$form['image-file'] = $customer->id_proof_filename;
 		
 	}elseif($customer == null){
 		$msg = 'patient not found';
+		$customer_err = true;
 	}
 
 
@@ -68,8 +70,9 @@ if($user->isOperator()){
 		'err' => $err,
 		'coupon_plans' => $current_plans,
 		'op_id' => $user->getCurrentId(),
-		'patient_id' => $patient_id,
-		'flash' => $flash_msg
+		'customer_id' => $customer_id,
+		'flash' => $flash_msg,
+		'customer_err' => $customer_err
 	);
 	echo $blade->view()->make('op.customer-page',$data);
 }else{

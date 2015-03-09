@@ -16,6 +16,8 @@
     <link href="css/clndr.css" rel="stylesheet">
     <!--clock css-->
     <link href="js/css3clock/css/style.css" rel="stylesheet">
+    <!--lightbox css-->
+    <link href="css/ekko-lightbox.min.css" rel="stylesheet">
     <!--Morris Chart CSS -->
     <link rel="stylesheet" href="js/morris-chart/morris.css">
     <!--dynamic table-->
@@ -26,6 +28,7 @@
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet"/>
+    <link href="css/print-styles.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
     <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -433,6 +436,8 @@
 <script src="js/flot-chart/jquery.flot.animator.min.js"></script>
 <script src="js/flot-chart/jquery.flot.growraf.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/ekko-lightbox.min.js"></script>
+<script src="js/jQuery.print.js"></script>
 <script src="js/jquery.customSelect.min.js" ></script>
 <!--script for this page-->
 <!--dynamic table-->

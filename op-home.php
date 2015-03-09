@@ -18,6 +18,7 @@ $form = array(
 	'patient_id' => '',
 	'customer_name' => '',
 	'mobile_number' => '',
+	'id_proof_number' => '',
 	'id_proof_type' => ''
 );
 $file_err = false;
@@ -71,25 +72,32 @@ if($user->isOperator()){
 				
 		}elseif ($_POST['form-type'] == 'create-customer') {
 
-			if(!isset($_POST['patient-id']) || strlen($_POST['patient-id']) < 3){
-				array_push($err,'patient id empty or too small');
+			if(!isset($_POST['patient-id']) || empty($_POST['patient-id']) || strlen($_POST['patient-id']) == 0){
+				$patient_id = 'NON-PATIENT';
 			}else{
 				$patient_id = filter_var($_POST['patient-id'], FILTER_SANITIZE_STRING);
 				$form['patient_id'] = $patient_id;
 			}
 
 			if(!isset($_POST['customer-name']) || strlen($_POST['customer-name']) < 3){
-				array_push($err,'Customer Name empty or too small');
+				array_push($err,'Customer Name not provided or too small');
 			}else{
 				$customer_name = filter_var($_POST['customer-name'], FILTER_SANITIZE_STRING);
 				$form['customer_name'] = $customer_name;
 			}
 
 			if(!isset($_POST['mobile-number']) || strlen($_POST['mobile-number']) < 10){
-				array_push($err,'Mobile Number empty or too small');
+				array_push($err,'Mobile Number not provided or too small');
 			}else{
 				$mobile_number = filter_var($_POST['mobile-number'], FILTER_SANITIZE_STRING);
 				$form['mobile_number'] = $mobile_number;
+			}
+
+			if(!isset($_POST['id-proof-number']) || strlen($_POST['id-proof-number']) < 4){
+				array_push($err,'ID proof number not provided or too small');
+			}else{
+				$id_proof_number = filter_var($_POST['id-proof-number'], FILTER_SANITIZE_STRING);
+				$form['id-proof-number'] = $id_proof_number;
 			}
 
 			$id_proof_type = $_POST['id-proof-type'];
@@ -139,7 +147,7 @@ if($user->isOperator()){
    				$customer->save();
 
    				$flash->add('Successfully added customer');
-   				header('Location: '.Config::$site_url.'op-customer.php?patient-id='.$patient_id);
+   				header('Location: '.Config::$site_url.'op-customer.php?customer-id='.$customer->id);
 
    			}
 
@@ -161,6 +169,7 @@ if($user->isOperator()){
 		'err' => $err,
 		'flash' => $flash_msg
 	);
+	//var_dump($form);
 	echo $blade->view()->make('op.home',$data);
 }else{
 	header('Location: '.Config::$site_url.'logout.php');

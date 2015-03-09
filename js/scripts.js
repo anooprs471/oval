@@ -286,5 +286,16 @@
 
     });
 
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) { 
+        event.preventDefault(); 
+        $(this).ekkoLightbox(); 
+    }); 
+
+    if($('.print-coupon').length > 0){
+        $('button.print').on('click', function() {
+            $(".print-coupon").print();
+        })
+    }
+
 
 })(jQuery);

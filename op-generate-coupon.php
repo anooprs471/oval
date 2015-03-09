@@ -10,6 +10,8 @@ $complementary = 0;
 
 $user = new UserAccounts;
 
+$flash = new Flash_Messages();
+
 $capsule = $user->getCapsule();
 
 $generator = new ComputerPasswordGenerator();
@@ -40,39 +42,72 @@ if($user->isOperator()){
 			$username = $generator->generatePassword();
 		}
 
-		$generator->setLength(4);
-
 		$password = $generator->generatePassword();
 
 		$plan_id = $_POST['plan-id'];
-		$patient_id = $_POST['patient-id'];
+		$customer_id = $_POST['customer-id'];
 
-		$plan_price = $capsule::table('couponplans')
-		->select('price')
+		$customer_plan = $capsule::table('couponplans')
+		->where('id','=',$plan_id)
 		->first();
 
-		if($plan_price['price'] > 0){
-			$complementary = 1;
+		$customer = $capsule::table('customers')
+		->where('id','=',$customer_id)
+		->first();
+
+		if($customer_plan != null && $customer != null){
+
+			if($customer_plan['price'] == 0){
+				$complementary = 1;
+			}
+			$customer_plan_name = $customer_plan['planname'];
+
+			$coupon_id = $capsule::table('coupons')
+			->insertGetId(array(
+				'customer_id' => $customer_id, 
+				'op_id' => $user->getCurrentId(),
+				'username' => $username,
+				'password' => $password,
+				'coupon_type' => $plan_id,
+				'complementary' => $complementary,
+				'created_at' => Carbon::now(),
+				'updated_at' =>	Carbon::now()
+				));
+
+			$capsule::table('radcheck')
+			->insert(array(
+				'username' => $username,
+				'attribute' => 'Cleartext-Password',
+				'op' => ':=',
+				'value' => $password
+				));
+
+
+			$capsule::table('radusergroup')
+			->insert(array(
+				'username' => $username,
+				'groupname' => $customer_plan_name,
+				'priority' => 0
+				));
+
+			$capsule::table('userinfo')
+			->insert(array(
+				'username' => $username,
+				'firstname' => $customer['customer_name'],
+				'mobilephone' => $customer['mobile_number'],
+				'mobilephone' => $customer['mobile_number'],
+				'creationdate' => Carbon::now(),
+				'updatedate' => Carbon::now(),
+				'creationby' => $customer['id'],
+				));
+			$flash->add('Successfully generated coupon');
+			header('Location: '.Config::$site_url.'op-print-coupon.php?coupon-id='.$coupon_id);
+		}else{
+			$flash->add('Wrong customer id or plan id. please retry');
+			header('Location: '.Config::$site_url.'op-generate-coupon.php?coupon-id='.$customer_id);
+
 		}
 
-		$coupon_id = $capsule::table('coupons')
-		->insertGetId(array(
-			'patient_id' => $patient_id, 
-			'op_id' => $user->getCurrentId(),
-			'username' => $username,
-			'password' => $password,
-			'coupon_type' => $plan_id,
-			'complementary' => $complementary,
-			'created_at' => Carbon::now(),
-			'updated_at' =>	Carbon::now()
-			));
-		$capsule::table('radreply')
-		->insert(array(
-			'username' => $username,
-			'value' => $password
-			));
-
-		header('Location: '.Config::$site_url.'print-coupon.php?coupon-id='.$coupon_id);
 	}
 	
 }else{
