@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2015 at 05:23 PM
+-- Generation Time: Mar 09, 2015 at 04:09 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -53,7 +53,7 @@ INSERT INTO `couponplans` (`id`, `planname`, `price`, `created_at`, `updated_at`
 
 CREATE TABLE IF NOT EXISTS `coupons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `patient_id` varchar(20) NOT NULL,
+  `customer_id` int(11) NOT NULL,
   `op_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(6) NOT NULL,
@@ -62,21 +62,26 @@ CREATE TABLE IF NOT EXISTS `coupons` (
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `coupons`
 --
 
-INSERT INTO `coupons` (`id`, `patient_id`, `op_id`, `username`, `password`, `coupon_type`, `complementary`, `created_at`, `updated_at`) VALUES
-(1, '124', 2121, 'wewww', 'www', '2', 1, '2015-03-06 15:12:05', '2015-03-06 15:12:05'),
-(2, 'erew', 56, 'fgfg', '1212', '45', 0, '2015-03-06 15:12:05', '2015-03-06 15:12:05'),
-(3, 'some', 3, 'vkxbxg', 'cjgz', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'some', 3, 'vgufyt', 'yvab', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'some', 3, 'zkwytw', 'zgbm', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(6, 'some', 3, 'hqxqhs', 'uaqs', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 'some', 3, 'hccvan', 'ksch', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(8, 'some', 3, 'vrpdmb', 'tafh', '3', 1, '2015-03-07 04:58:24', '2015-03-07 04:58:24');
+INSERT INTO `coupons` (`id`, `customer_id`, `op_id`, `username`, `password`, `coupon_type`, `complementary`, `created_at`, `updated_at`) VALUES
+(1, 124, 2121, 'wewww', 'www', '2', 1, '2015-03-06 15:12:05', '2015-03-06 15:12:05'),
+(2, 0, 56, 'fgfg', '1212', '45', 0, '2015-03-06 15:12:05', '2015-03-06 15:12:05'),
+(3, 0, 3, 'vkxbxg', 'cjgz', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 0, 3, 'vgufyt', 'yvab', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 0, 3, 'zkwytw', 'zgbm', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 0, 3, 'hqxqhs', 'uaqs', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 0, 3, 'hccvan', 'ksch', '3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 0, 3, 'vrpdmb', 'tafh', '3', 1, '2015-03-07 04:58:24', '2015-03-07 04:58:24'),
+(9, 0, 2, 'nwjcmr', 'kpax', '1', 1, '2015-03-09 04:29:26', '2015-03-09 04:29:26'),
+(10, 8, 2, 'wpzvrc', 'bramnz', '2', 0, '2015-03-09 05:18:01', '2015-03-09 05:18:01'),
+(11, 8, 2, 'msuehc', 'phpyyt', '2', 1, '2015-03-09 05:29:12', '2015-03-09 05:29:12'),
+(12, 8, 2, 'sutgay', 'ydfunm', '2', 0, '2015-03-09 05:30:23', '2015-03-09 05:30:23'),
+(13, 8, 2, 'knmwyx', 'acypqx', '2', 0, '2015-03-09 05:31:35', '2015-03-09 05:31:35');
 
 -- --------------------------------------------------------
 
@@ -89,23 +94,25 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `patient_id` varchar(20) NOT NULL,
   `customer_name` varchar(50) NOT NULL,
   `mobile_number` varchar(15) NOT NULL,
+  `id_proof_number` varchar(30) NOT NULL,
   `id_proof_type` varchar(30) NOT NULL,
   `id_proof_filename` varchar(150) NOT NULL,
   `operator_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `patient_id`, `customer_name`, `mobile_number`, `id_proof_type`, `id_proof_filename`, `operator_id`, `created_at`, `updated_at`) VALUES
-(4, 'some', 'name', '9847586512', 'Voters ID', 'some-2015-03-04-04-10.png', 2, '2015-03-04 10:40:51', '2015-03-04 10:40:51'),
-(5, 'werewrw', 'name', '9847586512', 'Voters ID', 'werewrw-2015-03-06-01-44.jpg', 3, '2015-03-06 08:14:19', '2015-03-06 08:14:19'),
-(6, 't56788', 'name', 'fghfghtyutyu', 'Voters ID', 't56788-2015-03-06-01-47.png', 3, '2015-03-06 08:17:07', '2015-03-06 08:17:07'),
-(7, 'werewrw', 'name', '9847586512', 'Voters ID', 'werewrw-2015-03-07-10-26.png', 3, '2015-03-07 04:56:09', '2015-03-07 04:56:09');
+INSERT INTO `customers` (`id`, `patient_id`, `customer_name`, `mobile_number`, `id_proof_number`, `id_proof_type`, `id_proof_filename`, `operator_id`, `created_at`, `updated_at`) VALUES
+(4, '0', 'name', '9847586512', '', 'Voters ID', 'some-2015-03-04-04-10.png', 2, '2015-03-04 10:40:51', '2015-03-04 10:40:51'),
+(5, '0', 'name', '9847586512', '', 'Voters ID', 'werewrw-2015-03-06-01-44.jpg', 3, '2015-03-06 08:14:19', '2015-03-06 08:14:19'),
+(6, '0', 'name', 'fghfghtyutyu', '', 'Voters ID', 't56788-2015-03-06-01-47.png', 3, '2015-03-06 08:17:07', '2015-03-06 08:17:07'),
+(7, '0', 'name', '9847586512', '', 'Voters ID', 'werewrw-2015-03-07-10-26.png', 3, '2015-03-07 04:56:09', '2015-03-07 04:56:09'),
+(8, '0', 'new name', '9879878844', '', 'Driving License', 'NON-PATIENT-2015-03-09-10-31.jpg', 2, '2015-03-09 05:01:37', '2015-03-09 05:01:37');
 
 -- --------------------------------------------------------
 
@@ -141,6 +148,33 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `radcheck`
+--
+
+CREATE TABLE IF NOT EXISTS `radcheck` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `attribute` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `op` char(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT '==',
+  `value` varchar(253) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`(32))
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `radcheck`
+--
+
+INSERT INTO `radcheck` (`id`, `username`, `attribute`, `op`, `value`) VALUES
+(1, 'user1', 'Cleartext-Password', ':=', 'pass1'),
+(2, 'wpzvrc', '', '==', 'bramnz'),
+(3, 'msuehc', '', '==', 'phpyyt'),
+(4, 'sutgay', '', '==', 'ydfunm'),
+(5, 'knmwyx', '', '==', 'acypqx');
 
 -- --------------------------------------------------------
 
@@ -203,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `radreply` (
   `value` varchar(253) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `username` (`username`(32))
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `radreply`
@@ -213,7 +247,30 @@ INSERT INTO `radreply` (`id`, `username`, `attribute`, `op`, `value`) VALUES
 (1, 'zkwytw', '', '=', 'zgbm'),
 (2, 'hqxqhs', '', '=', 'uaqs'),
 (3, 'hccvan', '', '=', 'ksch'),
-(4, 'vrpdmb', '', '=', 'tafh');
+(4, 'vrpdmb', '', '=', 'tafh'),
+(5, 'nwjcmr', '', '=', 'kpax');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `radusergroup`
+--
+
+CREATE TABLE IF NOT EXISTS `radusergroup` (
+  `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `groupname` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `priority` int(11) NOT NULL DEFAULT '1',
+  KEY `username` (`username`(32))
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `radusergroup`
+--
+
+INSERT INTO `radusergroup` (`username`, `groupname`, `priority`) VALUES
+('wpzvrc', 'sample1', 0),
+('sutgay', 'sample1', 0),
+('knmwyx', 'sample1', 0);
 
 -- --------------------------------------------------------
 
@@ -243,6 +300,49 @@ INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, 
 (4, 2, NULL, 0, 0, 0, '2015-03-05 03:04:41', NULL, NULL),
 (5, 3, NULL, 1, 0, 0, '2015-03-07 05:03:14', NULL, NULL),
 (6, 1, NULL, 0, 0, 0, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userinfo`
+--
+
+CREATE TABLE IF NOT EXISTS `userinfo` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(128) DEFAULT NULL,
+  `firstname` varchar(200) DEFAULT NULL,
+  `lastname` varchar(200) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `department` varchar(200) DEFAULT NULL,
+  `company` varchar(200) DEFAULT NULL,
+  `workphone` varchar(200) DEFAULT NULL,
+  `homephone` varchar(200) DEFAULT NULL,
+  `mobilephone` varchar(200) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `city` varchar(200) DEFAULT NULL,
+  `state` varchar(200) DEFAULT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `zip` varchar(200) DEFAULT NULL,
+  `notes` varchar(200) DEFAULT NULL,
+  `changeuserinfo` varchar(128) DEFAULT NULL,
+  `portalloginpassword` varchar(128) DEFAULT '',
+  `enableportallogin` int(32) DEFAULT '0',
+  `creationdate` datetime DEFAULT '0000-00-00 00:00:00',
+  `creationby` varchar(128) DEFAULT NULL,
+  `updatedate` datetime DEFAULT '0000-00-00 00:00:00',
+  `updateby` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `userinfo`
+--
+
+INSERT INTO `userinfo` (`id`, `username`, `firstname`, `lastname`, `email`, `department`, `company`, `workphone`, `homephone`, `mobilephone`, `address`, `city`, `state`, `country`, `zip`, `notes`, `changeuserinfo`, `portalloginpassword`, `enableportallogin`, `creationdate`, `creationby`, `updatedate`, `updateby`) VALUES
+(1, 'user1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', 0, '2015-02-26 12:22:44', 'administrator', NULL, NULL),
+(2, 'sutgay', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, '2015-03-09 11:00:23', NULL, '2015-03-09 11:00:23', NULL),
+(3, 'knmwyx', 'new name', NULL, NULL, NULL, NULL, NULL, NULL, '9879878844', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, '2015-03-09 11:01:35', '8', '2015-03-09 11:01:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -278,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`, `username`) VALUES
 (1, 'admin@administrator.com', '$2y$10$93aP1sZfDMnOdgElTUxckuq9L.L/0bNd7vvT6lJOaPR8x6YWuAwqS', NULL, 1, NULL, NULL, '2015-03-07 10:30:47', '$2y$10$OIrEErGdGLmMaGFU5U5b4uVZiwbhzpfmuifuHJIYLD0p3eqygbPHa', NULL, NULL, NULL, '2015-02-27 05:06:00', '2015-03-07 05:00:47', 'administrator'),
-(2, 'op@op.com', '$2y$10$0BcU/eZpLCH5WNIXbT51N.R3UbQkpvh1/mItdSJqfyHCpwhZLKJQu', NULL, 1, NULL, NULL, '2015-03-07 10:33:22', '$2y$10$yb35ZRRLDSHKajssMkfPVOb.6it0gr8JoBK5Qt37xBFi.hifed2YO', NULL, 'lijith', 'raj', '2015-02-27 05:11:24', '2015-03-07 05:03:22', 'operator1'),
+(2, 'op@op.com', '$2y$10$0BcU/eZpLCH5WNIXbT51N.R3UbQkpvh1/mItdSJqfyHCpwhZLKJQu', NULL, 1, NULL, NULL, '2015-03-09 08:38:17', '$2y$10$.7vrEq9mw4nV5yJbLF8kp.J5F1yFNTtUDYdW8PZf.q81BgP.2Uc2a', NULL, 'lijith', 'raj', '2015-02-27 05:11:24', '2015-03-09 03:08:17', 'operator1'),
 (3, 'op2@op.com', '$2y$10$uBoG54oAIpZXgDWejQ90leAgTvxj8CzTN8zpYEHWTZn1SsQl6rcCi', NULL, 1, NULL, NULL, '2015-03-07 10:27:59', '$2y$10$.9K62I.95iLGQxTY31gd5eg/AR0v/EFihsG/OT6.jzbBfMnlvfxsa', NULL, NULL, NULL, '2015-02-27 05:11:58', '2015-03-07 04:57:59', 'operator2');
 
 -- --------------------------------------------------------
