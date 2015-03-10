@@ -66,6 +66,7 @@ if($user->isOperator()){
 			->insertGetId(array(
 				'customer_id' => $customer_id, 
 				'op_id' => $user->getCurrentId(),
+				'patient_id' => $customer['patient_id'],
 				'username' => $username,
 				'password' => $password,
 				'coupon_type' => $plan_id,

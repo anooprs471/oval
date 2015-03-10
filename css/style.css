@@ -5710,3 +5710,9 @@ right: -1px;
     -o-transition: none;
     transition: none;
 }
+
+/*additional styles */
+.add-patient-wrap{
+    border-left: 1px solid #ddd;
+    padding-left: 10px;
+}

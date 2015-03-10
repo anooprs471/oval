@@ -46,18 +46,18 @@
 	              <ul class="nav nav-tabs nav-justified ">
 			              <li class="active">
 	                      <a data-toggle="tab" href="#search-patient">
-	                          Contact
+	                          Customer
 	                      </a>
 	                  </li>
 	                  <li>
 	                      <a data-toggle="tab" href="#contacts">
-	                          Contact
+	                          Contacts
 	                      </a>
 	                  </li>
 
 	                  <li>
 	                      <a data-toggle="tab" href="#settings">
-	                          Settings
+	                          User Settings
 	                      </a>
 	                  </li>
 	              </ul>
@@ -67,12 +67,20 @@
 
 										<div id="search-patient" class="tab-pane active">
 	                      <div class="row">
-	                          <div class="col-md-5">
+	                          <div class="col-md-6">
 	                              <div class="prf-contacts">
-	                                  <h2>Search Patient</h2>
+	                                  <h2>Find</h2>
+	                                  <form class="form-horizontal" role="form" method="GET" action="op-coupon-stats.php">
+	                                  	<div class="form-group">
+					                                <label class="col-lg-4 col-sm-2 control-label">Coupon Username</label>
+					                                <div class="col-lg-8">
+					                                    <input type="text" class="form-control" name="coupon-username" value="" placeholder="username">
+					                                </div>
+					                            </div>
+	                                  </form>
 	                              </div>
 	                          </div>
-	                          <div class="col-md-7">
+	                          <div class="col-md-6">
 	                              <div class="prf-contacts">
 	                                  <h2>Add User</h2>
 	                              </div>

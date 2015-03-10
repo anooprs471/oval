@@ -1,0 +1,50 @@
+@extends('layout')
+
+@section('content')
+	<div class="row">
+	  <div class="col-md-12">
+	  		@if($msg != '')
+          <div class="alert alert-danger">{{$msg}}</div>
+          <p></p>
+        @endif
+        @if($flash != '')
+          <div class="alert alert-success ">{{$flash}}</div>
+          <p></p>
+        @endif
+	      
+	  </div>
+	  <div class="col-md-12">
+	      <section class="panel">
+	        <header class="panel-heading">
+	            Coupon Stats
+	            
+	        </header>
+	        <div class="panel-body">
+	        	@if(!$cuopon_err)
+		            <table class="table  table-hover general-table table-bordered">
+		                <thead>
+			                <tr>
+			                    <th>Usage Started</th>
+			                    <th>Usage Stopped</th>
+			                    <th>Data Traffic(Up/Down)</th>
+			                </tr>
+		                </thead>
+		                <tbody>
+											@foreach($stats as $stat)
+				                <tr>
+														<td>{{$stat['acctstarttime']}}</td>
+														<td>{{$stat['acctstoptime']}}</td>
+														<td>{{$stat['total_download']}}</td>
+				                </tr>
+			                @endforeach
+
+		                </tbody>
+		            </table>
+		        @else
+		        	no stats for the coupon
+		        @endif 
+	        </div>
+	    </section>
+	  </div>
+	</div>
+@stop

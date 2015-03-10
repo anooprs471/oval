@@ -19,20 +19,10 @@
 	              <ul class="nav nav-tabs nav-justified ">
 			              <li class="active">
 	                      <a data-toggle="tab" href="#customer-details">
-	                          Cutomer
-	                      </a>
-	                  </li>
-	                  <li>
-	                      <a data-toggle="tab" href="#prev-coupons">
-	                          Previous Coupons Issued
+	                          Customer
 	                      </a>
 	                  </li>
 
-	                  <li>
-	                      <a data-toggle="tab" href="#settings">
-	                          Settings
-	                      </a>
-	                  </li>
 	              </ul>
 	          </header>
 	          @if(!$customer_err)
@@ -71,7 +61,40 @@
 		                      			</div><!-- /.col-md-8 -->
 		                      		</div><!-- /.row -->
 
+		                      		<hr />
 
+		                      		<div class="pre-coupons">
+		                      			<h2>Previous Coupons</h2>
+		                      			@if(!$no_coupons)
+																<table class="table table-bordered">
+	                                <thead>
+		                                <tr>
+	                                    <th>Username</th>
+	                                    <th>Date</th>
+	                                    <th>Type</th>
+		                                </tr>
+	                                </thead>
+	                                <tbody>
+
+			                      			@foreach($previous_coupons as $coupon)
+		                                <tr>
+		                                    <td>{{$coupon['username']}}</td>
+		                                    <td>{{$coupon['created_at']}}</td>
+		                                    <td>
+		                                    	@if($coupon['complementary'] == 1)
+		                                    		Complimentary
+		                                    	@endif`
+		                                    </td>
+		                                </tr>
+			                      			@endforeach
+			                      			</tbody>
+		                            </table>
+			                      		@else
+			                      			no previous coupons purchased!
+			                      		@endif
+		                      		</div><!-- /.pre-coupons -->
+
+                                
 
 		                      	</div><!-- /.col-md-6 -->
 		                      	<div class="col-md-6">
@@ -92,13 +115,7 @@
 		                      	</div><!-- /.col-md-6 -->
 		                      </div><!-- /.row -->
 		                  </div>
-		                  <div id="prev-coupons" class="tab-pane">
-		                      
-		                  </div>
-		                  <div id="settings" class="tab-pane ">
-		                      
 
-		                  </div>
 		              </div>
 		          </div>
 		        @endif  

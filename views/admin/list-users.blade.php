@@ -22,9 +22,9 @@
 		              <td><a href="{{$site_url}}admin-user-detail.php?id={{$id}}">{{$op_details['username']}}</a></td>
 		              <td>
 	              	@if($op_details['active'])
-										<a href="{{$site_url}}admin-suspend-user.php?id={{$id}}">Suspend User</a>
+										<a href="{{$site_url}}admin-suspend-user.php?id={{$id}}" class="label label-danger label-mini">Suspend User</a>
 	              	@else
-										<a href="{{$site_url}}admin-activate-user.php?id={{$id}}">Activate User</a>	
+										<a href="{{$site_url}}admin-activate-user.php?id={{$id}}" class="label label-success label-mini">Activate User</a>	
 	              	@endif
 
 		              </td>

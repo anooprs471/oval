@@ -57,7 +57,7 @@ if($user->isOperator()){
 			$username = $coupon['username'];
 			$password = $coupon['password'];
 
-			$date = Carbon::createFromFormat('Y-m-d H:m:s', $coupon['created_at'])
+			$date = Carbon::createFromFormat('Y-m-d H:i:s', $coupon['created_at'])
 			->toFormattedDateString();
 
 			$customer = $capsule::table('customers')
