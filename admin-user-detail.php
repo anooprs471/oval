@@ -21,42 +21,112 @@ $capsule = $user->getCapsule();
 $msg = '';
 $flash_msg = '';
 $user_err = false;
+$date_err = false;
+$data_date = 'till '.Carbon::now();
 
 $user_coupon = array();
 
 
-$user_id = $_GET['id'];
+
 
 if($user->isAdmin()){
 
-	// $coupons = $capsule::table('coupons')
-	// ->where('op_id','=',$user_id)
-	// ->whereBetween('created_at', $dates)
-	// ->get();
 
-	$op = $capsule::table('users')
-	->where('id','=',$user_id)
-	->first();
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-	if(!empty($user)){
-		$coupons = $capsule::table('coupons')
-		->where('op_id','=',$user_id)
-		->get();
+		$user_id = filter_var($_POST['user-id'], FILTER_SANITIZE_STRING);
 
-		if(!empty($coupons)){
-			foreach ($coupons as $key => $coupon) {
-				$plan = $capsule::table('couponplans')
-				->where('id','=',$coupon['coupon_type'])
-				->first();
-				$user_coupon[$key]['date'] = $coupon['created_at'];
-				$user_coupon[$key]['plan'] = $plan['planname'];
+		if(!isset($_POST['date-from']) || strlen($_POST['date-from']) == 0 ){
+			$fr_date = Carbon::create(2014, 1, 1, 12);
+		}else{
+			$from_date = filter_var($_POST['date-from'], FILTER_SANITIZE_STRING);
+			try {
+		    $fr_date = Carbon::createFromFormat('m/d/Y', $from_date);
+			} catch (Exception $e) {
+				$date_err = true;
 			}
 		}
+
+		if(!isset($_POST['date-to']) || strlen($_POST['date-to']) == 0 ){
+			$t_date = Carbon::now();
+		}else{
+			$to_date = filter_var($_POST['date-to'], FILTER_SANITIZE_STRING);
+			try {
+		    $t_date = Carbon::createFromFormat('m/d/Y', $to_date);
+			} catch (Exception $e) {
+				$date_err = true;
+			}
+		}
+
+		$plan_type = $_POST['plan-type'];
+
+
+
+
+		if(!$date_err){
+			$op = $capsule::table('users')
+			->where('id','=',$user_id)
+			->first();
+
+			if(!empty($op)){
+				 //echo $user_id;
+				if($plan_type == 'all'){
+					$coupons = $capsule::table('coupons')
+					->where('op_id','=',$user_id)
+					->whereBetween('created_at', array($fr_date,$t_date))
+					->get();
+				}else{
+					$coupons = $capsule::table('coupons')
+					->where('op_id','=',$user_id)
+					->where('coupon_type','=',$plan_type)
+					->whereBetween('created_at', array($fr_date,$t_date))
+					->get();
+				}
+				
+
+			}
+
+			$data_date = 'from <strong>'.$fr_date->format('Y/M/d').'</strong> to <strong>'.$t_date->format('Y/M/d').'</strong>';
+
+
+		}else{
+			$msg = 'date error '.$from_date.' '.$to_date;
+		}
+
 	}else{
-		$user_err = true;
+		if(!isset($_GET['id']) || empty($_GET['id']) || strlen($_GET['id']) == 0){
+			$user_err = true;
+			$msg = 'User id error';
+			$user_id = '';
+		}else{
+			$user_id = $_GET['id'];
+		}
+		$op = $capsule::table('users')
+		->where('id','=',$user_id)
+		->first();
+
+		if(!empty($op)){
+			$coupons = $capsule::table('coupons')
+			->where('op_id','=',$user_id)
+			->get();
+		}
+
+
 	}
 
-	
+	$plans = $capsule::table('couponplans')
+	->get();
+
+	if(!empty($coupons)){
+		foreach ($coupons as $key => $coupon) {
+			$plan = $capsule::table('couponplans')
+			->where('id','=',$coupon['coupon_type'])
+			->first();
+			$user_coupon[$key]['date'] = $coupon['created_at'];
+			$user_coupon[$key]['plan'] = $plan['planname'];
+		}
+	}
+
 	$data = array(
 		'type' => 'admin',
 		'site_url'=> Config::$site_url,
@@ -65,11 +135,13 @@ if($user->isAdmin()){
 		'flash' => $flash_msg,
 		'user_err' => $user_err,
 		'op' => $op,
-		'coupons' => $user_coupon
+		'coupons' => $user_coupon,
+		'user_id' => $user_id,
+		'data_date' => $data_date,
+		'plans' => $plans
 		
 	);
 	
-	//var_dump($plan);
 	echo $blade->view()->make('admin.user-page',$data);
 }else{
 	header('Location: '.Config::$site_url.'logout.php');

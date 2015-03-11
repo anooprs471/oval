@@ -23,7 +23,12 @@
     <!--dynamic table-->
     <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
     <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
-    <link  href="js/data-tables/DT_bootstrap.css" rel="stylesheet" />
+    <link href="js/data-tables/DT_bootstrap.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
+       
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
@@ -439,10 +444,14 @@
 <script src="js/ekko-lightbox.min.js"></script>
 <script src="js/jQuery.print.js"></script>
 <script src="js/jquery.customSelect.min.js" ></script>
+
 <!--script for this page-->
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 
