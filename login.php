@@ -23,6 +23,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	$filtered_username = filter_var($username, FILTER_SANITIZE_STRING);
 	$filtered_password = filter_var($password, FILTER_SANITIZE_STRING);
 
+
 	$msg = $user->login($filtered_username,$filtered_password,$remember);
 
 	if($user->isLoggedIn()){

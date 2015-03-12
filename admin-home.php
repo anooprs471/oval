@@ -13,13 +13,38 @@ $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 
-$data = array(
-	'type' => 'admin',
-	'site_url'=> Config::$site_url,
-	'name' => 'Administrator'
-);
+$capsule = $user->getCapsule();
+
+$users = $user->listOperators();
+
+$msg = '';
+
+
+foreach ($users as $op) {
+	$operator[$op->id] = array(
+		'username' => $op->username,
+		'active' => !$user->isSuspended($op->id)
+	);
+}
+
+
 
 if($user->isAdmin()){
+
+	$plans = $capsule::table('couponplans')
+	->get();
+
+
+	$data = array(
+		'type' => 'admin',
+		'site_url'=> Config::$site_url,
+		'name' => 'Administrator',
+		'msg' => $msg,
+		'users' => $operator,
+		'plans' => $plans
+	);
+
+
 	echo $blade->view()->make('admin.home',$data);
 }else{
 	header('Location: '.Config::$site_url.'logout.php');
