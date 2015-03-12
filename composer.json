@@ -12,7 +12,8 @@
         "illuminate/database": "4.2.*",
         "railto/flash-messages": "~1.0",
         "nesbot/carbon": "~1.15",
-        "hackzilla/password-generator": "~1.0"
+        "hackzilla/password-generator": "~1.0",
+        "mpdf/mpdf": "~6.0"
     },
     "autoload": {
         "classmap": ["App/"]

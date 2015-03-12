@@ -22,7 +22,7 @@ $msg = '';
 $flash_msg = '';
 $user_err = false;
 $date_err = false;
-$data_date = 'till '.Carbon::now();
+$data_date = 'till '.Carbon::now().' of all plan';
 
 $user_coupon = array();
 
@@ -75,18 +75,28 @@ if($user->isAdmin()){
 					->where('op_id','=',$user_id)
 					->whereBetween('created_at', array($fr_date,$t_date))
 					->get();
+					$plan_name = 'all';
 				}else{
 					$coupons = $capsule::table('coupons')
 					->where('op_id','=',$user_id)
 					->where('coupon_type','=',$plan_type)
 					->whereBetween('created_at', array($fr_date,$t_date))
 					->get();
+
+					$current_plan = $capsule::table('couponplans')
+					->where('id','=',$plan_type)
+					->first();
+
+					$plan_name = $current_plan['planname'];
 				}
 				
+				
+
+
 
 			}
 
-			$data_date = 'from <strong>'.$fr_date->format('Y/M/d').'</strong> to <strong>'.$t_date->format('Y/M/d').'</strong>';
+			$data_date = 'from <strong>'.$fr_date->format('Y/M/d').'</strong> to <strong>'.$t_date->format('Y/M/d').'</strong> of <strong>'.$plan_name.'</strong> plan';
 
 
 		}else{
