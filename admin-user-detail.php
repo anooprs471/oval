@@ -124,18 +124,16 @@ if($user->isAdmin()){
 
 	}
 
-	$plans = $capsule::table('couponplans')
+	$first = $capsule::table('radgroupreply')
+	->distinct()
+	->select('groupname');
+
+	$plans = $capsule::table('radgroupcheck')
+	->union($first)
+	->select('groupname')
+	->distinct()
 	->get();
 
-	if(!empty($coupons)){
-		foreach ($coupons as $key => $coupon) {
-			$plan = $capsule::table('couponplans')
-			->where('id','=',$coupon['coupon_type'])
-			->first();
-			$user_coupon[$key]['date'] = $coupon['created_at'];
-			$user_coupon[$key]['plan'] = $plan['planname'];
-		}
-	}
 
 	$data = array(
 		'type' => 'admin',
@@ -145,7 +143,7 @@ if($user->isAdmin()){
 		'flash' => $flash_msg,
 		'user_err' => $user_err,
 		'op' => $op,
-		'coupons' => $user_coupon,
+		'coupons' => $coupons,
 		'user_id' => $user_id,
 		'data_date' => $data_date,
 		'plans' => $plans

@@ -44,12 +44,12 @@ if($user->isOperator()){
 
 		$password = $generator->generatePassword();
 
-		$plan_id = $_POST['plan-id'];
+		$plan_type = $_POST['plan-type'];
 		$customer_id = $_POST['customer-id'];
 
 		$customer_plan = $capsule::table('couponplans')
-		->where('id','=',$plan_id)
-		->first();
+		->where('planname','=',$plan_type)
+		->first(); 
 
 		$customer = $capsule::table('customers')
 		->where('id','=',$customer_id)
@@ -69,7 +69,7 @@ if($user->isOperator()){
 				'patient_id' => $customer['patient_id'],
 				'username' => $username,
 				'password' => $password,
-				'coupon_type' => $plan_id,
+				'coupon_type' => $plan_type,
 				'complementary' => $complementary,
 				'created_at' => Carbon::now(),
 				'updated_at' =>	Carbon::now()

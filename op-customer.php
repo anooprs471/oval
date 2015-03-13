@@ -42,8 +42,27 @@ if($user->isOperator()){
 
 	$customer = Customers::where('id', '=', $customer_id)->first();
 
-	$current_plans = $capsule::table('couponplans')->get();
+	$first = $capsule::table('radgroupreply')
+	->distinct()
+	->select('groupname');
 
+	$current_plans = $capsule::table('radgroupcheck')
+	->union($first)
+	->select('groupname')
+	->distinct()
+	->get();
+
+	$coupon_plans = array();
+
+	foreach ($current_plans as $key => $plan) {
+		$price = $capsule::table('couponplans')
+		->where('planname','=', $plan['groupname'])
+		->first();
+
+		array_push($coupon_plans,array('plan' => $plan['groupname'],'price' => $price['price']));
+	}
+
+	//var_dump($coupon_plans);
 
 
 	
@@ -94,7 +113,7 @@ if($user->isOperator()){
 		'msg' => $msg,
 		'form' => $form,
 		'err' => $err,
-		'coupon_plans' => $current_plans,
+		'coupon_plans' => $coupon_plans,
 		'op_id' => $user->getCurrentId(),
 		'customer_id' => $customer_id,
 		'flash' => $flash_msg,

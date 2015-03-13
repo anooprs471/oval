@@ -26,66 +26,77 @@ $capsule = $user->getCapsule();
 $blade = new Blade($views, $cache);
 $flash = new Flash_Messages();
 
+$remove_plans = array();
+$to_insert_plans = array();
+
 if($flash->hasFlashMessage()){
 	$flash_msg = $flash->show();
 }
 if($user->isAdmin()){
 
-	$radcheck_plans = $capsule::table('radgroupcheck')->get();
+	$first = $capsule::table('radgroupreply')
+	->distinct()
+	->select('groupname');
 
-	$radgroupreply_plans = $capsule::table('radgroupreply')->get();
+	$oval_plans = $capsule::table('radgroupcheck')
+	->union($first)
+	->select('groupname')
+	->distinct()
+	->get();
 
-	$current_plans = $capsule::table('couponplans')->get();
+	$priced_plans = $capsule::table('couponplans')
+	->get();
 
-	$tempplan = array();
-	$toaddplan = array();
+	$priced_plan_names = array_map(function($item){
+		return $item['planname'];
+	},$priced_plans);
 
-	foreach ($current_plans as $key => $value) {
-		array_push($tempplan,$value['planname']);
-	}
+	$oval_plan_names = array_map(function($item){
+		return $item['groupname'];
+	},$oval_plans);
 
-	foreach ($radcheck_plans as $plan) {
-
-		if(!in_array($plan['groupname'],$tempplan)){
-			array_push($toaddplan,$plan['groupname']);
+	foreach ($oval_plan_names as $plan) {
+		if(!in_array($plan, $priced_plan_names)){
+			array_push($to_insert_plans,array(
+				'planname' => $plan,
+				'price' => 0,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			));
 		}
 	}
-	foreach ($radgroupreply_plans as $plan) {
 
-		if(!in_array($plan['groupname'],$tempplan)){
-			array_push($toaddplan,$plan['groupname']);
+	$count = 0;
+
+	foreach ($priced_plan_names as $plan) {
+		if(!in_array($plan,$oval_plan_names)){
+			array_push($remove_plans, array('id'=> $priced_plans[$count]['id']));
 		}
+		$count++;
 	}
 
-	if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
-		if($_POST['form-type'] == 'update'){
-			$plan_id = $_POST['plan-id'];
-			$price = $_POST['price'];
-
-			$capsule::table('couponplans')
-			->where('id', '=', $plan_id)
-			->update(array('price' => $price));
-
-			$flash->add('Successfully updated price');
-			
-			header('Location: '.Config::$site_url.'admin-customer-plans.php');
 
 
-		}elseif ($_POST['form-type'] == 'add-plan') {
-			if(!isset($_POST['price']) || empty($_POST['price'])){
-				$price = 0;
-			}
-			$price = $_POST['price'];
-			$plan_name = $_POST['plan-name'];
+	$capsule::table('couponplans')->whereIn('id', $remove_plans)->delete(); 
+	if(!empty($to_insert_plans)){
+		$capsule::table('couponplans')->insert($to_insert_plans);
+	}	
 
-			$capsule::table('couponplans')
-			->insert(array('planname' => $plan_name,
-										 'price' => $price));
-			$flash->add('Added new plan');
-			
-			header('Location: '.Config::$site_url.'admin-customer-plans.php');
-		}
+	$priced_plans = $capsule::table('couponplans')
+	->get();
+
+	 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+	 	$plan_name = $_POST['plan-name'];
+	 	$price = $_POST['price'];
+
+		$capsule::table('couponplans')
+		->where('planname', '=', $plan_name)
+		->update(array('price' => $price));
+
+		$flash->add('Successfully updated price');
+
+		header('Location: '.Config::$site_url.'admin-customer-plans.php');
 
 	}
 
@@ -95,8 +106,7 @@ if($user->isAdmin()){
 		'site_url'=> Config::$site_url,
 		'name' => 'Administrator',
 		'msg' => $msg,
-		'to_add_plans' => $toaddplan,
-		'current_plans' => $current_plans,
+		'priced_plans' => $priced_plans,
 		'flash' => $flash_msg
 	);
 	echo $blade->view()->make('admin.customer-plans',$data);

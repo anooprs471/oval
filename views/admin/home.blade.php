@@ -97,8 +97,8 @@
 							  @foreach($plans as $plan)
 							  	<div class="radio">
 							        <label>
-							            <input type="radio" value="{{$plan['id']}}" id="optionsRadios1" name="plan-type">
-							            {{$plan['planname']}}
+							            <input type="radio" value="{{$plan['groupname']}}" id="optionsRadios1" name="plan-type">
+							            {{$plan['groupname']}}
 							        </label>
 							    </div>
 							  @endforeach

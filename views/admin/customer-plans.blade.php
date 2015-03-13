@@ -36,14 +36,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($current_plans as $plan)
+                        @foreach($priced_plans as $plan)
 	                        <tr>
 	                            <td></td>
 	                            <td>{{$plan['planname']}}</td>
 	                            <td>
 	                            	<form class=" form-inline" method="POST" action="">
 		                            	<div class="form-group">
-		                            		<input type="hidden" value="{{$plan['id']}}" name="plan-id" />
+		                            		<input type="hidden" value="{{$plan['planname']}}" name="plan-name" />
 		                            		<input type="hidden" value="update" name="form-type" />
 	                                	<input type="text" name="price" id="" class="form-control" value="{{$plan['price']}}">
 	                            		</div>
@@ -59,43 +59,6 @@
                 </div>
             </section>
 
-            <hr />
-            <section class="panel">
-                <header class="panel-heading">
-                    Add Available Plans for Operators
-                    
-                </header>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Plan Name</th>
-                            <th>Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($to_add_plans as $plan)
-	                        <tr>
-	                            <td></td>
-	                            <td>{{$plan}}</td>
-	                            <td>
-	                            	<form class=" form-inline" method="POST" action="">
-		                            	<div class="form-group">
-	                                	<input type="hidden" value="add-plan" name="form-type" />
-	                                	<input type="hidden" value="{{$plan}}" name="plan-name" />
-	                                	<input type="text" name="price" class="form-control" value="">
-	                            		</div>
-	                            		<button class="btn btn-success" type="submit">Add</button>
-	                            	</form>
-	                            </td>
-	                        </tr>
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-            </section>
 
 	          </div>
 	      </div>

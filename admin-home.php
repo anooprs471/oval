@@ -30,8 +30,15 @@ foreach ($users as $op) {
 
 
 if($user->isAdmin()){
+	
+	$first = $capsule::table('radgroupreply')
+	->distinct()
+	->select('groupname');
 
-	$plans = $capsule::table('couponplans')
+	$plans = $capsule::table('radgroupcheck')
+	->union($first)
+	->select('groupname')
+	->distinct()
 	->get();
 
 

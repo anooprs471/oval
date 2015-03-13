@@ -83,7 +83,7 @@
 		                                    <td>
 		                                    	@if($coupon['complementary'] == 1)
 		                                    		Complimentary
-		                                    	@endif`
+		                                    	@endif
 		                                    </td>
 		                                </tr>
 			                      			@endforeach
@@ -103,8 +103,8 @@
 		                      			@foreach($coupon_plans as $plan)
 		                      				<div class="radio">
 			                                <label>
-			                                    <input type="radio" checked="" value="{{$plan['id']}}" name="plan-id">
-			                                    {{$plan['planname']}} <strong>Rs {{$plan['price']}} /-</strong>
+			                                    <input type="radio" checked="" value="{{$plan['plan']}}" name="plan-type">
+			                                    {{$plan['plan']}} <strong>Rs {{$plan['price']}} /-</strong>
 			                                </label>
 			                            </div>
 		                      			@endforeach

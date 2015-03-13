@@ -56,8 +56,8 @@
                       <tbody>
                       @foreach($coupons as $coupon)
                       <tr>
-                          <td>{{$coupon['date']}}</td>
-                          <td>{{$coupon['plan']}}</td>
+                          <td>{{$coupon['created_at']}}</td>
+                          <td>{{$coupon['coupon_type']}}</td>
                       </tr>
                       @endforeach
            
@@ -96,8 +96,8 @@
                     @foreach($plans as $plan)
                     	<div class="radio">
                           <label>
-                              <input type="radio" value="{{$plan['id']}}" id="optionsRadios1" name="plan-type">
-                              {{$plan['planname']}}
+                              <input type="radio" value="{{$plan['groupname']}}" id="optionsRadios1" name="plan-type">
+                              {{$plan['groupname']}}
                           </label>
                       </div>
                     @endforeach
