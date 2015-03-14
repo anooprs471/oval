@@ -59,7 +59,9 @@ if($user->isOperator()){
 		->where('planname','=', $plan['groupname'])
 		->first();
 
-		array_push($coupon_plans,array('plan' => $plan['groupname'],'price' => $price['price']));
+		if($price != null){
+			array_push($coupon_plans,array('plan' => $plan['groupname'],'price' => $price['price']));
+		}
 	}
 
 	//var_dump($coupon_plans);

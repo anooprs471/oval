@@ -30,7 +30,7 @@
 		          	<td>{{$detail['plan_name']}}</td>
 		          	<td>{{$detail['operator']}}</td>
 		          	<td>{{$detail['id_proof_number']}}</td>
-		          	<td>{{$detail['filename']}}</td>
+		          	<td><a data-toggle="lightbox" href="{{$site_url}}images/id-proofs/{{$detail['filename']}}">View Proof</a></td>
 		          </tr>
 	          @endforeach
 

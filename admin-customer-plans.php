@@ -66,13 +66,10 @@ if($user->isAdmin()){
 		}
 	}
 
-	$count = 0;
-
 	foreach ($priced_plan_names as $plan) {
 		if(!in_array($plan,$oval_plan_names)){
 			array_push($remove_plans, array('id'=> $priced_plans[$count]['id']));
 		}
-		$count++;
 	}
 
 
