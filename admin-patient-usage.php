@@ -35,7 +35,7 @@ if($user->isAdmin()){
 		$patient_details = $capsule::table('coupons')
 		->where('coupons.patient_id','=',$patient_id)
 		->join('customers', 'customers.id', '=', 'coupons.customer_id')
-		->join('couponplans', 'couponplans.id', '=', 'coupons.coupon_type')
+		->join('couponplans', 'couponplans.planname', '=', 'coupons.coupon_type')
 		->join('users', 'users.id', '=', 'coupons.op_id')
 		->select(
 			'coupons.username as username', 
@@ -59,8 +59,7 @@ if($user->isAdmin()){
 		'site_url'=> Config::$site_url,
 		'name' => 'Administrator',
 		'msg' => $msg,
-		'patient_details' => $patient_details,
-		'plans' => $plans
+		'patient_details' => $patient_details
 	);
 
 
