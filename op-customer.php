@@ -80,6 +80,7 @@ if($user->isOperator()){
 
 			$previous_coupons = $capsule::table('coupons')
 			->where('patient_id','=',$customer->patient_id)
+			->orderby('created_at')
 			->get();
 
 
@@ -88,7 +89,7 @@ if($user->isOperator()){
 
 			 		foreach ($previous_coupons as $key => $coupon) {
 			 			$previous_coupons[$key]['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $coupon['created_at'])
-										->toFormattedDateString();
+						->toFormattedDateString();
 			 		}
 
 			 }

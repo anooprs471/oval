@@ -33,33 +33,33 @@
 		                      <div class="row">
 		                      	<div class="col-md-6">
 
-		                      		<div class="row">
-		                      			<div class="col-md-4">
-		                      				Patient ID
-		                      			</div><!-- /.col-md-4 -->
-		                      			<div class="col-md-8">
-		                      				{{$form['patient_id']}}
-		                      			</div><!-- /.col-md-8 -->
-		                      		</div><!-- /.row -->
+		                      		<div class="row invoice-to">
+				                      		<div class="col-md-4">
+			                      				<h4>Patient ID</h4>
+			                      			</div><!-- /.col-md-4 -->
+			                      			<div class="col-md-8">
+			                      				<h4>{{$form['patient_id']}}</h4>
+			                      			</div><!-- /.col-md-8 -->
+			                        </div>
 
-															<div class="row">
-		                      			<div class="col-md-4">
-		                      				Cutomer Name
-		                      			</div><!-- /.col-md-4 -->
-		                      			<div class="col-md-8">
-		                      				{{$form['customer_name']}}
-		                      			</div><!-- /.col-md-8 -->
-		                      		</div><!-- /.row -->
+			                        <div class="row invoice-to">
+				                      		<div class="col-md-4">
+			                      				<h4>Cutomer Name</h4>
+			                      			</div><!-- /.col-md-4 -->
+			                      			<div class="col-md-8">
+			                      				<h4>{{$form['customer_name']}}</h4>
+			                      			</div><!-- /.col-md-8 -->
+			                        </div>
 
-		                      		<div class="row">
-		                      			<div class="col-md-4">
-		                      				ID Proof
-		                      			</div><!-- /.col-md-4 -->
-		                      			<div class="col-md-8">
-		                      				{{-- <img src="images/id-proofs/{{$form['image-file']}}"><br />{{$form['id_proof_type']}} --}}
-		                      				<a data-toggle="lightbox" href="{{$site_url}}images/id-proofs/{{$form['image-file']}}">View ID Proof</a>
-		                      			</div><!-- /.col-md-8 -->
-		                      		</div><!-- /.row -->
+			                        <div class="row invoice-to">
+				                      		<div class="col-md-4">
+			                      				<h4>ID Proof No</h4>
+			                      			</div><!-- /.col-md-4 -->
+			                      			<div class="col-md-8">
+			                      				<h4>{{$form['id_proof_number']}}</h4>
+			                      				<p><a data-toggle="lightbox" href="{{$site_url}}images/id-proofs/{{$form['image-file']}}">View ID Proof</a></p>
+			                      			</div><!-- /.col-md-8 -->
+			                        </div>
 
 		                      		<hr />
 
@@ -83,6 +83,8 @@
 		                                    <td>
 		                                    	@if($coupon['complementary'] == 1)
 		                                    		Complimentary
+		                                    	@else
+		                                    		{{$coupon['created_at']}}
 		                                    	@endif
 		                                    </td>
 		                                </tr>

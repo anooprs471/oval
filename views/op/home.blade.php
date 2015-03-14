@@ -50,6 +50,11 @@
 	                      </a>
 	                  </li>
 	                  <li>
+	                      <a data-toggle="tab" href="#search">
+	                          Coupon Usage
+	                      </a>
+	                  </li>
+	                  <li>
 	                      <a data-toggle="tab" href="#contacts">
 	                          Contacts
 	                      </a>
@@ -67,19 +72,7 @@
 
 										<div id="search-patient" class="tab-pane active">
 	                      <div class="row">
-	                          <div class="col-md-6">
-	                              <div class="prf-contacts">
-	                                  <h2>Find</h2>
-	                                  <form class="form-horizontal" role="form" method="GET" action="op-coupon-stats.php">
-	                                  	<div class="form-group">
-					                                <label class="col-lg-4 col-sm-2 control-label">Coupon Username</label>
-					                                <div class="col-lg-8">
-					                                    <input type="text" class="form-control" name="coupon-username" value="" placeholder="username">
-					                                </div>
-					                            </div>
-	                                  </form>
-	                              </div>
-	                          </div>
+	                          
 	                          <div class="col-md-6">
 	                              <div class="prf-contacts">
 	                                  <h2>Add User</h2>
@@ -163,6 +156,27 @@
 	                          </div>
 
 	                      </div>
+	                  </div>
+	                  <div id="search" class="tab-pane">
+	                 		 <div class="col-md-6">
+	                        <div class="prf-contacts">
+	                            <h2>Find</h2>
+	                            <form class="form-horizontal" role="form" method="GET" action="op-coupon-stats.php">
+		                            	<div class="form-group">
+			                                <label class="col-lg-4 col-sm-2 control-label">Coupon Username</label>
+			                                <div class="col-lg-8">
+			                                    <input type="text" class="form-control" name="coupon-username" value="" placeholder="username">
+			                                    <p>Find the usage statistics of a coupon</p>
+			                                </div>
+			                                <div class="form-group">
+					                                <div class="col-lg-offset-4 col-lg-8">
+					                                    <button class="btn btn-danger" type="submit">Search</button>
+					                                </div>
+					                            </div>
+		                            </div>
+	                            </form>
+	                        </div>
+	                    </div>
 	                  </div>
 	                  <div id="contacts" class="tab-pane">
 	                      <div class="row">
