@@ -40,6 +40,32 @@
 	      </section>
 	  </div>
 	   <div class="col-sm-6">
+	   <section class="panel">
+	      <header class="panel-heading">
+	          Find details of username
+	      </header>
+        <div class="panel-body">
+          <div class="position-center">
+	          <div class="row">
+          		<form class="form-inline" role="form" method="GET" action="admin-username-details.php">
+
+	          	<div class="col-md-8">
+			          	<div class="form-group">
+                      <label class="sr-only">Username</label>
+                      <input type="text" class="form-control" placeholder="Username" name="username" />
+                  </div>
+	          	</div><!-- /.col-md-8 -->
+	          	<div class="col-md-4">
+	          		 <button type="submit" class="btn btn-success">Find</button>
+	          	</div><!-- /.col-md-4 -->
+	          	</form>
+	          </div><!-- /.row -->
+
+          </div>
+        </div>
+      </section>
+
+
 	   	<section class="panel">
 	      <header class="panel-heading">
 	          Find Patient's Usage
