@@ -14,6 +14,7 @@ $blade = new Blade($views, $cache);
 $user = new UserAccounts;
 $data = array(
 	'type' => 'operator',
+	'page_title' => "Operator Profile",
 	'site_url'=> Config::$site_url,
 	'name' => 'Operator'
 );

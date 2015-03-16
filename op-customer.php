@@ -15,6 +15,9 @@ $msg = '';
 $flash_msg = '';
 $err = array();
 $previous_coupons = array();
+$coupon_plans = array();
+$customer_id = '';
+$id_err= false;
 $form = array(
 	'patient_id' => '',
 	'customer_name' => '',
@@ -38,71 +41,79 @@ if($flash->hasFlashMessage()){
 if($user->isOperator()){
 	$names = $user->getOperatorName();
 
-	$customer_id = $_GET['customer-id'];
-
-	$customer = Customers::where('id', '=', $customer_id)->first();
-
-	$first = $capsule::table('radgroupreply')
-	->distinct()
-	->select('groupname');
-
-	$current_plans = $capsule::table('radgroupcheck')
-	->union($first)
-	->select('groupname')
-	->distinct()
-	->get();
-
-	$coupon_plans = array();
-
-	foreach ($current_plans as $key => $plan) {
-		$price = $capsule::table('couponplans')
-		->where('planname','=', $plan['groupname'])
-		->first();
-
-		if($price != null){
-			array_push($coupon_plans,array('plan' => $plan['groupname'],'price' => $price['price']));
-		}
-	}
-
-	//var_dump($coupon_plans);
+	if(!isset($_GET['customer-id']) || strlen($_GET['customer-id']) == 0){
+		$msg = 'Customer ID error';
+		$id_err = true;
+	}else{
 
 
-	
-	if($customer != null){
+			$customer_id = $_GET['customer-id'];
 
-		$form['patient_id'] = $customer->patient_id;
-		$form['customer_id'] = $customer_id;
-		$form['customer_name'] = $customer->customer_name;
-		$form['mobile_number'] = $customer->mobile_number;
-		$form['id_proof_number'] = $customer->id_proof_number;
-		$form['id_proof_type'] = $customer->id_proof_type;
-		$form['image-file'] = $customer->id_proof_filename;
+			$customer = Customers::where('id', '=', $customer_id)->first();
 
-		if($customer->patient_id != 'NON-PATIENT'){
+			$first = $capsule::table('radgroupreply')
+			->distinct()
+			->select('groupname');
 
-			$previous_coupons = $capsule::table('coupons')
-			->where('patient_id','=',$customer->patient_id)
-			->orderby('created_at')
+			$current_plans = $capsule::table('radgroupcheck')
+			->union($first)
+			->select('groupname')
+			->distinct()
 			->get();
 
+			$coupon_plans = array();
 
-			 if(!empty($previous_coupons)){
-			 		$no_coupons = false;
+			foreach ($current_plans as $key => $plan) {
+				$price = $capsule::table('couponplans')
+				->where('planname','=', $plan['groupname'])
+				->first();
 
-			 		foreach ($previous_coupons as $key => $coupon) {
-			 			$previous_coupons[$key]['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $coupon['created_at'])
-						->toFormattedDateString();
-			 		}
+				if($price != null){
+					array_push($coupon_plans,array('plan' => $plan['groupname'],'price' => $price['price']));
+				}
+			}
 
-			 }
-
-		}
+			//var_dump($coupon_plans);
 
 
-		
-	}elseif($customer == null){
-		$msg = 'patient not found';
-		$customer_err = true;
+			
+			if($customer != null){
+
+				$form['patient_id'] = $customer->patient_id;
+				$form['customer_id'] = $customer_id;
+				$form['customer_name'] = $customer->customer_name;
+				$form['mobile_number'] = $customer->mobile_number;
+				$form['id_proof_number'] = $customer->id_proof_number;
+				$form['id_proof_type'] = $customer->id_proof_type;
+				$form['image-file'] = $customer->id_proof_filename;
+
+				if($customer->patient_id != 'NON-PATIENT'){
+
+					$previous_coupons = $capsule::table('coupons')
+					->where('patient_id','=',$customer->patient_id)
+					->orderby('created_at')
+					->get();
+
+
+					 if(!empty($previous_coupons)){
+					 		$no_coupons = false;
+
+					 		foreach ($previous_coupons as $key => $coupon) {
+					 			$previous_coupons[$key]['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $coupon['created_at'])
+								->toFormattedDateString();
+					 		}
+
+					 }
+
+				}
+
+
+				
+			}elseif($customer == null){
+				$msg = 'patient not found';
+				$customer_err = true;
+			}
+
 	}
 
 
@@ -111,11 +122,13 @@ if($user->isOperator()){
 		'type' => 'operator',
 		'site_url'=> Config::$site_url,
 		'name' => 'Operator',
+		'page_title' => "Generate Coupon",
 		'first_name' => $names['first-name'],
 		'last_name' => $names['last-name'],
 		'msg' => $msg,
 		'form' => $form,
 		'err' => $err,
+		'id_err' => $id_err,
 		'coupon_plans' => $coupon_plans,
 		'op_id' => $user->getCurrentId(),
 		'customer_id' => $customer_id,

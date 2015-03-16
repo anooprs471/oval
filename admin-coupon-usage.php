@@ -88,6 +88,7 @@ if($user->isAdmin()){
 	$data = array(
 		'type' => 'admin',
 		'site_url'=> Config::$site_url,
+		'page_title' => "Admin Coupon Usage",
 		'name' => 'Administrator',
 		'msg' => $msg,
 		'plans' => $plans

@@ -173,6 +173,8 @@ class UserAccounts {
 		    // Create the user
 		    $new_user = Sentry::createUser(array(
 		        'username'	=> $username,
+		        'username'	=> $username,
+		        'email'			=> $username.'@ovalinfo.com',
 		        'password'  => $password,
 		        'activated' => true
 		    ));

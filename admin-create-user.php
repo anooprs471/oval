@@ -34,6 +34,7 @@ if($user->isAdmin()){
 	$data = array(
 		'type' => 'admin',
 		'site_url'=> Config::$site_url,
+		'page_title' => "Create Operators",
 		'name' => 'Administrator',
 		'msg' => $msg
 	);

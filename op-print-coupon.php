@@ -50,7 +50,7 @@ if($user->isOperator()){
 
 		if($coupon != null){
 
-			$plan_id = $coupon['coupon_type'];
+			$plan_type = $coupon['coupon_type'];
 			$customer_id = $coupon['customer_id'];
 			$complementary = $coupon['complementary'];
 
@@ -65,7 +65,7 @@ if($user->isOperator()){
 			->first();
 
 			$coupon_detail = $capsule::table('couponplans')
-			->where('id','=',$plan_id)
+			->where('planname','=',$plan_type)
 			->first();
 
 			$customer_name = $customer['customer_name'];
@@ -93,6 +93,7 @@ if($user->isOperator()){
 		'type' => 'operator',
 		'site_url'=> Config::$site_url,
 		'name' => 'Operator',
+		'page_title' => "Print Coupon",
 		'first_name' => $names['first-name'],
 		'last_name' => $names['last-name'],
 		'msg' => $msg,

@@ -25,7 +25,7 @@
 
 	              </ul>
 	          </header>
-	          @if(!$customer_err)
+	          @if(!$customer_err && !$id_err)
 		          <div class="panel-body">
 		              <div class="tab-content tasi-tab">
 
@@ -57,7 +57,7 @@
 			                      			</div><!-- /.col-md-4 -->
 			                      			<div class="col-md-8">
 			                      				<h4>{{$form['id_proof_number']}}</h4>
-			                      				<p><a data-toggle="lightbox" href="{{$site_url}}images/id-proofs/{{$form['image-file']}}">View ID Proof</a></p>
+			                      				<p><a data-toggle="lightbox" href="{{$site_url}}images/id-proofs/{{$form['image-file']}}"><span class="label label-info">View ID Proof</span></a></p>
 			                      			</div><!-- /.col-md-8 -->
 			                        </div>
 

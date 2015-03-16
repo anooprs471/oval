@@ -13,6 +13,8 @@ $cache = __DIR__ . '/cache';
 $blade = new Blade($views, $cache);
 $msg = '';
 $flash_msg = '';
+$op_coupon_count_all = '';
+$op_coupons_this_week = '';
 $err = array();
 $form = array(
 	'patient_id' => '',
@@ -26,6 +28,8 @@ $user = new UserAccounts;
 
 $flash = new Flash_Messages();
 
+$capsule = $user->getCapsule();
+
 if($flash->hasFlashMessage()){
 	$flash_msg = $flash->show();
 }
@@ -33,6 +37,41 @@ if($flash->hasFlashMessage()){
 
 if($user->isOperator()){
 	$names = $user->getOperatorName();
+
+	$date = Carbon::now();
+
+	$op_coupons_this_week = $capsule::table('coupons')
+	->where('op_id', '=', $user->getCurrentId())
+	->where('created_at', '>', $date->startOfWeek())
+	->count();
+
+	$op_coupon_count_all = $capsule::table('coupons')
+	->where('op_id', '=', $user->getCurrentId())
+	->count();
+
+	$first = $capsule::table('radgroupreply')
+	->distinct()
+	->select('groupname');
+
+	$current_plans = $capsule::table('radgroupcheck')
+	->union($first)
+	->select('groupname')
+	->distinct()
+	->get();
+
+	$coupon_plans = array();
+
+	foreach ($current_plans as $key => $plan) {
+		$price = $capsule::table('couponplans')
+		->where('planname','=', $plan['groupname'])
+		->first();
+
+		if($price != null){
+			array_push($coupon_plans,array('plan' => $plan['groupname'],'price' => $price['price']));
+		}
+	}
+
+
 
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
@@ -138,9 +177,10 @@ if($user->isOperator()){
    				$customer = new Customers;
 
    				$customer->patient_id = $patient_id;
-   				$customer->customer_name = $customer_name;
+   				$customer->customer_name = ucwords($customer_name);
    				$customer->mobile_number = $mobile_number;
    				$customer->id_proof_type = $id_proof_type;
+   				$customer->id_proof_number = $id_proof_number;
    				$customer->id_proof_filename = $filename;
    				$customer->operator_id = $user->getCurrentId();
 
@@ -161,13 +201,17 @@ if($user->isOperator()){
 	$data = array(
 		'type' => 'operator',
 		'site_url'=> Config::$site_url,
+		'page_title' => "Operator Dashboard",
 		'name' => 'Operator',
 		'first_name' => $names['first-name'],
 		'last_name' => $names['last-name'],
 		'msg' => $msg,
 		'form' => $form,
 		'err' => $err,
-		'flash' => $flash_msg
+		'flash' => $flash_msg,
+		'coupons_this_week' => $op_coupons_this_week,
+		'coupon_count_all' => $op_coupon_count_all,
+		'coupon_plans' => $coupon_plans
 	);
 	//var_dump($form);
 	echo $blade->view()->make('op.home',$data);

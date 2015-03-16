@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
-    <title>BucketAdmin</title>
+    <title>{{$page_title}}</title>
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="js/jquery-ui/jquery-ui-1.10.1.custom.min.css" rel="stylesheet">
@@ -14,6 +14,7 @@
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="js/jvector-map/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <link href="css/clndr.css" rel="stylesheet">
+
     <!--clock css-->
     <link href="js/css3clock/css/style.css" rel="stylesheet">
     <!--lightbox css-->
@@ -52,12 +53,12 @@
 
     @if($type == 'admin')
     <a href="{{$site_url}}admin-home.php" class="logo">
-        <img src="images/logo.png" alt="">
+        <img src="images/oval_logo.jpg" alt="">
     </a>    
     @endif
     @if($type == 'operator')
     <a href="{{$site_url}}op-home.php" class="logo">
-        <img src="images/logo.png" alt="">
+        <img src="images/oval_logo.jpg" alt="">
     </a>    
     @endif
 

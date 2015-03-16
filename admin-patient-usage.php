@@ -58,6 +58,7 @@ if($user->isAdmin()){
 		'type' => 'admin',
 		'site_url'=> Config::$site_url,
 		'name' => 'Administrator',
+		'page_title' => "Patient Usage Details",
 		'msg' => $msg,
 		'patient_details' => $patient_details
 	);

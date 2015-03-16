@@ -139,6 +139,7 @@ if($user->isAdmin()){
 		'type' => 'admin',
 		'site_url'=> Config::$site_url,
 		'name' => 'Administrator',
+		'page_title' => "Operator Details",
 		'msg' => $msg,
 		'flash' => $flash_msg,
 		'user_err' => $user_err,

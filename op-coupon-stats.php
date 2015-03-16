@@ -66,6 +66,7 @@ if($flash->hasFlashMessage()){
 	$data = array(
 		'type' => 'operator',
 		'site_url'=> Config::$site_url,
+		'page_title' => "Coupon Usage",
 		'name' => 'Operator',
 		'first_name' => $names['first-name'],
 		'last_name' => $names['last-name'],

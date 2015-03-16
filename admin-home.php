@@ -45,6 +45,7 @@ if($user->isAdmin()){
 	$data = array(
 		'type' => 'admin',
 		'site_url'=> Config::$site_url,
+		'page_title' => "Admin Dashboard",
 		'name' => 'Administrator',
 		'msg' => $msg,
 		'users' => $operator,

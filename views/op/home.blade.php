@@ -30,9 +30,9 @@
 	             </div>
 	             <div class="col-md-3">
 	                 <div class="profile-statistics">
-	                     <h1>1240</h1>
+	                     <h1>{{$coupon_count_all}}</h1>
 	                     <p>Total Coupons</p>
-	                     <h1>10</h1>
+	                     <h1>{{$coupons_this_week}}</h1>
 	                     <p>This Week</p>
 
 	                 </div>
@@ -55,8 +55,8 @@
 	                      </a>
 	                  </li>
 	                  <li>
-	                      <a data-toggle="tab" href="#contacts">
-	                          Contacts
+	                      <a data-toggle="tab" href="#coupons">
+	                          Coupons
 	                      </a>
 	                  </li>
 
@@ -125,12 +125,25 @@
 	   							                                <label for="mobile-number" class="col-lg-4 col-sm-2 control-label">ID Proof Document Type</label>
 	   							                                <div class="col-lg-8">
 	   							                                    <select class="form-control m-bot15" name="id-proof-type">
-													                                <option value="Driving License">Driving License</option>
-													                                <option value="Voters ID">Voters ID</option>
-													                                <option value="Ration Card">Ration Card</option>
+		   							                                    <option value="Voter identity card">Voter identity card</option>
+
+		   							                                    <option value="Passport">Passport</option>
+
+		   							                                    <option value="PAN Card">PAN Card</option>
+
+		   							                                    <option value="Driving Licence">Driving Licence</option>
+
+		   							                                    <option value="Aadhaar Unique Identification Card">Aadhaar Unique Identification Card</option>
+
+		   							                                    <option value="Others"></option>
 
 													                            </select>
-	   							                                    <p class="help-block">Document presented as ID proof</p>
+	   							                                    <p class="help-block">Document presented as ID proof <br />
+	   							                                    <p></p>
+	   							                                    <input type="text" name="other-id-proof"  class="form-control" />
+	   							                                    <p>If selected other fill above</p>
+
+	   							                                    </p>
 	   							                                </div>
 
 	   							                            </div>
@@ -178,31 +191,34 @@
 	                        </div>
 	                    </div>
 	                  </div>
-	                  <div id="contacts" class="tab-pane">
+	                  <div id="coupons" class="tab-pane">
 	                      <div class="row">
 	                          <div class="col-md-6">
-	                              <div class="prf-contacts">
-	                                  <h2> <span><i class="fa fa-map-marker"></i></span> location</h2>
-	                                  <div class="location-info">
-	                                      <p>Postal Address<br>
-	                                          PO Box 16122 Collins Street West<br>
-	                                          Victoria 8007 Australia</p>
-	                                      <p>Headquarters<br>
-	                                          121 King Street, Melbourne<br>
-	                                          Victoria 3000 Australia</p>
-	                                  </div>
-	                                  <h2> <span><i class="fa fa-phone"></i></span> contacts</h2>
-	                                  <div class="location-info">
-	                                      <p>Phone	: +61 3 8376 6284 <br>
-	                                          Cell		: +61 3 8376 6284</p>
-	                                      <p>Email		: david@themebucket.net<br>
-	                                          Skype		: david.rojormillan</p>
-	                                      <p>
-	                                          Facebook	: https://www.facebook.com/themebuckets <br>
-	                                          Twitter	: https://twitter.com/theme_bucket
-	                                      </p>
-	                                  </div>
-	                              </div>
+	                              <section class="panel">
+							                    <header class="panel-heading">
+							                        Available Coupons
+							                        
+							                    </header>
+							                    <div class="panel-body">
+							                        <table class="table  table-hover general-table">
+							                            <thead>
+							                            <tr>
+							                                <th>Plan</th>
+							                                <th>Price</th>
+							                            </tr>
+							                            </thead>
+							                            <tbody>
+							                            @foreach($coupon_plans as $plan)
+							                          	  <tr>
+							                            		<td>{{$plan['plan']}}</td>
+							                            		<td>{{$plan['price']}}</td>
+							                            	</tr>
+							                            @endforeach
+							                            	
+							                            </tbody>
+							                        </table>
+							                    </div>
+							                </section>
 	                          </div>
 
 	                      </div>
