@@ -19,11 +19,15 @@ $capsule = $user->getCapsule();
 
 $patient_details = array();
 
+$plans = array();
+
 $msg = '';
 
-$date_err = false;
+$form_err = false;
 
 $data_err = false;
+
+$date_err = false;
 
 if($user->isAdmin()){
 
@@ -67,14 +71,35 @@ if($user->isAdmin()){
 		if(!$date_err){
 
 			if($plan_type == 'all'){
+
 				$plans = $capsule::table('coupons')
-				->whereBetween('created_at', array($fr_date,$t_date))
+				->whereBetween('coupons.created_at', array($fr_date,$t_date))
+				->join('users', 'coupons.op_id', '=', 'users.id')
+				->select(
+					'coupons.created_at as date',
+					'coupons.username as username', 
+					'users.username as operator',
+					'users.id as op_id',
+					'coupons.created_at as date'
+					)
+				->orderby('coupons.created_at')
 				->get();
+
 			}else{
 				$plans = $capsule::table('coupons')
-				->where('coupon_type','=',$plan_type)
-				->whereBetween('created_at', array($fr_date,$t_date))
+				->where('coupons.coupon_type','=',$plan_type)
+				->whereBetween('coupons.created_at', array($fr_date,$t_date))
+				->join('users', 'coupons.op_id', '=', 'users.id')
+				->select(
+					'coupons.created_at as date',
+					'coupons.username as username', 
+					'users.username as operator',
+					'users.id as op_id',
+					'coupons.created_at as date'
+					)
+				->orderby('coupons.created_at')
 				->get();
+
 			}
 
 			$data_date = 'from <strong>'.$fr_date->format('Y/M/d').'</strong> to <strong>'.$t_date->format('Y/M/d').'</strong> of <strong>'.$plan_name.'</strong> plan';
@@ -83,7 +108,11 @@ if($user->isAdmin()){
 			$msg = 'date error '.$from_date.' '.$to_date;
 		}
 
+	}else{
+		$form_err = true;
 	}
+
+	//var_dump($plans);
 
 	$data = array(
 		'type' => 'admin',
@@ -91,7 +120,8 @@ if($user->isAdmin()){
 		'page_title' => "Admin Coupon Usage",
 		'name' => 'Administrator',
 		'msg' => $msg,
-		'plans' => $plans
+		'plans' => $plans,
+		'form_err' => $form_err
 	);
 
 
