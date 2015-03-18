@@ -20,29 +20,35 @@
 	            
 	        </header>
 	        <div class="panel-body">
-	        	@if(!$cuopon_err)
-		            <table class="table  table-hover general-table table-bordered">
-		                <thead>
-			                <tr>
-			                    <th>Usage Started</th>
-			                    <th>Usage Stopped</th>
-			                    <th>Data Traffic(Up/Down)</th>
-			                </tr>
-		                </thead>
-		                <tbody>
-											@foreach($stats as $stat)
+	        	<div class="print-username-stat">
+	        		
+		        	<h4>username : {{$username}}</h4>
+		        	<hr />
+		        	@if(!$cuopon_err)
+			            <table class="table  table-hover general-table table-bordered">
+			                <thead>
 				                <tr>
-														<td>{{$stat['acctstarttime']}}</td>
-														<td>{{$stat['acctstoptime']}}</td>
-														<td>{{$stat['total_download']}}</td>
+				                    <th>Usage Started</th>
+				                    <th>Usage Stopped</th>
+				                    <th>Data Traffic(Up/Down)</th>
 				                </tr>
-			                @endforeach
+			                </thead>
+			                <tbody>
+												@foreach($stats as $stat)
+					                <tr>
+															<td>{{$stat['acctstarttime']}}</td>
+															<td>{{$stat['acctstoptime']}}</td>
+															<td>{{$stat['total_download']}}</td>
+					                </tr>
+				                @endforeach
 
-		                </tbody>
-		            </table>
-		        @else
-		        	no stats for the coupon
-		        @endif 
+			                </tbody>
+			            </table>
+			        @else
+			        	no stats for the coupon
+			        @endif 
+	        	</div><!-- /.print-username-stat -->
+	        	<button class="btn btn-primary print"><i class="fa fa-print"></i> Print</button>
 	        </div>
 	    </section>
 	  </div>

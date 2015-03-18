@@ -180,6 +180,30 @@
         })
     }
 
+    if ($('.print-username-stat').length > 0) {
+        $('button.print').on('click', function() {
+            $(".print-username-stat").print();
+        })
+    }
+
+    if ($('.print-username-details').length > 0) {
+        $('button.print').on('click', function() {
+            $(".print-username-details").print();
+        })
+    }
+
+    if ($('.print-patient-usage').length > 0) {
+        $('button.print').on('click', function() {
+            $(".print-patient-usage").print();
+        })
+    }
+
+    if ($('.print-plan-usage').length > 0) {
+        $('button.print').on('click', function() {
+            $(".print-plan-usage").print();
+        })
+    }
+
     // disabling dates
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);

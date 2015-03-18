@@ -1,7 +1,15 @@
 /*print styles*/
 @page {
-	size: A5;
+	size: A4;
 	margin: 5%;
+}
+
+@media screen{
+	.print-username-details,
+	.print-patient-usage,
+	.print-plan-usage{
+		display: none;
+	}
 }
 @media print{
 	.print-coupon{
@@ -32,6 +40,12 @@
 	}
 	.table-invoice td.text-left{
 		text-align: left;
+	}
+
+	.print-username-details,
+	.print-patient-usage,
+	.print-plan-usage{
+		display: block;
 	}
 
 }

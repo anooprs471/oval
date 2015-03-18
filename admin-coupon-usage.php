@@ -113,6 +113,8 @@ if($user->isAdmin()){
 	}
 
 	//var_dump($plans);
+	$disp_frm_year = $fr_date->year.'/'.$fr_date->month.'/'.$fr_date->day;
+	$disp_to_year = $t_date->year.'/'.$t_date->month.'/'.$t_date->day;
 
 	$data = array(
 		'type' => 'admin',
@@ -120,6 +122,7 @@ if($user->isAdmin()){
 		'page_title' => "Admin Coupon Usage",
 		'name' => 'Administrator',
 		'msg' => $msg,
+		'searched_for' => 'plan - '.$plan_type.' between dates '.$disp_frm_year.' - '.$disp_to_year,
 		'plans' => $plans,
 		'form_err' => $form_err
 	);

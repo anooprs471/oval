@@ -60,6 +60,7 @@ if($user->isAdmin()){
 		'name' => 'Administrator',
 		'page_title' => "Patient Usage Details",
 		'msg' => $msg,
+		'patient_id' => $patient_id,
 		'patient_details' => $patient_details
 	);
 
