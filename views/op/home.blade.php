@@ -135,7 +135,7 @@
 
 		   							                                    <option value="Aadhaar Unique Identification Card">Aadhaar Unique Identification Card</option>
 
-		   							                                    <option value="Others"></option>
+		   							                                    <option value="Others">Others</option>
 
 													                            </select>
 	   							                                    <p class="help-block">Document presented as ID proof <br />

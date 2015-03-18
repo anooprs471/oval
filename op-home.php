@@ -121,7 +121,7 @@ if($user->isOperator()){
 			if(!isset($_POST['customer-name']) || strlen($_POST['customer-name']) < 3){
 				array_push($err,'Customer Name not provided or too small');
 			}else{
-				$customer_name = filter_var($_POST['customer-name'], FILTER_SANITIZE_STRING);
+				$customer_name = ucwords(filter_var($_POST['customer-name'], FILTER_SANITIZE_STRING));
 				$form['customer_name'] = $customer_name;
 			}
 
@@ -140,6 +140,15 @@ if($user->isOperator()){
 			}
 
 			$id_proof_type = $_POST['id-proof-type'];
+
+			if($id_proof_type == 'Others'){
+
+				if(!isset($_POST['other-id-proof']) || strlen($_POST['other-id-proof']) == 0){
+					array_push($err,'Enter proof type as you have selected other as id proof');
+				}else{
+					$id_proof_type = filter_var($_POST['other-id-proof'], FILTER_SANITIZE_STRING);
+				}
+			}
 
 
 
