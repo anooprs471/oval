@@ -80,8 +80,8 @@ if($user->isOperator()){
 				$firstname = $_POST['first-name'];
 				$lastname = $_POST['last-name'];
 
-				$filtered_firstname = filter_var($firstname, FILTER_SANITIZE_STRING);
-				$filtered_lastname = filter_var($lastname, FILTER_SANITIZE_STRING);
+				$filtered_firstname = ucwords(filter_var($firstname, FILTER_SANITIZE_STRING));
+				$filtered_lastname = ucwords(filter_var($lastname, FILTER_SANITIZE_STRING));
 
 				$user->updateProfile($filtered_firstname,$filtered_lastname);
 

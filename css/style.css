@@ -5716,3 +5716,7 @@ right: -1px;
     border-left: 1px solid #ddd;
     padding-left: 10px;
 }
+
+.form-control {
+    color: #000;
+}

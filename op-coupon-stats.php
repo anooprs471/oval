@@ -13,6 +13,7 @@ $cache = __DIR__ . '/cache';
 $blade = new Blade($views, $cache);
 $msg = '';
 $flash_msg = '';
+$username = '';
 $err = array();
 $stats = array();
 $form = array(
@@ -44,8 +45,9 @@ if($flash->hasFlashMessage()){
 
 	}else{
 
+		$username = filter_var($_GET['coupon-username'], FILTER_SANITIZE_STRING);
 		$stats = $capsule::table('radacct')
-		->where('username','=',filter_var($_GET['coupon-username'], FILTER_SANITIZE_STRING))
+		->where('username','=',$username)
 		->get();
 
 		if(empty($stats)){
@@ -72,6 +74,7 @@ if($flash->hasFlashMessage()){
 		'last_name' => $names['last-name'],
 		'msg' => $msg,
 		'form' => $form,
+		'username' => $username,
 		'cuopon_err' => $cuopon_err,
 		'flash' => $flash_msg,
 		'stats' => $stats

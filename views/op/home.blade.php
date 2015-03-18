@@ -259,13 +259,13 @@
 	                              <div class="form-group">
 	                                  <label class="col-lg-2 control-label"> Old Password</label>
 	                                  <div class="col-lg-6">
-	                                      <input type="text" placeholder=" " id="old-password" name="old-password" class="form-control">
+	                                      <input type="password" placeholder=" " id="old-password" name="old-password" class="form-control">
 	                                  </div>
 	                              </div>
 	                              <div class="form-group">
 	                                  <label class="col-lg-2 control-label"> New Password</label>
 	                                  <div class="col-lg-6">
-	                                      <input type="text" placeholder=" " id="new-password" name="new-password" class="form-control">
+	                                      <input type="password" placeholder=" " id="new-password" name="new-password" class="form-control">
 	                                  </div>
 	                              </div>
 	                              <div class="form-group">

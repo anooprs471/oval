@@ -13,6 +13,14 @@ $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 
+$flash = new Flash_Messages();
+
+$flash_msg = '';
+
+if($flash->hasFlashMessage()){
+	$flash_msg = $flash->show();
+}
+
 $msg = '';
 
 if($user->isAdmin()){
@@ -28,6 +36,11 @@ if($user->isAdmin()){
 
 		$msg = $user->createOperator($filtered_username,$filtered_password);
 
+		if($msg == ''){
+			$flash->add('New user created');
+			header('Location: '.Config::$site_url.'admin-create-user.php');
+		}
+
 
 	}
 
@@ -36,7 +49,8 @@ if($user->isAdmin()){
 		'site_url'=> Config::$site_url,
 		'page_title' => "Create Operators",
 		'name' => 'Administrator',
-		'msg' => $msg
+		'msg' => $msg,
+		'flash' => $flash_msg
 	);
 	echo $blade->view()->make('admin.create-user',$data);
 }else{

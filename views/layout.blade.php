@@ -128,6 +128,12 @@
                             <span>Plans</span>
                         </a>
                     </li>
+                    <li class="sub-menu">
+                        <a href="{{$site_url}}admin-change-password.php">
+                            <i class="fa fa-laptop"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
                 @endif
             </ul> 
        </div>
