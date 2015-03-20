@@ -27,6 +27,7 @@
                     
                 </header>
                 <div class="panel-body">
+                		@if(!empty($priced_plans))
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -36,6 +37,7 @@
                         </tr>
                         </thead>
                         <tbody>
+
                         @foreach($priced_plans as $plan)
 	                        <tr>
 	                            <td></td>
@@ -56,6 +58,9 @@
 
                         </tbody>
                     </table>
+                    @else
+                    	<p>No plans available, please add from control panel</p>
+                    @endif	
                 </div>
             </section>
 

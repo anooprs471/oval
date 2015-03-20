@@ -28,6 +28,7 @@ $flash = new Flash_Messages();
 
 $remove_plans = array();
 $to_insert_plans = array();
+$priced_plans = array();
 
 if($flash->hasFlashMessage()){
 	$flash_msg = $flash->show();
@@ -44,43 +45,45 @@ if($user->isAdmin()){
 	->distinct()
 	->get();
 
-	$priced_plans = $capsule::table('couponplans')
-	->get();
+	if(!empty($oval_plans)){
+		$priced_plans = $capsule::table('couponplans')
+		->get();
 
-	$priced_plan_names = array_map(function($item){
-		return $item['planname'];
-	},$priced_plans);
+		$priced_plan_names = array_map(function($item){
+			return $item['planname'];
+		},$priced_plans);
 
-	$oval_plan_names = array_map(function($item){
-		return $item['groupname'];
-	},$oval_plans);
+		$oval_plan_names = array_map(function($item){
+			return $item['groupname'];
+		},$oval_plans);
 
-	foreach ($oval_plan_names as $plan) {
-		if(!in_array($plan, $priced_plan_names)){
-			array_push($to_insert_plans,array(
-				'planname' => $plan,
-				'price' => 0,
-				'created_at' => Carbon::now(),
-				'updated_at' => Carbon::now()
-			));
+		foreach ($oval_plan_names as $plan) {
+			if(!in_array($plan, $priced_plan_names)){
+				array_push($to_insert_plans,array(
+					'planname' => $plan,
+					'price' => 0,
+					'created_at' => Carbon::now(),
+					'updated_at' => Carbon::now()
+				));
+			}
 		}
-	}
 
-	foreach ($priced_plan_names as $plan) {
-		if(!in_array($plan,$oval_plan_names)){
-			array_push($remove_plans, array('id'=> $priced_plans[$count]['id']));
+		foreach ($priced_plan_names as $plan) {
+			if(!in_array($plan,$oval_plan_names)){
+				array_push($remove_plans, array('id'=> $priced_plans[$count]['id']));
+			}
 		}
+
+
+
+		$capsule::table('couponplans')->whereIn('id', $remove_plans)->delete(); 
+		if(!empty($to_insert_plans)){
+			$capsule::table('couponplans')->insert($to_insert_plans);
+		}	
+
+		$priced_plans = $capsule::table('couponplans')
+		->get();
 	}
-
-
-
-	$capsule::table('couponplans')->whereIn('id', $remove_plans)->delete(); 
-	if(!empty($to_insert_plans)){
-		$capsule::table('couponplans')->insert($to_insert_plans);
-	}	
-
-	$priced_plans = $capsule::table('couponplans')
-	->get();
 
 	 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 

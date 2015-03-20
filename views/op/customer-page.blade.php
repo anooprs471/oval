@@ -97,13 +97,13 @@
 
 								                      			@foreach($previous_coupons as $coupon)
 							                                <tr>
-							                                    <td>{{$coupon['username']}}</td>
-							                                    <td>{{$coupon['created_at']}}</td>
+							                                    <td>{{ucwords($coupon['name'])}}</td>
+							                                    <td>{{$coupon['date']}}</td>
 							                                    <td>
 							                                    	@if($coupon['complementary'] == 1)
 							                                    		Complimentary
 							                                    	@else
-							                                    		{{$coupon['created_at']}}
+							                                    		{{$coupon['plan']}}
 							                                    	@endif
 							                                    </td>
 							                                </tr>

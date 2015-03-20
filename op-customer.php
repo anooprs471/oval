@@ -90,8 +90,15 @@ if($user->isOperator()){
 				if($customer->patient_id != 'NON-PATIENT'){
 
 					$previous_coupons = $capsule::table('coupons')
-					->where('patient_id','=',$customer->patient_id)
-					->orderby('created_at')
+					->where('coupons.patient_id','=',$customer->patient_id)
+					->join('customers','customers.id', '=','coupons.customer_id')
+					->orderby('coupons.created_at')
+					->select(
+						'customers.customer_name as name', 
+						'coupons.created_at as date',
+						'coupons.coupon_type as plan',
+						'coupons.complementary as complementary'
+					)
 					->get();
 
 
@@ -99,7 +106,7 @@ if($user->isOperator()){
 					 		$no_coupons = false;
 
 					 		foreach ($previous_coupons as $key => $coupon) {
-					 			$previous_coupons[$key]['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $coupon['created_at'])
+					 			$previous_coupons[$key]['date'] = Carbon::createFromFormat('Y-m-d H:i:s', $coupon['date'])
 								->toFormattedDateString();
 					 		}
 
