@@ -22,7 +22,7 @@ $msg = '';
 $flash_msg = '';
 $user_err = false;
 $date_err = false;
-$data_date = 'till '.Carbon::now().' of all plan';
+$data_date = 'Today all plans';
 
 $user_coupon = array();
 
@@ -68,6 +68,16 @@ if($user->isAdmin()){
 			->where('id','=',$user_id)
 			->first();
 
+			//set start and end time of days
+			
+			$fr_date->hour = 0;
+			$fr_date->minute = 0;
+			$fr_date->second = 0;
+
+			$t_date->hour = 23;
+			$t_date->minute = 59;
+			$t_date->second = 59;
+
 			if(!empty($op)){
 				 //echo $user_id;
 				if($plan_type == 'all'){
@@ -97,7 +107,9 @@ if($user->isAdmin()){
 			}
 
 			$data_date = 'from <strong>'.$fr_date->format('Y/M/d').'</strong> to <strong>'.$t_date->format('Y/M/d').'</strong> of <strong>'.$plan_name.'</strong> plan';
+			
 
+			//echo 'date error '.$fr_date.' '.$t_date;
 
 		}else{
 			$msg = 'date error '.$from_date.' '.$to_date;

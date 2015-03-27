@@ -69,6 +69,15 @@ if($user->isAdmin()){
 		}
 
 		if(!$date_err){
+			//set start and end time of days
+			
+			$fr_date->hour = 0;
+			$fr_date->minute = 0;
+			$fr_date->second = 0;
+
+			$t_date->hour = 23;
+			$t_date->minute = 59;
+			$t_date->second = 59;
 
 			if($plan_type == 'all'){
 
