@@ -118,6 +118,7 @@ if($user->isAdmin()){
 		if(!empty($op)){
 			$coupons = $capsule::table('coupons')
 			->where('op_id','=',$user_id)
+			->where('created_at', '>',Carbon::today())
 			->get();
 		}
 
@@ -134,6 +135,24 @@ if($user->isAdmin()){
 	->distinct()
 	->get();
 
+	$allot_plans = array();
+	foreach ($coupons as $coupon) {
+		array_push($allot_plans, $coupon['coupon_type']);
+	}
+
+	$avail_plans = $capsule::table('couponplans')
+                    ->whereIn('planname', $allot_plans)->get();
+	foreach ($avail_plans as $plan) {
+		$plans_arr[$plan['planname']] = $plan['price'];
+	}
+	$payment = 0;
+	foreach ($coupons as $coupon) {
+		$payment = $payment + $plans_arr[$coupon['coupon_type']];
+	}
+
+
+
+
 
 	$data = array(
 		'type' => 'admin',
@@ -147,7 +166,8 @@ if($user->isAdmin()){
 		'coupons' => $coupons,
 		'user_id' => $user_id,
 		'data_date' => $data_date,
-		'plans' => $plans
+		'plans' => $plans,
+		'payment' => $payment
 		
 	);
 	

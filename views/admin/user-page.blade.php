@@ -60,6 +60,10 @@
                           <td>{{$coupon['coupon_type']}}</td>
                       </tr>
                       @endforeach
+                      <tr>
+                        <td>Payment</td>
+                        <td>{{$payment}}</td>
+                      </tr>
            
                       </tbody>
                   </table>
