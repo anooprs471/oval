@@ -38,6 +38,40 @@
 	          </div>
 	          </div>
 	      </section>
+	      <hr />
+	      <section class="panel">
+	          <header class="panel-heading">
+	              Todays Report
+	          </header>
+	          <div class="panel-body">
+	          <div class="adv-table">
+	          <table  class="display table table-bordered table-striped" id="dynamic-table">
+	          <thead>
+	          <tr>
+	              <th>Username</th>
+	              <th>Coupon(s)</th>
+	              <th>Amount</th>
+	          </tr>
+	          </thead>
+	          <tbody>
+	          @foreach($sale_details as $sale)
+		          <tr class="gradeC">
+		              <td><a href="{{$site_url}}admin-user-detail.php?id={{$sale['op_id']}}">{{$sale['op_name']}}</a></td>
+		              <td>
+	              	{{$sale['count']}}
+		              </td>
+		              <td>
+	              	{{$sale['payment']}}
+		              </td>
+		              
+		          </tr>
+	          @endforeach
+
+
+	          </table>
+	          </div>
+	          </div>
+	      </section>
 	  </div>
 	   <div class="col-sm-6">
 	   <section class="panel">
