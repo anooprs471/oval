@@ -11,31 +11,49 @@
 	          <div class="adv-table">
 	          @if(!$form_err)
 
-	          <table  class="display table table-bordered table-striped" id="dynamic-table">
-	          <thead>
-	          <tr>
-	              <th>Date</th>
-	              <th>Username</th>
-	              <th>Operator</th>
-	          </tr>
-	          </thead>
-	          <tbody>
-	          @foreach($plans as $plan)
+	          <table  class="display table table-bordered table-striped">
+		          <thead>
 		          <tr>
-		          	<td>{{$plan['date']}}</td>
-		          	<td>
-		          	<a href="{{$site_url}}admin-username-details.php?username={{$plan['username']}}">{{$plan['username']}}</a>
-		          	</td>
-		          	<td>
-		          		<a href="{{$site_url}}admin-user-detail.php?id={{$plan['op_id']}}">{{$plan['operator']}}</a>
-		          		
-		          	</td>
-
+		              <th>Date</th>
+		              <th>Username</th>
+		              <th>Operator</th>
+		              <th>Plan</th>
+		              <th>Amount</th>
 		          </tr>
-	          @endforeach
+		          </thead>
+	          	<tbody>
+		          <?php 
+		          	$total = 0;
+		          ?>
+		          @foreach($plans as $plan)
+			          <tr>
+			          	<td>{{$plan['date']}}</td>
+			          	<td>
+			          	<a href="{{$site_url}}admin-username-details.php?username={{$plan['username']}}">{{$plan['username']}}</a>
+			          	</td>
+			          	<td>
+			          		<a href="{{$site_url}}admin-user-detail.php?id={{$plan['op_id']}}">{{$plan['operator']}}</a>
+			          		
+			          	</td>
+			          	<td>{{$plan['plan']}}</td>
+			          	<td>{{$plan['price']}}</td>
 
+			          	<?php $total = $total + $plan['price']; ?>
 
+			          </tr>
+		          @endforeach
+
+		          <tr>
+		         		<td>:</td>
+		          	<td>:</td>
+		          	<td>:</td>
+		          	<td><strong>Total Amount</strong></td>
+		          	<td><strong>{{$total}}</strong></td>
+		          </tr>
+
+						 </tbody>
 	          </table>
+	         
 	          @else
 	          	<div class="">
 	          		Nothing to show
@@ -43,6 +61,7 @@
 	          @endif	
 	          </div> 
 	          <p class="clearfix"></p>
+	          
 		          <button class="btn btn-primary print"><i class="fa fa-print"></i> Print</button>
 	          </div>
 	          </div>

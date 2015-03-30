@@ -84,11 +84,14 @@ if($user->isAdmin()){
 				$plans = $capsule::table('coupons')
 				->whereBetween('coupons.created_at', array($fr_date,$t_date))
 				->join('users', 'coupons.op_id', '=', 'users.id')
+				->join('couponplans', 'couponplans.planname', '=', 'coupons.coupon_type')
 				->select(
 					'coupons.created_at as date',
 					'coupons.username as username', 
 					'users.username as operator',
 					'users.id as op_id',
+					'couponplans.planname as plan',
+					'couponplans.price as price',
 					'coupons.created_at as date'
 					)
 				->orderby('coupons.created_at')
@@ -99,11 +102,14 @@ if($user->isAdmin()){
 				->where('coupons.coupon_type','=',$plan_type)
 				->whereBetween('coupons.created_at', array($fr_date,$t_date))
 				->join('users', 'coupons.op_id', '=', 'users.id')
+				->join('couponplans', 'couponplans.planname', '=', 'coupons.coupon_type')
 				->select(
 					'coupons.created_at as date',
 					'coupons.username as username', 
 					'users.username as operator',
 					'users.id as op_id',
+					'couponplans.planname as plan',
+					'couponplans.price as price',
 					'coupons.created_at as date'
 					)
 				->orderby('coupons.created_at')
