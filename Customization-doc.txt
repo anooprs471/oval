@@ -1,0 +1,70 @@
+Customization
+Administrator should be able to create plans (profile).
+Administrator should be able to specify attribute values under the section settings.
+Attributes are
+
+	Download speed.
+	Upload speed.
+	Max-data-usage (Total Data consumption).
+	Max-all-session (Total duration).
+	Max-daily-session (Daily duration).
+	Simultaneous use.
+	Idle time out.
+
+Created plans should be listed under list plans tab along with number of users created under that plan.
+
+Space for Administrator to upload logo in end-customer login page and logo in the coupon.
+
+Space for Administrator to upload Advertisement images which will be visible on end-customer login page.
+
+Modifying existing SMS package and payment gateway integration. 
+
+Registered user (mobile number) should be able to select plan of his choice from enlisted plans and should make payment through payment gateway prior to using it. 
+
+--
+Current Scenario
+User’s will get a login page with a link to do free sign up, in free sign up page user can enter his/her mobile number and should create password. An SMS will be send to his/her mobile number containing an access code. Upon receiving the access code users will be able to login, using their mobile number as username and user will be placed inside a pre-set plan (mobile users). Forget password option is also present which will generate new access code so that user’s can reset the password. 
+
+After modification
+Upon user registration, user will be able to select a plan of his/her choice from the enlisted plans and will be able to do payment through payment gateway.  For registered users once the initial plan gets expired he/she will be directed to a page where he/she can select a plan from enlisted one and can make payment for it through payment gateway.  Free signup link will be provided to the clients who will be providing free usage time to the end-customers (e.g.:- half hour free internet usage daily) on which users will be redirected to default plan upon registration.
+
+
+--------------------
+Attribute name 										sql table
+
+Max-all-session 									radgroupcheck
+Max-Daily-Session 								radgroupcheck
+Simultaneous-Use									radgroupcheck
+CS-Total-Octets-Daily 						radgroupcheck
+CS-Total-Octets-Daily							radgroupcheck
+ 
+
+Idle-Timeout											radgroupreply
+Session-Timeout										radgroupreply
+ChilliSpot-Bandwidth-Max-Up				radgroupreply
+ChilliSpot-Bandwidth-Max-Down			radgroupreply
+
+
+  
+$sql = "INSERT INTO $table (id, GroupName, Attribute, Op, Value) ".
+
+
+sample to set maximum daily usage time
+
+id - 1 (auto increment)
+GroupName - free_usage_plan {must be given by the user (plan/profile name)}
+Attribute -  Max-Daily-Session
+Op - :=      value must be statically inserted via sql query
+Value - 1800 ( user input ) value in seconds ...
+
+-----------------------------
+
+
+--
+
+1 create profile(plans)
+2 logo for coupons
+3 ads support
+4 bring plan selection on user(free + paid)
+5 payment gateway if selected plan not free
+6 sms
