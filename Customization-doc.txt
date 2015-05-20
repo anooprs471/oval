@@ -44,6 +44,16 @@ Session-Timeout										radgroupreply
 ChilliSpot-Bandwidth-Max-Up				radgroupreply
 ChilliSpot-Bandwidth-Max-Down			radgroupreply
 
+Profile                                                      Plan 
+
+1.Chillispot-Bandwidth-Max-Down     -----    Download speed 
+2.Chillispot-Bandwidth-Max-Up         -----    Upload speed
+3.CS-Total-Octets -----    Max data usage(Total Data consumption) 
+4.Max-All-Session -----    Max all session (Total duration)
+5.Max-Daily-Session                        -----    Max daily session(Daily duration)
+6.Simultaneous use                         -----    Simultaneous use
+7.Idle time out                                -----    Idle time out 
+
 
   
 $sql = "INSERT INTO $table (id, GroupName, Attribute, Op, Value) ".

@@ -34,6 +34,7 @@
                             <th>#</th>
                             <th>Plan Name</th>
                             <th>Price</th>
+                            <th>Edit</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,12 @@
 	                            		<button class="btn btn-success" type="submit">Update Price</button>
 	                            	</form>
 	                            	
+	                            </td>
+	                            <td>
+	                            	<form class=" form-inline" method="GET" action="admin-edit-plan.php">
+		                            		<input type="hidden" value="{{$plan['planname']}}" name="plan-name" />
+		                            		<button class="btn btn-danger" type="submit">Edit</button>
+	                            	</form>
 	                            </td>
 	                        </tr>
                         @endforeach

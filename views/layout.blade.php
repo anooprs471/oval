@@ -112,6 +112,7 @@
                     @endif
                 </li>
                 @if($type == 'admin')
+
                     <li class="sub-menu">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
@@ -122,12 +123,18 @@
                             <li><a href="{{$site_url}}admin-create-user.php">Create User</a></li>
                         </ul>
                     </li>
+
                     <li class="sub-menu">
-                        <a href="{{$site_url}}admin-customer-plans.php">
+                        <a href="#">
                             <i class="fa fa-laptop"></i>
                             <span>Plans</span>
                         </a>
+                        <ul class="sub">
+                            <li><a href="{{$site_url}}admin-customer-plans.php">Plan Pricing</a></li>
+                            <li><a href="{{$site_url}}admin-create-plan.php">Create Plan</a></li>
+                        </ul>
                     </li>
+                    
                     <li class="sub-menu">
                         <a href="{{$site_url}}admin-change-password.php">
                             <i class="fa fa-laptop"></i>
