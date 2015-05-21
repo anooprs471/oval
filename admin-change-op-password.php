@@ -36,7 +36,7 @@ if($user->isAdmin()){
 			$user_id = $_POST['op-id'];
 		}
 
-		if(!isset($_POST['op-password']) || strlen($_POST['password-id']) < 6 ){
+		if(!isset($_POST['password']) || strlen($_POST['password']) < 6 ){
 			$form_err = true;
 		}else{
 			$new_password = $_POST['password'];
@@ -46,9 +46,9 @@ if($user->isAdmin()){
 			$op = $capsule::table('users')
 			->where('id','=',$user_id)
 			->first();
-			if(!empty($user)){
+			if(!empty($op)){
 				$old_password = $op['password'];
-				$user->operatorChangePassword($old_password,$new_password);
+				$user->changeOperatorsPassword($user_id,$new_password);
 			}
 		}else{
 			$flash->add('No changes done');

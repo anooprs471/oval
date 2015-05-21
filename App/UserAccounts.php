@@ -341,4 +341,20 @@ class UserAccounts {
     }
 	}
 
+
+	/**
+	 * change password by admin
+	 *
+	 * @return string
+	 * @author 
+	 **/
+	public function changeOperatorsPassword($user_id, $new_password){
+
+		$this->user = Sentry::findUserByID($user_id);
+
+		$resetCode = $this->user->getResetPasswordCode();
+
+		$this->user->attemptResetPassword($resetCode, $new_password);
+	}
+
 }
