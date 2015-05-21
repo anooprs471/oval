@@ -96,7 +96,7 @@ if($user->isAdmin()){
 
 		$capsule::table('couponplans')
 		->where('planname', '=', $plan_name)
-		->update(array('price' => $price));
+		->update( array('price' => $price,'updated_at' => Carbon::now() ));
 
 		$flash->add('Successfully updated price');
 

@@ -25,6 +25,12 @@
 										<input type="text" class="form-control" name="plan-name" value="{{ $form_data['plan-name'] }}">
 								</div>
 						</div>
+						<div class="form-group">
+								<label class="col-sm-3 control-label">Price</label>
+								<div class="col-sm-6">
+										<input type="text" class="form-control" name="price" value="{{ $form_data['price'] }}">
+								</div>
+						</div>
 
 						<hr />
 						<h4>Plan Attributes</h4>

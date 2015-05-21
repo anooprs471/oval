@@ -33,6 +33,7 @@ $plan_err = false;
 
 $form_data = array(
 	'plan-name' => '',
+	'price' => '',
 	'download-speed' => '',
 	'upload-speed' => '',
 	'max-data-usage' => '',
@@ -49,6 +50,7 @@ if($user->isAdmin()){
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		$plan_name = filter_var(trim($_POST['plan-name']));
+		$price = filter_var(trim($_POST['price']));
 
 		$download_speed = filter_var(trim($_POST['download-speed']));
 		$upload_speed = filter_var(trim($_POST['upload-speed']));
@@ -60,6 +62,7 @@ if($user->isAdmin()){
 
 		$form_data = array(
 			'plan-name' => $plan_name,
+			'price' => $price,
 			'download-speed' => $download_speed,
 			'upload-speed' => $upload_speed,
 			'max-data-usage' => $max_data_usage,
@@ -163,6 +166,16 @@ if($user->isAdmin()){
 				$capsule::table('radgroupreply')
 				->insert($radgroupreply);
 			}
+
+			$capsule::table('couponplans')
+				->insert(array(
+					'planname' => $plan_name,
+					'price' => $price,
+					'created_at' => Carbon::now(),
+					'updated_at' => Carbon::now()
+			));
+
+				
 
 			$flash->add('Successfully added plan');
 			header('Location: '.Config::$site_url.'admin-customer-plans.php');

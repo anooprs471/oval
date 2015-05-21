@@ -83,6 +83,7 @@
 						<div class="form-group">
 								<div class="col-sm-6 col-sm-offset-3">
 										<button type="submit" class="btn btn-success">Save Plan</button>
+										<a href="{{ $site_url }}admin-customer-plans.php" class="btn btn-default">Cancel</a>
 								</div>
 						</div><!-- /.form-group -->	
 				</form>
