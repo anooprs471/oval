@@ -34,7 +34,6 @@
                             <th>#</th>
                             <th>Plan Name</th>
                             <th>Price</th>
-                            <th>Edit</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,7 +43,9 @@
 	                            <td></td>
 	                            <td>{{$plan['planname']}}</td>
 	                            <td>
-	                            	<form class=" form-inline" method="POST" action="">
+	                            
+	                            <div class="clearfix">
+	                            	<form class=" form-inline pull-left" method="POST" action="">
 		                            	<div class="form-group">
 		                            		<input type="hidden" value="{{$plan['planname']}}" name="plan-name" />
 		                            		<input type="hidden" value="update" name="form-type" />
@@ -52,13 +53,18 @@
 	                            		</div>
 	                            		<button class="btn btn-success" type="submit">Update Price</button>
 	                            	</form>
+	                            	<i class="pull-left">&nbsp;</i>
 	                            	
-	                            </td>
-	                            <td>
-	                            	<form class=" form-inline" method="GET" action="admin-edit-plan.php">
+	                            	<form class=" form-inline pull-left" method="GET" action="admin-edit-plan.php">
 		                            		<input type="hidden" value="{{$plan['planname']}}" name="plan-name" />
-		                            		<button class="btn btn-danger" type="submit">Edit</button>
+		                            		<button class="btn btn-danger" type="submit">Edit Plan Attributes</button>
 	                            	</form>
+	                            	<i class="pull-left">&nbsp;</i>
+	                            	<form class=" form-inline pull-left" method="POST" action="admin-remove-plan.php">
+		                            		<input type="hidden" value="{{$plan['planname']}}" name="plan-name" />
+		                            		<button class="btn btn-danger" type="submit">Remove Plan</button>
+	                            	</form>
+	                            </div><!-- /.clearfix -->
 	                            </td>
 	                        </tr>
                         @endforeach

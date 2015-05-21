@@ -4,6 +4,7 @@ include_once "vendor/autoload.php";
 
 // Import the necessary classes
 use Philo\Blade\Blade;
+use Carbon\Carbon;
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
@@ -175,7 +176,7 @@ if($user->isAdmin()){
 					'updated_at' => Carbon::now()
 			));
 
-				
+
 
 			$flash->add('Successfully added plan');
 			header('Location: '.Config::$site_url.'admin-customer-plans.php');
