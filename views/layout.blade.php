@@ -27,9 +27,9 @@
     <link href="js/data-tables/DT_bootstrap.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
-       
+
     <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
-    
+
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
@@ -54,12 +54,12 @@
     @if($type == 'admin')
     <a href="{{$site_url}}admin-home.php" class="logo">
         <img src="images/oval_logo.jpg" alt="">
-    </a>    
+    </a>
     @endif
     @if($type == 'operator')
     <a href="{{$site_url}}op-home.php" class="logo">
         <img src="images/oval_logo.jpg" alt="">
-    </a>    
+    </a>
     @endif
 
 
@@ -74,7 +74,7 @@
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
-        
+
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -86,7 +86,7 @@
                 <li><a href="{{$site_url}}logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
-        
+
     </ul>
     <!--search & user info end-->
 </div>
@@ -104,7 +104,7 @@
                             <i class="fa fa-dashboard"></i>
                             <span>Dashboard</span>
                         </a>
-                    @elseif($type == 'operator') 
+                    @elseif($type == 'operator')
                         <a class="active" href="{{$site_url}}op-home.php">
                             <i class="fa fa-dashboard"></i>
                             <span>Dashboard</span>
@@ -134,7 +134,18 @@
                             <li><a href="{{$site_url}}admin-create-plan.php">Create Plan</a></li>
                         </ul>
                     </li>
-                    
+
+                    <li class="sub-menu">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Images</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{$site_url}}admin-logo-upload.php">Logo</a></li>
+                            <li><a href="{{$site_url}}admin-ads-upload.php">Ads</a></li>
+                        </ul>
+                    </li>
+
                     <li class="sub-menu">
                         <a href="{{$site_url}}admin-change-password.php">
                             <i class="fa fa-laptop"></i>
@@ -142,7 +153,7 @@
                         </a>
                     </li>
                 @endif
-            </ul> 
+            </ul>
        </div>
         <!-- sidebar menu end-->
     </div>

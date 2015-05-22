@@ -13,7 +13,8 @@
         "railto/flash-messages": "~1.0",
         "nesbot/carbon": "~1.15",
         "hackzilla/password-generator": "~1.0",
-        "mpdf/mpdf": "~6.0"
+        "mpdf/mpdf": "~6.0",
+        "intervention/image": "^2.2"
     },
     "autoload": {
         "classmap": ["App/"]
