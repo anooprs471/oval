@@ -72,7 +72,35 @@
 
 										<div id="search-patient" class="tab-pane active">
 	                      <div class="row">
-	                          
+
+	                      		<div class="col-md-6">
+	                      			<div class="prf-contacts">
+	                                  <h2>Re-issue Coupon</h2>
+	                              </div>
+	                      			<scection class="panel">
+	                      				<header class="panel-heading">
+	                      					ID Proof Detail
+	                      				</header>
+	                      				<div class="panel-body">
+	                      					<form class="form-horizontal" role="form" method="POST" action="">
+	                      						<input type="hidden" name="form-type" value="search-id-proof" />
+	                      						<div class="form-group">
+				                                <label for="patient-id" class="col-lg-4 col-sm-2 control-label">ID Proof Number</label>
+				                                <div class="col-lg-8">
+				                                    <input type="text" class="form-control" name="search-id-number" value="">
+				                                </div>
+
+				                            </div>
+				                            <div class="form-group">
+				                                <div class="col-lg-offset-4 col-lg-8">
+				                                    <button type="submit" class="btn btn-danger">Find ID</button>
+				                                </div>
+				                            </div>
+	                      					</form>
+	                      				</div><!-- /.panel-body -->
+	                      			</scection><!-- /.panel -->
+	                      		</div><!-- /.col-md-6 -->
+														@if($search_customer == null)
 	                          <div class="col-md-6">
 	                              <div class="prf-contacts">
 	                                  <h2>Add User</h2>
@@ -119,7 +147,7 @@
 	   							                                    <input type="text" class="form-control" name="id-proof-number" value="{{$form['id_proof_number']}}">
 	   							                                    <p class="help-block">As given in the ID proof</p>
 	   							                                </div>
-	   							                                
+
 	   							                            </div>
 	   							                            <div class="form-group">
 	   							                                <label for="mobile-number" class="col-lg-4 col-sm-2 control-label">ID Proof Document Type</label>
@@ -167,6 +195,72 @@
 	   							                </section>
    							                </div>
 	                          </div>
+	                          @else
+														<div class="add-patient-wrap">
+															<div class="col-md-6">
+	                              <div class="prf-contacts">
+	                                  <h2>Details : {{ strtoupper($search_customer['id_proof_number']) }}</h2>
+
+	                                  <section class="panel">
+	   							                    <header class="panel-heading">
+	   							                        Customer Details
+	   							                    </header>
+	   							                    <div class="panel-body">
+
+			                                  <div class="row">
+			                                  	<div class="col-lg-4">
+			                                  		<label>Customer Name</label>
+			                                  	</div><!-- /.col-lg-4 -->
+			                                  	<div class="col-lg-8">
+			                                  	{{ ucwords($search_customer['customer_name']) }}
+			                                  	</div><!-- /.col-lg-8 -->
+			                                  </div><!-- /.row -->
+
+			                                  <div class="row">
+			                                  	<div class="col-lg-4">
+			                                  		<label>ID Proof number</label>
+			                                  	</div><!-- /.col-lg-4 -->
+			                                  	<div class="col-lg-8">
+			                                  	{{ strtoupper($search_customer['id_proof_number']) }}
+			                                  	</div><!-- /.col-lg-8 -->
+			                                  </div><!-- /.row -->
+																				<div class="row">
+			                                  	<div class="col-lg-4">
+			                                  		<label>ID Proof Copy</label>
+			                                  	</div><!-- /.col-lg-4 -->
+			                                  	<div class="col-lg-8">
+			                                  	<a data-toggle="lightbox" href="{{$site_url}}images/id-proofs/{{$search_customer['id_proof_filename']}}">See {{ strtoupper($search_customer['id_proof_type']) }}</a>
+			                                  	</div><!-- /.col-lg-8 -->
+			                                  </div><!-- /.row -->
+			                                  <hr />
+			                                  <div class="row">
+
+				                                  <form class="form-horizontal" role="form" method="POST" action="">
+				                                  	<input type="hidden" name="form-type" value="re-issue-coupon" />
+				                                  	<input type="hidden" name="customer-id" value="{{ $search_customer['id'] }}" />
+
+				                                  	<div class="form-group">
+	 							                                <div class="col-lg-8 col-lg-offset-4">
+	 							                                    <button type="submit" class="btn btn-danger">Re-issue Coupon</button>
+	 							                                </div>
+	 							                            </div>
+				                                  </form>
+
+			                                  </div><!-- /.row -->
+
+	   							                    </div><!-- /.panel-body -->
+	   							                  </section>
+
+
+
+
+	                              </div>
+
+	                            </div>
+
+                            </div><!--add-patient-wrap-->
+
+	                          @endif
 
 	                      </div>
 	                  </div>
@@ -197,7 +291,7 @@
 	                              <section class="panel">
 							                    <header class="panel-heading">
 							                        Available Coupons
-							                        
+
 							                    </header>
 							                    <div class="panel-body">
 							                        <table class="table  table-hover general-table">
@@ -214,7 +308,7 @@
 							                            		<td>{{$plan['price']}}</td>
 							                            	</tr>
 							                            @endforeach
-							                            	
+
 							                            </tbody>
 							                        </table>
 							                    </div>

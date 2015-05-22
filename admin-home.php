@@ -3,13 +3,11 @@
 include_once "vendor/autoload.php";
 
 // Import the necessary classes
-use Philo\Blade\Blade;
 use Carbon\Carbon;
-
+use Philo\Blade\Blade;
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
-
 
 $blade = new Blade($views, $cache);
 
@@ -21,11 +19,10 @@ $users = $user->listOperators();
 
 $msg = '';
 
-
 foreach ($users as $op) {
 	$operator[$op->id] = array(
 		'username' => $op->username,
-		'active' => !$user->isSuspended($op->id)
+		'active' => !$user->isSuspended($op->id),
 	);
 }
 
@@ -40,51 +37,48 @@ $t_date->hour = 23;
 $t_date->minute = 59;
 $t_date->second = 59;
 
+if ($user->isAdmin()) {
 
-if($user->isAdmin()){
-	
 	$first = $capsule::table('radgroupreply')
-	->distinct()
-	->select('groupname');
+		->distinct()
+		->select('groupname');
 
 	$plans = $capsule::table('radgroupcheck')
-	->union($first)
-	->select('groupname')
-	->distinct()
-	->get();
+		->union($first)
+		->select('groupname')
+		->distinct()
+		->get();
 
 	$op_details = array();
 
 	foreach ($operator as $opt_id => $op) {
 
 		$cpn_op_details = $capsule::table('coupons')
-		->where('coupons.op_id', '=', $opt_id)
-		->whereBetween('coupons.created_at', array($fr_date,$t_date))
-		->join('users', 'users.id', '=', 'coupons.op_id')
-		->select(
-			'coupons.username as username', 
-			'coupons.coupon_type as planname',
-			'users.username as operator',
-			'users.id as op_id',
-			'coupons.created_at as date'
+			->where('coupons.op_id', '=', $opt_id)
+			->whereBetween('coupons.created_at', array($fr_date, $t_date))
+			->join('users', 'users.id', '=', 'coupons.op_id')
+			->select(
+				'coupons.username as username',
+				'coupons.coupon_type as planname',
+				'users.username as operator',
+				'users.id as op_id',
+				'coupons.created_at as date'
 			)
-		->get();
+			->get();
 
 		//var_dump($op_details);
-		if(!empty($cpn_op_details)){
-			array_push($op_details,$cpn_op_details);
+		if (!empty($cpn_op_details)) {
+			array_push($op_details, $cpn_op_details);
 		}
-		
+
 	}
 
-
 	$avail_plans = $capsule::table('couponplans')
-	->get();
+		->get();
 
 	foreach ($avail_plans as $plan) {
 		$plans_arr[$plan['planname']] = $plan['price'];
 	}
-
 
 	$coupon_count = 0;
 	$payment = 0;
@@ -94,11 +88,11 @@ if($user->isAdmin()){
 		foreach ($op as $cpns) {
 			$payment = $payment + $plans_arr[$cpns['planname']];
 			//echo $payment.'<br />';
-			$coupon_count ++;
+			$coupon_count++;
 			$operator_id = $cpns['op_id'];
 			$operator_name = $cpns['operator'];
 		}
-		array_push($show_op_details,array(
+		array_push($show_op_details, array(
 			'op_id' => $operator_id,
 			'op_name' => $operator_name,
 			'payment' => $payment,
@@ -115,17 +109,16 @@ if($user->isAdmin()){
 
 	$data = array(
 		'type' => 'admin',
-		'site_url'=> Config::$site_url,
+		'site_url' => Config::$site_url,
 		'page_title' => "Admin Dashboard",
 		'name' => 'Administrator',
 		'msg' => $msg,
 		'users' => $operator,
 		'sale_details' => $show_op_details,
-		'plans' => $plans
+		'plans' => $plans,
 	);
 
-
-	echo $blade->view()->make('admin.home',$data);
-}else{
-	header('Location: '.Config::$site_url.'logout.php');
+	echo $blade->view()->make('admin.home', $data);
+} else {
+	header('Location: ' . Config::$site_url . 'logout.php');
 }
