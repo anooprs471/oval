@@ -1,9 +1,9 @@
 @extends('layout')
 
 @section('content')
-	
+
 <div class="col-md-10">
-	
+
 <section class="panel">
 		<header class="panel-heading">
 				Create Plan
@@ -37,46 +37,81 @@
 						<hr />
 						<div class="form-group">
 								<label class="col-sm-3 control-label">Download speed</label>
-								<div class="col-sm-6">
+								<div class="col-sm-4">
 										<input type="text" class="form-control" name="download-speed" value="{{ $form_data['download-speed'] }}">
 										<span class="help-block"></span>
 								</div>
-						</div><!-- /.form-group -->	
+								<div class="col-sm-3">
+									<select class="form-control" name="download-speed-option">
+	                    <option selected="" value="Kbps">Kbps</option>
+	                    <option value="Mbps">Mbps</option>
+	                </select>
+                </div>
+						</div><!-- /.form-group -->
 
 						<div class="form-group">
 								<label class="col-sm-3 control-label">Upload speed</label>
-								<div class="col-sm-6">
+								<div class="col-sm-4">
 										<input type="text" class="form-control" name="upload-speed" value="{{ $form_data['upload-speed'] }}">
 										<span class="help-block"></span>
 								</div>
-						</div><!-- /.form-group -->	
+								<div class="col-sm-3">
+									<select class="form-control" name="upload-speed-option">
+	                    <option selected="" value="Kbps">Kbps</option>
+	                    <option value="Mbps">Mbps</option>
+	                </select>
+                </div>
+						</div><!-- /.form-group -->
 
 						<div class="form-group">
 								<label class="col-sm-3 control-label">Max data usage<br />
 								(Total Data consumption)</label>
-								<div class="col-sm-6">
+								<div class="col-sm-4">
 										<input type="text" class="form-control" name="max-data-usage" value="{{ $form_data['max-data-usage'] }}">
 										<span class="help-block"></span>
 								</div>
-						</div><!-- /.form-group -->	
+								<div class="col-sm-3">
+									<select class="form-control" name="max-data-usage-option">
+	                    <option selected="" value="MB">MB</option>
+	                    <option value="GB">GB</option>
+	                </select>
+                </div>
+
+						</div><!-- /.form-group -->
 
 						<div class="form-group">
 								<label class="col-sm-3 control-label">Max all session<br />
 								(Total duration)</label>
-								<div class="col-sm-6">
+								<div class="col-sm-4">
 										<input type="text" class="form-control" name="max-all-session" value="{{ $form_data['max-all-session'] }}">
 										<span class="help-block"></span>
 								</div>
-						</div><!-- /.form-group -->	
+								<div class="col-sm-3">
+									<select class="form-control" name="max-all-session-option">
+	                    <option selected="" value="minute">minute(s)</option>
+	                    <option value="hour">hour(s)</option>
+	                    <option value="day">day(s)</option>
+	                    <option value="week">week(s)</option>
+	                    <option value="month">month(s)</option>
+	                </select>
+                </div>
+
+						</div><!-- /.form-group -->
 
 						<div class="form-group">
 								<label class="col-sm-3 control-label">Max daily session<br />
 								(Daily duration)</label>
-								<div class="col-sm-6">
+								<div class="col-sm-4">
 										<input type="text" class="form-control" name="max-daily-session" value="{{ $form_data['max-daily-session'] }}">
 										<span class="help-block"></span>
 								</div>
-						</div><!-- /.form-group -->	
+								<div class="col-sm-3">
+									<select class="form-control" name="max-daily-session-option">
+	                    <option selected="" value="minute">minute(s)</option>
+	                    <option value="hour">hour(s)</option>
+	                </select>
+                </div>
+						</div><!-- /.form-group -->
 
 						<div class="form-group">
 								<label class="col-sm-3 control-label">Simultaneous use</label>
@@ -84,24 +119,24 @@
 										<input type="text" class="form-control" name="simult-use" value="{{ $form_data['simult-use'] }}">
 										<span class="help-block"></span>
 								</div>
-						</div><!-- /.form-group -->	
+						</div><!-- /.form-group -->
 
 						<div class="form-group">
 								<label class="col-sm-3 control-label">Idle timeout </label>
 								<div class="col-sm-6">
 										<input type="text" class="form-control" name="idle-timeout" value="{{ $form_data['idle-timeout'] }}">
-										<span class="help-block"></span>
+										<span class="help-block">minutes (auto logout when no usage)</span>
 								</div>
-						</div><!-- /.form-group -->	
+						</div><!-- /.form-group -->
 						<div class="form-group">
 								<div class="col-sm-6 col-sm-offset-3">
 										<button type="submit" class="btn btn-success">Save Plan</button>
 								</div>
-						</div><!-- /.form-group -->	
+						</div><!-- /.form-group -->
 				</form>
-		</div><!-- /.panel-body -->	
-</section><!-- /.panel -->	
-</div><!-- /.col-md-8 -->	
+		</div><!-- /.panel-body -->
+</section><!-- /.panel -->
+</div><!-- /.col-md-8 -->
 
 
 @stop

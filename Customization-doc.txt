@@ -80,3 +80,33 @@ Value - 1800 ( user input ) value in seconds ...
 6 sms
 
 id- autofill
+
+Download Speed/Upload Speed    required drop-down kbps/Mbps  default_value = kbps 
+so if administrator select kbps no conversion required.
+But if he select Mbps then a conversion must be done ie final_value_to_database = input_value x 1000 [1 Mbps = 1000 kbps]
+
+
+
+Max data Usage : required drop-down MB/GB    default_value - Bytes 
+so if administrator select MB then
+
+final_value_to_database = input_value x 1000000 [1 MB = 1000000 Bytes]
+
+if administrator select GB then
+
+final_value_to_database = input_value x 1000000000 [1 GB = 1000000000 Bytes]
+
+max-all-session / max-daily-session minutes/hours/day(s)/week(s)/month(s) default_value = seconds
+
+if administrator select minutes then final_value_to_database = input_value x 60 [ 1 minute = 60 seconds ]
+
+if administrator select hours then final_value_to_database = input_value x 3600 [ 1 hour = 3600 seconds ]
+
+if administrator select days then final_value_to_database = input_value x 86400 [ 1 day = 86400 seconds ]
+
+if administrator select weeks then final_value_to_database = input_value x 604800 [ 1 week = 604800 seconds ]
+
+if administrator select months then final_value_to_database = input_value x 2628000 [ 1 month = 2628000 seconds ]
+
+
+same for Edit plan settings page also
