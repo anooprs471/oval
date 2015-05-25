@@ -13,6 +13,8 @@ $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 
+$images = new Images;
+
 $capsule = $user->getCapsule();
 
 $users = $user->listOperators();
@@ -111,6 +113,7 @@ if ($user->isAdmin()) {
 		'type' => 'admin',
 		'site_url' => Config::$site_url,
 		'page_title' => "Admin Dashboard",
+		'logo_file' => $images->getScreenLogo(),
 		'name' => 'Administrator',
 		'msg' => $msg,
 		'users' => $operator,

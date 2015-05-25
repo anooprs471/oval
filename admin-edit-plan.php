@@ -12,6 +12,8 @@ $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 
+$images = new Images;
+
 $flash = new Flash_Messages();
 
 $capsule = $user->getCapsule();
@@ -238,6 +240,7 @@ if ($user->isAdmin()) {
 		'type' => 'admin',
 		'site_url' => Config::$site_url,
 		'page_title' => "Edit Plan",
+		'logo_file' => $images->getScreenLogo(),
 		'name' => 'Administrator',
 		'msg' => $msg,
 		'flash' => $flash_msg,

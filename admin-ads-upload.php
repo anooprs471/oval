@@ -12,47 +12,54 @@ $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 
-$images = new Images;
-
 $flash = new Flash_Messages();
 
+$images = new Images;
+
+$capsule = $user->getCapsule();
+
 $flash_msg = '';
+$msg = '';
+$err = array();
+$file_err = false;
 
 if ($flash->hasFlashMessage()) {
 	$flash_msg = $flash->show();
 }
 
-$msg = '';
-
 if ($user->isAdmin()) {
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-		$username = $_POST['username'];
-		$password = $_POST['password'];
+		if ($_POST['upload-type'] == 'login-screen-right') {
 
-		$filtered_username = filter_var($username, FILTER_SANITIZE_STRING);
-		$filtered_password = filter_var($password, FILTER_SANITIZE_STRING);
+			$images->addLoginScreenRightAd('upload');
 
-		$msg = $user->createOperator($filtered_username, $filtered_password);
+		} elseif ($_POST['upload-type'] == 'login-screen-bottom') {
 
-		if ($msg == '') {
-			$flash->add('New user created');
-			header('Location: ' . Config::$site_url . 'admin-create-user.php');
+			$images->addLoginScreenBottomAd('upload');
+
+		} elseif ($_POST['upload-type'] == 'scroll-ads') {
+			$images->addScrollAds('upload');
 		}
+
+		header('Location: ' . Config::$site_url . 'admin-ads-upload.php');
 
 	}
 
 	$data = array(
 		'type' => 'admin',
 		'site_url' => Config::$site_url,
-		'page_title' => "Create Operators",
+		'page_title' => "Upload Logo",
 		'logo_file' => $images->getScreenLogo(),
+		'ad_login_right' => $images->getLoginRightAd(),
+		'ad_login_bottom' => $images->getLoginBottomAd(),
 		'name' => 'Administrator',
 		'msg' => $msg,
 		'flash' => $flash_msg,
 	);
-	echo $blade->view()->make('admin.create-user', $data);
+	echo $blade->view()->make('admin.upload-ads', $data);
+
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

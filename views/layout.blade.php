@@ -53,12 +53,12 @@
 
     @if($type == 'admin')
     <a href="{{$site_url}}admin-home.php" class="logo">
-        <img src="images/oval_logo.jpg" alt="">
+        <img src="{{ $site_url }}images/client-files/{{ $logo_file }}" alt="">
     </a>
     @endif
     @if($type == 'operator')
     <a href="{{$site_url}}op-home.php" class="logo">
-        <img src="images/oval_logo.jpg" alt="">
+        <img src="{{ $site_url }}images/client-files/{{ $logo_file }}" alt="">
     </a>
     @endif
 
