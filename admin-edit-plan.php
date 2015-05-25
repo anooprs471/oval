@@ -61,20 +61,29 @@ if ($user->isAdmin()) {
 
 			foreach ($plan_radgroupcheck as $data) {
 				if ($data['attribute'] == 'Max-All-Session') {
+					$options['max-all-session'] = 'minute';
 					if ($data['value'] > 3600 && $data['value'] <= 86400) {
 						$data['value'] = $data['value'] / 3600;
+						$options['max-all-session'] = 'hour';
 					} elseif ($data['value'] > 86400 && $data['value'] <= 604800) {
 						$data['value'] = $data['value'] / 86400;
+						$options['max-all-session'] = 'day';
 					} elseif ($data['value'] > 604800 && $data['value'] <= 2628000) {
 						$data['value'] = $data['value'] / 604800;
+						$options['max-all-session'] = 'week';
+					} elseif ($data['value'] > 2628000) {
+						$data['value'] = $data['value'] / 2628000;
+						$options['max-all-session'] = 'month';
 					}
 					$form_data['max-all-session'] = $data['value'];
 				}
 				if ($data['attribute'] == 'Max-Daily-Session') {
+					$options['max-daily-session'] = 'minute';
 					if ($data['value'] > 1 && $data['value'] <= 3600) {
 						$data['value'] = $data['value'] / 60;
 					} elseif ($data['value'] > 3600 && $data['value'] <= 86400) {
 						$data['value'] = $data['value'] / 3600;
+						$options['max-daily-session'] = 'hour';
 					}
 					$form_data['max-daily-session'] = $data['value'];
 				}
@@ -82,6 +91,11 @@ if ($user->isAdmin()) {
 					$form_data['simult-use'] = $data['value'];
 				}
 				if ($data['attribute'] == 'CS-Total-Octets-Daily') {
+					$options['max-data-usage'] = 'MB';
+					if ($data['value'] >= 1000000) {
+						$data['value'] = $data['value'] / 1000000;
+						$options['max-data-usage'] = 'GB';
+					}
 					$form_data['max-data-usage'] = $data['value'];
 				}
 			}
@@ -96,12 +110,23 @@ if ($user->isAdmin()) {
 					$form_data['idle-timeout'] = $data['value'];
 				}
 				if ($data['attribute'] == 'Session-Timeout') {
+
 					$form_data['session-timeout'] = $data['value'];
 				}
 				if ($data['attribute'] == 'Chillispot-Bandwidth-Max-Up') {
+					$options['upload-speed'] = 'Kbps';
+					if ($data['value'] > 1000) {
+						$data['value'] = $data['value'] / 1000;
+						$options['upload-speed'] = 'Mbps';
+					}
 					$form_data['upload-speed'] = $data['value'];
 				}
 				if ($data['attribute'] == 'Chillispot-Bandwidth-Max-Down') {
+					$options['download-speed'] = 'Kbps';
+					if ($data['value'] > 1000) {
+						$data['value'] = $data['value'] / 1000;
+						$options['download-speed'] = 'Mbps';
+					}
 					$form_data['download-speed'] = $data['value'];
 				}
 
@@ -127,6 +152,9 @@ if ($user->isAdmin()) {
 			//
 
 			if ($download_speed != '') {
+				if ($_POST['download-speed-option'] == 'Mbps') {
+					$download_speed *= 1000;
+				}
 				$capsule::table('radgroupreply')
 					->where('groupname', '=', $plan_name)
 					->where('attribute', '=', 'Chillispot-Bandwidth-Max-Down')
@@ -134,6 +162,9 @@ if ($user->isAdmin()) {
 			}
 
 			if ($upload_speed != '') {
+				if ($_POST['upload-speed-option'] == 'Mbps') {
+					$upload_speed *= 1000;
+				}
 				$capsule::table('radgroupreply')
 					->where('groupname', '=', $plan_name)
 					->where('attribute', '=', 'Chillispot-Bandwidth-Max-Up')
@@ -148,6 +179,18 @@ if ($user->isAdmin()) {
 			}
 
 			if ($max_all_session != '') {
+				if ($_POST['max-all-session-option'] == 'minute') {
+					$max_all_session *= 60;
+				} elseif ($_POST['max-all-session-option'] == 'hour') {
+					$max_all_session *= 3600;
+				} elseif ($_POST['max-all-session-option'] == 'day') {
+					$max_all_session *= 86400;
+				} elseif ($_POST['max-all-session-option'] == 'week') {
+					$max_all_session *= 604800;
+				} elseif ($_POST['max-all-session-option'] == 'month') {
+					$max_all_session *= 2628000;
+				}
+
 				$capsule::table('radgroupcheck')
 					->where('groupname', '=', $plan_name)
 					->where('attribute', '=', 'Max-All-Session')
@@ -155,6 +198,12 @@ if ($user->isAdmin()) {
 			}
 
 			if ($max_daily_session != '') {
+
+				if ($_POST['max-daily-session-option'] == 'minute') {
+					$max_daily_session *= 60;
+				} elseif ($_POST['max-all-session-option'] == 'hour') {
+					$max_daily_session *= 3600;
+				}
 				$capsule::table('radgroupcheck')
 					->where('groupname', '=', $plan_name)
 					->where('attribute', '=', 'Max-Daily-Session')
@@ -169,6 +218,10 @@ if ($user->isAdmin()) {
 			}
 
 			if ($max_data_usage != '') {
+				if ($_POST['max-data-usage-option'] == 'GB') {
+					$max_data_usage *= 1000000;
+				}
+
 				$capsule::table('radgroupcheck')
 					->where('groupname', '=', $plan_name)
 					->where('attribute', '=', 'CS-Total-Octets-Daily')
@@ -191,6 +244,7 @@ if ($user->isAdmin()) {
 		'form_data' => $form_data,
 		'errors' => $err,
 		'plan_name' => $plan_name,
+		'options' => $options,
 	);
 	echo $blade->view()->make('admin.edit-plan', $data);
 } else {
