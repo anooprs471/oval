@@ -19,6 +19,10 @@
 								@endforeach
 							</div><!-- /.alert alert-block alert-danger fade in -->
 						@endif
+						@if($flash != '')
+						  <div class="alert alert-success ">{{$flash}}</div>
+						  <p></p>
+						@endif
 
 						<h4>Plan Attributes</h4>
 						<hr />
