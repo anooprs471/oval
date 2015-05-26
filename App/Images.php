@@ -49,7 +49,11 @@ class Images {
 	}
 
 	function getScrollAds() {
+		$ads = $this->capsule->table('images')
+		            ->where('type', '=', 'scroll-ad')
+		            ->get();
 
+		return $ads;
 	}
 
 	function getLoginRightAd() {
@@ -171,6 +175,24 @@ class Images {
 		}
 		$this->capsule->table('images')
 		     ->insert($insert);
+	}
+
+	public function removeImage($image_id) {
+
+		$image = $this->capsule->table('images')->find($image_id);
+
+		if ($image != null) {
+			$del_file = $this->uploaddir . $image['image_name'];
+
+			if (file_exists($del_file)) {
+				unlink($del_file);
+			}
+
+			$this->capsule->table('images')
+			     ->where('id', '=', $image_id)
+			     ->delete();
+		}
+
 	}
 
 	private function isImage($file) {

@@ -59,6 +59,17 @@
 									<input type="file" name="upload[]" id="" multiple />
 									<button class="btn btn-success">Upload</button>
 
+									<hr />
+									<div class="row">
+										@foreach($scroll_ads as $image)
+
+										<div class="col-md-3">
+											<img src="{{ $site_url }}images/client-files/{{ $image['image_name'] }}" alt="" class="img-responsive" />
+											<p><a href="{{ $site_url }}admin-remove-ads.php?image={{ $image['id'] }}" class="btn btn-primary">Delete</a></p>
+										</div><!-- /.col-md-3 -->
+										@endforeach
+									</div><!-- /.row -->
+
 
 								</form>
 							</div><!-- /.upload-logo -->

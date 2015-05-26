@@ -54,6 +54,7 @@ if ($user->isAdmin()) {
 		'logo_file' => $images->getScreenLogo(),
 		'ad_login_right' => $images->getLoginRightAd(),
 		'ad_login_bottom' => $images->getLoginBottomAd(),
+		'scroll_ads' => $images->getScrollAds(),
 		'name' => 'Administrator',
 		'msg' => $msg,
 		'flash' => $flash_msg,

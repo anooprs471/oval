@@ -24,7 +24,10 @@ $form = array(
 );
 $search_customer = null;
 $file_err = false;
+
 $user = new UserAccounts;
+
+$images = new Images;
 
 $flash = new Flash_Messages();
 
@@ -227,6 +230,7 @@ if ($user->isOperator()) {
 		'type' => 'operator',
 		'site_url' => Config::$site_url,
 		'page_title' => "Operator Dashboard",
+		'logo_file' => $images->getScreenLogo(),
 		'name' => 'Operator',
 		'first_name' => $names['first-name'],
 		'last_name' => $names['last-name'],
