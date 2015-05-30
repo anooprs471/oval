@@ -62,6 +62,7 @@ if ($user->isAdmin()) {
 		if ($plan_radgroupcheck != null) {
 
 			foreach ($plan_radgroupcheck as $data) {
+
 				if ($data['attribute'] == 'Max-All-Session') {
 					$options['max-all-session'] = 'minute';
 					if ($data['value'] > 3600 && $data['value'] <= 86400) {
@@ -79,6 +80,7 @@ if ($user->isAdmin()) {
 					}
 					$form_data['max-all-session'] = $data['value'];
 				}
+
 				if ($data['attribute'] == 'Max-Daily-Session') {
 					$options['max-daily-session'] = 'minute';
 					if ($data['value'] > 1 && $data['value'] <= 3600) {
@@ -89,14 +91,19 @@ if ($user->isAdmin()) {
 					}
 					$form_data['max-daily-session'] = $data['value'];
 				}
+
 				if ($data['attribute'] == 'Simultaneous-Use') {
 					$form_data['simult-use'] = $data['value'];
 				}
+
 				if ($data['attribute'] == 'CS-Total-Octets-Daily') {
 					$options['max-data-usage'] = 'MB';
 					if ($data['value'] >= 1000000) {
 						$data['value'] = $data['value'] / 1000000;
 						$options['max-data-usage'] = 'GB';
+					} else {
+						$data['value'] = $data['value'] / 1000;
+						$options['max-data-usage'] = 'MB';
 					}
 					$form_data['max-data-usage'] = $data['value'];
 				}

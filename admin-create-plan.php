@@ -187,7 +187,7 @@ if ($user->isAdmin()) {
 						'groupname' => $plan_name,
 						'attribute' => 'Max-Daily-Session',
 						'op' => ':=',
-						'value' => $max_all_session,
+						'value' => $max_daily_session,
 					));
 				} else {
 					array_push($err, 'Max Daily Session value needs to be numeric');
@@ -207,6 +207,8 @@ if ($user->isAdmin()) {
 			}
 			if ($max_data_usage != '') {
 				if (is_numeric($max_data_usage)) {
+
+					$max_data_usage *= 1000;
 
 					if ($_POST['max-data-usage-option'] == 'GB') {
 						$max_data_usage *= 1000000;
