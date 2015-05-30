@@ -28,7 +28,7 @@ $no_coupons = true;
 
 $user = new UserAccounts;
 
-$flash = new Flash_Messages();
+$flash = new FlashMessages;
 
 $images = new Images;
 

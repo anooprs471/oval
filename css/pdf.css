@@ -1,0 +1,81 @@
+body {
+    background: #f1f2f7 none repeat scroll 0 0;
+    color: #767676;
+    font-family: "Open Sans",sans-serif;
+    font-size: 13px;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-rendering: optimizelegibility;
+}
+
+hr { 
+	display: block; 
+	height: 1px;
+	border: 0; 
+	border-top: 1px solid #ddd;
+	margin: 1em 0; padding: 0; 
+}
+
+.wrapper {
+    display: inline-block;
+    padding: 15px;
+    width: 100%;
+    border:1px solid #ddd;
+}
+
+.invoice-header {
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin-bottom: 40px;
+    width: 100%;
+}
+.invoice-title {
+    background: #48a9ed none repeat scroll 0 0;
+    color: #fff;
+    display: inline-block;
+}
+.coupon-header{
+	width: 30%;
+	float: left;
+}
+.coupon-data{
+	width: 70%;
+	float: left;
+}
+.invoice-title h1 {
+    font-size: 35px;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+}
+
+.table-invoice {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+.table-invoice {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+.table-invoice tbody tr td {
+    background: #f5f6f9 none repeat scroll 0 0;
+    border-radius: 5px;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.table-invoice > tbody > tr > td {
+    border-top: medium none;
+}
+.table-invoice tbody tr td.title {
+    text-align: right;
+    padding-right: 15px;
+}
+.table-invoice tbody tr td.value {
+    text-align: left;
+    padding-left: 15px;
+}

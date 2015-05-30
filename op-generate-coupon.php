@@ -9,7 +9,7 @@ $complementary = 0;
 
 $user = new UserAccounts;
 
-$flash = new Flash_Messages();
+$flash = new FlashMessages;
 
 $capsule = $user->getCapsule();
 

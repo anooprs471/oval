@@ -25,7 +25,7 @@ $images = new Images;
 $capsule = $user->getCapsule();
 
 $blade = new Blade($views, $cache);
-$flash = new Flash_Messages();
+$flash = new FlashMessages;
 
 $remove_plans = array();
 $to_insert_plans = array();

@@ -4,17 +4,15 @@ include_once "vendor/autoload.php";
 
 // Import the necessary classes
 use Philo\Blade\Blade;
-use Carbon\Carbon;
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
-
 
 $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 
-$flash = new Flash_Messages();
+$flash = new FlashMessages;
 
 $capsule = $user->getCapsule();
 
@@ -22,44 +20,40 @@ $msg = '';
 $flash_msg = '';
 $form_err = false;
 
+if ($user->isAdmin()) {
 
-if($user->isAdmin()){
-
-	if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		$new_password = $_POST['password'];
 
-		if(!isset($_POST['op-id']) || strlen($_POST['op-id']) == 0 ){
+		if (!isset($_POST['op-id']) || strlen($_POST['op-id']) == 0) {
 			$form_err = true;
-		}else{
+		} else {
 			$user_id = $_POST['op-id'];
 		}
 
-		if(!isset($_POST['password']) || strlen($_POST['password']) < 6 ){
+		if (!isset($_POST['password']) || strlen($_POST['password']) < 6) {
 			$form_err = true;
-		}else{
+		} else {
 			$new_password = $_POST['password'];
 		}
 
-		if(!$form_err){
+		if (!$form_err) {
 			$op = $capsule::table('users')
-			->where('id','=',$user_id)
-			->first();
-			if(!empty($op)){
+				->where('id', '=', $user_id)
+				->first();
+			if (!empty($op)) {
 				$old_password = $op['password'];
-				$user->changeOperatorsPassword($user_id,$new_password);
+				$user->changeOperatorsPassword($user_id, $new_password);
 			}
-		}else{
+		} else {
 			$flash->add('No changes done');
 		}
 
-
 	}
 
+	header('Location: ' . Config::$site_url . 'admin-user-detail.php?id=' . $_POST['op-id']);
 
-	header('Location: '.Config::$site_url.'admin-user-detail.php?id='.$_POST['op-id']);
-
-}else{
-	header('Location: '.Config::$site_url.'logout.php');
+} else {
+	header('Location: ' . Config::$site_url . 'logout.php');
 }

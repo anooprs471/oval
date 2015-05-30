@@ -1,0 +1,244 @@
+/* CSS Document */
+
+body{
+background-color:#00638B;
+color: #FAFAFA;
+font-family:Arial;
+}
+.header{
+
+height:160px;
+text-align:center;
+margin:0 auto;
+}
+
+.header p {
+font-size:24px;
+height:160px;
+position:relative;
+top:105px; 
+left:95px;
+text-align:left;
+}
+
+.header p span {
+color:#9bd0df;
+font-weight:bold;
+font-style:italic
+}
+
+.header p sup {
+font-size:9px;
+}
+.header a {
+text-decoration:none;
+color:#FFFFFF
+}
+
+#navigation{
+/*background-image:url(../images/navigation.jpg);
+*/height:58px;
+text-align:center;
+margin:0 auto;
+}
+.wrap-all{
+	width: 95%;
+	margin: 0 auto;
+}
+
+#body{
+	font-size:14px;
+	margin:0 auto;
+	text-shadow:#000000;
+	padding: 5%;
+	background: #000;
+	border-radius: 5px;
+}
+
+.form-group{
+	overflow: hidden;
+	padding-bottom: 10px;
+}
+.form-group .form-label{
+	font-weight: bold;
+}
+.form-element input{
+	width: 99%;
+	padding: 5px .5%;
+	border-radius: 5px;
+
+}
+
+.input-buttons{
+	float: left;
+	width: 49%;
+}
+.input-buttons.left{
+	margin-right: .5%;
+}
+.input-buttons.right{
+	margin-left: .5%;
+}
+.input-buttons input[type=submit]{
+	width: 100%;
+	padding:  7px;
+	border-radius: 3px;
+	border: 0;
+}
+.input-buttons input[name=button]{
+	margin-right: 5px;
+}
+.form-wrap{
+	background: #000;
+	padding: 10px;
+	border-radius: 5px;
+}
+.top .banner-wrap{
+	background: #fff;
+	padding: 14px 10px;
+	overflow: hidden;
+	max-height: 302px;
+
+}
+.bottom-banner-full .banner-wrap{
+	overflow: hidden;
+	max-height: 100px;
+
+}
+.banner-wrap img{
+	width: 100%;
+
+}
+
+@media screen and (min-width: 580px) {
+ 	.wrap-all{
+		width: 70%;
+ 	}	
+
+ } 
+ @media screen and (min-width: 769px) {
+ 	.wrap-all{
+		width: 80%;
+ 	}	
+
+ 	.top{
+ 		overflow: hidden;
+ 		padding: 10px;
+ 		background: #E6E0D4;
+ 		border-radius: 5px;
+ 	}
+
+ 	.login-form,
+ 	.banner-area{
+ 		float: left;
+ 		width: 50%;
+ 	}
+
+
+ } 
+
+ @media screen and (min-width: 980px) {
+ 	.wrap-all{
+		width: 800px;
+ 	}	
+ 	.form-label,
+ 	.form-element{
+ 		text-align: left;
+ 	}
+ 	.form-label{
+		margin-right: .5%;
+		padding-top: 7px;
+		padding-bottom: 7px;
+
+ 	}
+ 	.form-element{
+		margin-left: .5%;
+		
+ 	}
+ 	.form-group{
+ 		padding-bottom: 15px;
+ 	}
+
+ } 
+#body p{
+padding-left:20px;
+padding-right:20px;
+text-indent:30px;
+margin:0;
+padding-top:5px;
+text-align:left;
+}
+#body img {
+border:#FFFFFF 7px solid;
+text-align:center;
+margin-left:15px;
+}
+#body h1{
+font-family: Century Gothic;
+font-size:20px;
+text-align:center;
+padding-left:20px;
+margin:0;
+padding-top:5px;
+padding-bottom:5px;
+}
+#footer{
+font-family: Trebuchet MS;
+font-size:12px;
+padding-top:10px;
+background-image:url(../images/footer.jpg);
+height:46px;
+text-align:center;
+margin:0 auto;
+color: #000;
+}
+  
+.glossymenu{
+	position: relative;
+	padding-right:20px;
+	padding-left:20px;
+	margin: 0 auto 0 auto;
+	background: url(../images/menur_bg.gif) repeat-x; /*tab background image path*/
+	height: 46px;
+	list-style: none;
+	padding-top:10px;
+}
+
+.glossymenu li{
+	float:left;
+}
+
+.glossymenu li a{
+	float: left;
+	display: block;
+	color:#FFFFFF;
+	text-decoration: none;
+	font-family: Trebuchet MS;
+	font-size: 12px;
+	padding:0 0 0 16px; /*Padding to accomodate left tab image. Do not change*/
+	height: 46px;
+	line-height: 46px;
+	text-align: center;
+	cursor: pointer;	
+}
+
+.glossymenu li a b{
+	float: left;
+	display: block;
+	padding: 0 20px 0 8px; /*Padding of menu items*/
+}
+
+.glossymenu li.current a, .glossymenu li a:hover{
+	color: #fff;
+	background: url(../images/menur_hover_left.gif) no-repeat; /*left tab image path*/
+	background-position: left;
+}
+
+.glossymenu li.current a b, .glossymenu li a:hover b{
+	color: #fff;
+	background: url(../images/menur_hover_right.gif) no-repeat right top; /*right tab image path*/
+}
+
+a {
+	color:#FFF;
+}

@@ -27,7 +27,7 @@ $user = new UserAccounts;
 
 $images = new Images;
 
-$flash = new Flash_Messages();
+$flash = new FlashMessages;
 
 $capsule = $user->getCapsule();
 

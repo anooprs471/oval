@@ -11,41 +11,23 @@ $cache = __DIR__ . '/cache';
 
 $blade = new Blade($views, $cache);
 
-$msg = '';
-$flash_msg = '';
-$data_err = false;
+$images = new Images;
+
+$mpdf = new \mPDF('utf-8', 'A3');
 
 $user = new UserAccounts;
 
-$images = new Images;
-
 $capsule = $user->getCapsule();
-
-$flash = new FlashMessages;
-
-if ($flash->hasFlashMessage()) {
-	$flash_msg = $flash->show();
-}
-
-$coupon_details = array(
-	'customer_name' => '',
-	'username' => '',
-	'password' => '',
-	'plan_name' => '',
-	'price' => '',
-	'coupon_date' => '',
-);
 
 if ($user->isOperator()) {
 	$names = $user->getOperatorName();
 
-	if (!isset($_GET['coupon-id']) || strlen($_GET['coupon-id']) == 0) {
-		$msg = 'Coupon id invalid!';
-		$data_err = true;
+	if (!isset($_GET['username']) || strlen($_GET['username']) == 0) {
+		header('Location: ' . Config::$site_url);
 	} else {
 
 		$coupon = $capsule::table('coupons')
-			->where('id', '=', filter_var($_GET['coupon-id'], FILTER_SANITIZE_STRING))
+			->where('username', '=', filter_var($_GET['username'], FILTER_SANITIZE_STRING))
 			->first();
 
 		if ($coupon != null) {
@@ -92,18 +74,26 @@ if ($user->isOperator()) {
 	$data = array(
 		'type' => 'operator',
 		'site_url' => Config::$site_url,
-		'name' => 'Operator',
-		'page_title' => "Print Coupon",
+		'page_title' => $username,
 		'logo_file' => $images->getScreenLogo(),
 		'first_name' => $names['first-name'],
 		'last_name' => $names['last-name'],
-		'msg' => $msg,
-		'flash' => $flash_msg,
 		'coupon_details' => $coupon_details,
-		'data_err' => $data_err,
 	);
 
-	echo $blade->view()->make('op.coupon-print', $data);
+	$bootstrap_css = file_get_contents('bs3/css/bootstrap.min.css');
+
+	$stylesheet = file_get_contents('css/pdf.css');
+
+	$mpdf->WriteHTML($bootstrap_css, 1);
+	$mpdf->WriteHTML($stylesheet, 1);
+
+	$html = $blade->view()->make('coupon', $data);
+
+	$mpdf->WriteHTML($html->__toString());
+
+	$mpdf->Output(Carbon::createFromFormat('Y-m-d H:i:s', $coupon['created_at'])->format('Y-m-d') . '-' . $username . '.pdf', 'I');
+
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

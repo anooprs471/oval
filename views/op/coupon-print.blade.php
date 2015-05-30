@@ -11,7 +11,7 @@
           <div class="alert alert-success ">{{$flash}}</div>
           <p></p>
         @endif
-				
+
 				@if(!$data_err)
 	        <div class="print-coupon">
 
@@ -23,13 +23,13 @@
                         <div class="invoice-header">
                             <div class="invoice-title col-md-5 col-xs-2">
                                     <h1>Coupon</h1>
-                                    
+
                             </div>
-                            
+
                         </div>
-                        
+
                         <table class="table table-invoice" >
-                            
+
                             <tbody>
                                 <tr>
                                     <td class="text-right">Username</td>
@@ -51,21 +51,24 @@
                                     <td class="text-right">Date</td>
                                     <td class="text-left">{{$coupon_details['coupon_date']}}</td>
                                 </tr>
-                                
-                                
+
+
 
                             </tbody>
                         </table>
-                        
+
                     </div>
                 </section>
             </div>
         </div>
 	        </div><!-- /.print-coupon -->
 
-	        <button class="btn btn-primary print"><i class="fa fa-print"></i> Print Coupon</button>
-	        
-	      @endif 
+
+            <a href="{{ $site_url }}op-coupon-view.php?username={{ $coupon_details['username'] }}" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> Print Coupon</a>
+
+
+
+	      @endif
     </div>
   </div><!-- .row-->
 

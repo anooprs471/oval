@@ -12,7 +12,7 @@ $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 
-$flash = new Flash_Messages();
+$flash = new FlashMessages;
 
 $images = new Images;
 
