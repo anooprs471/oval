@@ -14,7 +14,8 @@
         "nesbot/carbon": "~1.15",
         "hackzilla/password-generator": "~1.0",
         "mpdf/mpdf": "~6.0",
-        "intervention/image": "^2.2"
+        "intervention/image": "^2.2",
+        "aura/session": "^2.0"
     },
     "autoload": {
         "classmap": ["App/"]

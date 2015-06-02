@@ -13,7 +13,7 @@ $blade = new Blade($views, $cache);
 
 $images = new Images;
 
-$mpdf = new \mPDF('utf-8', 'A3');
+$mpdf = new \mPDF('utf-8', 'A5');
 
 $user = new UserAccounts;
 
