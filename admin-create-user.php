@@ -34,7 +34,19 @@ if ($user->isAdmin()) {
 		$filtered_username = filter_var($username, FILTER_SANITIZE_STRING);
 		$filtered_password = filter_var($password, FILTER_SANITIZE_STRING);
 
-		$msg = $user->createOperator($filtered_username, $filtered_password);
+		if (isset($_POST['first-name'])) {
+			$firstname = preg_replace("/[^a-zA-Z]/", "", filter_var($_POST['first-name'], FILTER_SANITIZE_STRING));
+		} else {
+			$firstname = '';
+		}
+
+		if (isset($_POST['last-name'])) {
+			$lastname = preg_replace("/[^a-zA-Z]/", "", filter_var($_POST['last-name'], FILTER_SANITIZE_STRING));
+		} else {
+			$lastname = '';
+		}
+
+		$msg = $user->createOperator($filtered_username, $filtered_password, $firstname, $lastname);
 
 		if ($msg == '') {
 			$flash->add('New user created');

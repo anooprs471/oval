@@ -18,7 +18,7 @@ $blade = new Blade($views, $cache);
 $session_factory = new SessionFactory;
 $session = $session_factory->newInstance($_COOKIE);
 
-$segment = $session->getSegment('oval');
+$segment = $session->getSegment('oval/signup');
 
 $form_data = array(
 	'phone-number' => '',
@@ -44,6 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			          ->setLength(4);
 
 			$access_key = $generator->generatePasswords(1)[0];
+
+			//connect to sms api
+
+			//set access code to session
+			$segment->set('access_code', $access_key);
+			$segment->set('phone_number', trim($_POST['phone-number']));
+
+			header('Location: ' . Config::$site_url . 'sign-up/verify-access-code.php');
 
 		} else {
 			array_push($err, 'Phone number is not valid');

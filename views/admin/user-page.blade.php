@@ -30,7 +30,7 @@
 		                <form class="form-horizontal" role="form" method="POST" action="admin-change-op-password.php">
 		                	<div class="form-group">
 		                      <div class="col-lg-6">
-		                          <input type="text" class="form-control" name="password" value="" placeholder="password">
+		                          <input type="password" class="form-control" name="password" value="" placeholder="password">
 		                          <input type="hidden" name="op-id" value="{{$op['id']}}" />
 		                      </div>
 		                      <div class="col-lg-6">
@@ -38,12 +38,12 @@
 		                      </div>
 		                  </div>
 		                </form>
-		                 
+
 		             </div>
 	             </div>
 
 	             <div class="col-md-7">
-					          
+
 			            <p>Coupons {{$data_date}}</p>
 
 			            <table class="table table-bordered">
@@ -64,7 +64,7 @@
                         <td>Payment</td>
                         <td>{{$payment}}</td>
                       </tr>
-           
+
                       </tbody>
                   </table>
                   <p><span class="badge bg-primary">{{sizeof($coupons)}}</span> Coupons</p>
@@ -84,7 +84,7 @@
                             </div>
                             <span class="help-block">Select date range</span>
                         </div>
-                        
+
                     </div>
 
                     <hr />
@@ -110,8 +110,8 @@
                   </form>
 
 	             </div><!-- /.col-md-5 -->
-	             
-	             
+
+
 	          </div>
 	      </section>
 	      @endif

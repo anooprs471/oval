@@ -18,11 +18,11 @@
 					</div><!-- /.notification error -->
 				@endif
 				<form method="POST" action="">
-					<input type="text" name="phone-number" autofocus="" placeholder="phone number" class="form-control" autocomplete="off" value="{{ $form_data['phone-number'] }}">
+					<input type="text" name="access-code" autofocus="" placeholder="access code here" class="form-control" autocomplete="off" >
 
-					<button type="submit" class="btn btn-lg btn-login btn-block">Sign Up</button>
+					<button type="submit" class="btn btn-lg btn-login btn-block">Verify</button>
 				</form>
-				<p><small>Use your phone number here. An access code will be send to that number by sms.</small></p>
+				<p><small>Enter Access Code</small></p>
 			</div><!-- /.sign-up-form -->
 
 

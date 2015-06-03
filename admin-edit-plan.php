@@ -42,6 +42,14 @@ $form_data = array(
 	'idle-timeout' => '',
 );
 
+$options = array(
+	'max-all-session' => 'minute',
+	'max-daily-session' => 'minute',
+	'max-data-usage' => 'MB',
+	'download-speed' => 'Kbps',
+	'upload-speed' => 'Kbps',
+);
+
 $msg = '';
 
 if ($user->isAdmin()) {
@@ -64,7 +72,7 @@ if ($user->isAdmin()) {
 			foreach ($plan_radgroupcheck as $data) {
 
 				if ($data['attribute'] == 'Max-All-Session') {
-					$options['max-all-session'] = 'minute';
+
 					if ($data['value'] > 3600 && $data['value'] <= 86400) {
 						$data['value'] = $data['value'] / 3600;
 						$options['max-all-session'] = 'hour';
@@ -82,7 +90,7 @@ if ($user->isAdmin()) {
 				}
 
 				if ($data['attribute'] == 'Max-Daily-Session') {
-					$options['max-daily-session'] = 'minute';
+
 					if ($data['value'] > 1 && $data['value'] <= 3600) {
 						$data['value'] = $data['value'] / 60;
 					} elseif ($data['value'] > 3600 && $data['value'] <= 86400) {
@@ -97,7 +105,7 @@ if ($user->isAdmin()) {
 				}
 
 				if ($data['attribute'] == 'CS-Total-Octets-Daily') {
-					$options['max-data-usage'] = 'MB';
+
 					if ($data['value'] >= 1000000) {
 						$data['value'] = $data['value'] / 1000000;
 						$options['max-data-usage'] = 'GB';
@@ -118,20 +126,23 @@ if ($user->isAdmin()) {
 				if ($data['attribute'] == 'Idle-Timeout') {
 					$form_data['idle-timeout'] = $data['value'];
 				}
+
 				if ($data['attribute'] == 'Session-Timeout') {
 
 					$form_data['session-timeout'] = $data['value'];
 				}
+
 				if ($data['attribute'] == 'Chillispot-Bandwidth-Max-Up') {
-					$options['upload-speed'] = 'Kbps';
+
 					if ($data['value'] > 1000) {
 						$data['value'] = $data['value'] / 1000;
 						$options['upload-speed'] = 'Mbps';
 					}
 					$form_data['upload-speed'] = $data['value'];
 				}
+
 				if ($data['attribute'] == 'Chillispot-Bandwidth-Max-Down') {
-					$options['download-speed'] = 'Kbps';
+
 					if ($data['value'] > 1000) {
 						$data['value'] = $data['value'] / 1000;
 						$options['download-speed'] = 'Mbps';
