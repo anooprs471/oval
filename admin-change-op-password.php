@@ -20,6 +20,10 @@ $msg = '';
 $flash_msg = '';
 $form_err = false;
 
+if ($flash->hasFlashMessage()) {
+	$flash_msg = $flash->show();
+}
+
 if ($user->isAdmin()) {
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -45,6 +49,7 @@ if ($user->isAdmin()) {
 			if (!empty($op)) {
 				$old_password = $op['password'];
 				$user->changeOperatorsPassword($user_id, $new_password);
+				$flash->add('Password changed');
 			}
 		} else {
 			$flash->add('No changes done');

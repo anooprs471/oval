@@ -15,7 +15,7 @@ $user = new UserAccounts;
 
 $images = new Images;
 
-$flash = new FlashMessages;
+$flash = new Flash_Messages();
 
 $capsule = $user->getCapsule();
 
@@ -100,8 +100,10 @@ if ($user->isAdmin()) {
 
 				if (is_numeric($download_speed)) {
 
-					if ($_POST['download-speed-option'] == 'Mbps') {
-						$download_speed *= 1000;
+					if ($_POST['download-speed-option'] == 'Kbps') {
+						$download_speed *= 1;
+					} elseif ($_POST['download-speed-option'] == 'Mbps') {
+						$download_speed *= 1024;
 					}
 
 					array_push($radgroupreply, array(
@@ -118,8 +120,10 @@ if ($user->isAdmin()) {
 			if ($upload_speed != '') {
 				if (is_numeric($upload_speed)) {
 
-					if ($_POST['upload-speed-option'] == 'Mbps') {
-						$upload_speed *= 1000;
+					if ($_POST['upload-speed-option'] == 'Kbps') {
+						$upload_speed *= 1;
+					} elseif ($_POST['upload-speed-option'] == 'Mbps') {
+						$upload_speed *= 1024;
 					}
 
 					array_push($radgroupreply, array(
@@ -179,7 +183,7 @@ if ($user->isAdmin()) {
 
 					if ($_POST['max-daily-session-option'] == 'minute') {
 						$max_daily_session *= 60;
-					} elseif ($_POST['max-all-session-option'] == 'hour') {
+					} elseif ($_POST['max-daily-session-option'] == 'hour') {
 						$max_daily_session *= 3600;
 					}
 
@@ -208,10 +212,10 @@ if ($user->isAdmin()) {
 			if ($max_data_usage != '') {
 				if (is_numeric($max_data_usage)) {
 
-					$max_data_usage *= 1000;
-
-					if ($_POST['max-data-usage-option'] == 'GB') {
+					if ($_POST['max-data-usage-option'] == 'MB') {
 						$max_data_usage *= 1000000;
+					} elseif ($_POST['max-data-usage-option'] == 'GB') {
+						$max_data_usage *= 1000000000;
 					}
 
 					array_push($radgroupcheck, array(
@@ -244,7 +248,7 @@ if ($user->isAdmin()) {
 						'updated_at' => Carbon::now(),
 					));
 
-				$flash->add('Successfully added plan');
+				$flash->add('Plan added successfully');
 				header('Location: ' . Config::$site_url . 'admin-customer-plans.php');
 			}
 

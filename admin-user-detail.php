@@ -25,6 +25,10 @@ $user_err = false;
 $date_err = false;
 $data_date = 'Today all plans';
 
+if ($flash->hasFlashMessage()) {
+	$flash_msg = $flash->show();
+}
+
 $user_coupon = array();
 
 if ($user->isAdmin()) {

@@ -10,6 +10,13 @@ $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
 
 $blade = new Blade($views, $cache);
+
+$user = new UserAccounts;
+
+$images = new Images;
+
+$flash = new FlashMessages;
+
 $msg = '';
 $flash_msg = '';
 $op_coupon_count_all = '';
@@ -24,12 +31,6 @@ $form = array(
 );
 $search_customer = null;
 $file_err = false;
-
-$user = new UserAccounts;
-
-$images = new Images;
-
-$flash = new FlashMessages;
 
 $capsule = $user->getCapsule();
 
@@ -108,7 +109,9 @@ if ($user->isOperator()) {
 			if (strlen($filtered_old_password) < 4 || strlen($filtered_new_password) < 4) {
 				$msg = 'password length too short';
 			} else {
-				$msg = $user->operatorChangePassword($filtered_old_password, $filtered_new_password);
+				$user->operatorChangePassword($filtered_old_password, $filtered_new_password);
+				$flash->add('Password changed');
+				header('Location: ' . Config::$site_url . 'op-home.php');
 			}
 
 		} elseif ($_POST['form-type'] == 'create-customer') {

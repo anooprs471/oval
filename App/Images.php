@@ -26,7 +26,7 @@ class Images {
 
 		$this->capsule->bootEloquent();
 
-		$this->ImgManager = new ImageManager(array('driver' => 'GD'));
+		$this->ImgManager = new ImageManager(array('driver' => 'Imagick'));
 
 		$this->uploaddir = 'images/client-files/';
 
