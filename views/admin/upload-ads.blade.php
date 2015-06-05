@@ -4,6 +4,19 @@
 	<div class="row">
 	  <div class="col-sm-8">
 
+				@if(!empty($msg))
+		      <div class="alert alert-danger">
+		      	@foreach($msg as $e)
+		      		<li>{{$e}}</li>
+		      	@endforeach
+		      </div>
+		      <p></p>
+		    @endif
+		    @if($flash != '')
+		      <div class="alert alert-success ">{{$flash}}</div>
+		      <p></p>
+		    @endif
+
 	      <section class="panel">
 	          <header class="panel-heading">
 	              Login Screen Right Ad

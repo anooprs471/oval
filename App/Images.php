@@ -26,7 +26,8 @@ class Images {
 
 		$this->capsule->bootEloquent();
 
-		$this->ImgManager = new ImageManager(array('driver' => 'Imagick'));
+		$this->ImgManager = new ImageManager(array('driver' => 'GD'));
+		//$this->ImgManager = new ImageManager(array('driver' => 'Imagick'));
 
 		$this->uploaddir = 'images/client-files/';
 
@@ -86,9 +87,10 @@ class Images {
 			->resize(300, 300, function ($constraint) {
 				$constraint->aspectRatio();
 			})
-			->fit(300, 300)
 			->save($this->uploaddir . $logo_print)
-			->fit(50, 50)
+			->resize(180, 50, function ($constraint) {
+				$constraint->aspectRatio();
+			})
 			->save($this->uploaddir . $logo_screen);
 
 		$this->capsule->table('images')

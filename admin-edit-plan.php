@@ -108,10 +108,10 @@ if ($user->isAdmin()) {
 
 				if ($data['attribute'] == 'CS-Total-Octets-Daily') {
 
-					if ($data['value'] >= 1000000) {
-						$data['value'] = $data['value'] / 1000000;
-					} elseif ($data['value'] > 1000000000) {
-						$data['value'] = $data['value'] / 1000000000;
+					if ($data['value'] >= 1048576) {
+						$data['value'] = $data['value'] / 1048576;
+					} elseif ($data['value'] > 1073741824) {
+						$data['value'] = $data['value'] / 1073741824;
 						$options['max-data-usage'] = 'GB';
 					}
 					$form_data['max-data-usage'] = $data['value'];
@@ -134,7 +134,7 @@ if ($user->isAdmin()) {
 					$form_data['session-timeout'] = $data['value'];
 				}
 
-				if ($data['attribute'] == 'Chillispot-Bandwidth-Max-Up') {
+				if ($data['attribute'] == 'ChilliSpot-Bandwidth-Max-Up') {
 
 					if ($data['value'] > 1024) {
 						$data['value'] = $data['value'] / 1024;
@@ -143,7 +143,7 @@ if ($user->isAdmin()) {
 					$form_data['upload-speed'] = $data['value'];
 				}
 
-				if ($data['attribute'] == 'Chillispot-Bandwidth-Max-Down') {
+				if ($data['attribute'] == 'ChilliSpot-Bandwidth-Max-Down') {
 
 					if ($data['value'] > 1024) {
 						$data['value'] = $data['value'] / 1024;
@@ -245,9 +245,9 @@ if ($user->isAdmin()) {
 
 			if ($max_data_usage != '') {
 				if ($_POST['max-data-usage-option'] == 'MB') {
-					$max_data_usage *= 1000000;
+					$max_data_usage *= 1048576;
 				} elseif ($_POST['max-data-usage-option'] == 'GB') {
-					$max_data_usage *= 1000000000;
+					$max_data_usage *= 1073741824;
 				}
 				$capsule::table('radgroupcheck')
 					->where('groupname', '=', $plan_name)

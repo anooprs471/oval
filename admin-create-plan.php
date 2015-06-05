@@ -108,7 +108,7 @@ if ($user->isAdmin()) {
 
 					array_push($radgroupreply, array(
 						'groupname' => $plan_name,
-						'attribute' => 'Chillispot-Bandwidth-Max-Down',
+						'attribute' => 'ChilliSpot-Bandwidth-Max-Down',
 						'op' => ':=',
 						'value' => $download_speed,
 					));
@@ -128,7 +128,7 @@ if ($user->isAdmin()) {
 
 					array_push($radgroupreply, array(
 						'groupname' => $plan_name,
-						'attribute' => 'Chillispot-Bandwidth-Max-Up',
+						'attribute' => 'ChilliSpot-Bandwidth-Max-Up',
 						'op' => ':=',
 						'value' => $upload_speed,
 					));
@@ -213,9 +213,9 @@ if ($user->isAdmin()) {
 				if (is_numeric($max_data_usage)) {
 
 					if ($_POST['max-data-usage-option'] == 'MB') {
-						$max_data_usage *= 1000000;
+						$max_data_usage *= 1048576;
 					} elseif ($_POST['max-data-usage-option'] == 'GB') {
-						$max_data_usage *= 1000000000;
+						$max_data_usage *= 1073741824;
 					}
 
 					array_push($radgroupcheck, array(

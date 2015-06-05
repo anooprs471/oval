@@ -33,17 +33,29 @@ if ($user->isAdmin()) {
 
 		if ($_POST['upload-type'] == 'login-screen-right') {
 
-			$images->addLoginScreenRightAd('upload');
+			if (file_exists($_FILES['upload']['tmp_name'])) {
+				$images->addLoginScreenRightAd('upload');
+				$flash->add('Login screen Ad updated');
+				header('Location: ' . Config::$site_url . 'admin-ads-upload.php');
+			} else {
+				array_push($err, 'Upload a image file');
+			}
 
 		} elseif ($_POST['upload-type'] == 'login-screen-bottom') {
 
-			$images->addLoginScreenBottomAd('upload');
+			if (file_exists($_FILES['upload']['tmp_name'])) {
+				$images->addLoginScreenBottomAd('upload');
+				$flash->add('Login screen Ad updated');
+				header('Location: ' . Config::$site_url . 'admin-ads-upload.php');
+			} else {
+				array_push($err, 'Upload a image file');
+			}
 
 		} elseif ($_POST['upload-type'] == 'scroll-ads') {
 			$images->addScrollAds('upload');
+			$flash->add('Scroll Ads updated');
+			header('Location: ' . Config::$site_url . 'admin-ads-upload.php');
 		}
-
-		header('Location: ' . Config::$site_url . 'admin-ads-upload.php');
 
 	}
 
@@ -56,7 +68,7 @@ if ($user->isAdmin()) {
 		'ad_login_bottom' => $images->getLoginBottomAd(),
 		'scroll_ads' => $images->getScrollAds(),
 		'name' => 'Administrator',
-		'msg' => $msg,
+		'msg' => $err,
 		'flash' => $flash_msg,
 	);
 	echo $blade->view()->make('admin.upload-ads', $data);
