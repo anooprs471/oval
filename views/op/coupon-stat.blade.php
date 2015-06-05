@@ -11,17 +11,17 @@
           <div class="alert alert-success ">{{$flash}}</div>
           <p></p>
         @endif
-	      
+
 	  </div>
 	  <div class="col-md-12">
 	      <section class="panel">
 	        <header class="panel-heading">
 	            Coupon Stats
-	            
+
 	        </header>
 	        <div class="panel-body">
 	        	<div class="print-username-stat">
-	        		
+
 		        	<h4>username : {{$username}}</h4>
 		        	<hr />
 		        	@if(!$cuopon_err)
@@ -30,6 +30,7 @@
 				                <tr>
 				                    <th>Usage Started</th>
 				                    <th>Usage Stopped</th>
+				                    <th>Session Time</th>
 				                    <th>Data Traffic(Up/Down)</th>
 				                </tr>
 			                </thead>
@@ -38,6 +39,16 @@
 					                <tr>
 															<td>{{$stat['acctstarttime']}}</td>
 															<td>{{$stat['acctstoptime']}}</td>
+															<td>
+																@if(gmdate('H', $stat['acctsessiontime']) > 0)
+																	{{ gmdate('H', $stat['acctsessiontime']) }} hr
+																@endif
+																@if(gmdate('i', $stat['acctsessiontime']) > 0)
+																	{{ gmdate('i', $stat['acctsessiontime']) }} mins
+																@endif
+																@if(gmdate('s', $stat['acctsessiontime']) > 0)
+																	{{ gmdate('s', $stat['acctsessiontime']) }} secs
+																@endif
 															<td>{{$stat['total_download']}}</td>
 					                </tr>
 				                @endforeach
@@ -46,7 +57,7 @@
 			            </table>
 			        @else
 			        	no stats for the coupon
-			        @endif 
+			        @endif
 	        	</div><!-- /.print-username-stat -->
 	        	<button class="btn btn-primary print"><i class="fa fa-print"></i> Print</button>
 	        </div>
