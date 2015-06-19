@@ -25,11 +25,11 @@
 	              	@if($op_details['active'])
 										<a href="{{$site_url}}admin-suspend-user.php?id={{$id}}" class="label label-danger label-mini">Suspend User</a>
 	              	@else
-										<a href="{{$site_url}}admin-activate-user.php?id={{$id}}" class="label label-success label-mini">Activate User</a>	
+										<a href="{{$site_url}}admin-activate-user.php?id={{$id}}" class="label label-success label-mini">Activate User</a>
 	              	@endif
 
 		              </td>
-		              
+
 		          </tr>
 	          @endforeach
 
@@ -63,7 +63,7 @@
 		              <td>
 	              	{{$sale['payment']}}
 		              </td>
-		              
+
 		          </tr>
 	          @endforeach
 
@@ -98,6 +98,8 @@
           </div>
         </div>
       </section>
+
+
 
 
 	   	<section class="panel">
@@ -141,7 +143,7 @@
 							          </div>
 							          <span class="help-block">Select date range</span>
 							      </div>
-							      
+
 							  </div>
 
 							  <hr />
@@ -169,9 +171,21 @@
             </div>
           </div>
       </section>
+
+      <section class="panel">
+          <header class="panel-heading">
+              Weblogs
+          </header>
+          <div class="panel-body">
+            <div class="position-center">
+            	<a href="admin-weblog.php" class="btn btn-success"><i class="fa fa-search"></i> Access Log</a>
+
+            </div>
+          </div>
+      </section>
 	   </div>
 	</div><!--row-->
 
-	
+
 @stop
 

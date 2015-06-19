@@ -110,3 +110,9 @@ if administrator select months then final_value_to_database = input_value x 2628
 
 
 same for Edit plan settings page also
+
+SQL QUERY
+
+SELECT DISTINCT b.username, b.callingstationid, a.request_url, DATE(FROM_UNIXTIME(a.time_since_epoch)) FROM access_log a, radacct b where b.framedipaddress = a.client_src_ip_addr and FROM_UNIXTIME(a.time_since_epoch) BETWEEN b.acctstarttime AND b.acctstoptime;
+
+sample DB with data attached
