@@ -204,6 +204,10 @@
         })
     }
 
+    $('.default-date-picker').datepicker({
+        format: 'mm-dd-yyyy'
+    });
+
     // disabling dates
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);

@@ -520,10 +520,7 @@
 	"buffers":
 	[
 		{
-			"contents": "Customization\nAdministrator should be able to create plans (profile).\nAdministrator should be able to specify attribute values under the section settings.\nAttributes are\n\n	Download speed.\n	Upload speed.\n	Max-data-usage (Total Data consumption).\n	Max-all-session (Total duration).\n	Max-daily-session (Daily duration).\n	Simultaneous use.\n	Idle time out.\n\nCreated plans should be listed under list plans tab along with number of users created under that plan.\n\nSpace for Administrator to upload logo in end-customer login page and logo in the coupon.\n\nSpace for Administrator to upload Advertisement images which will be visible on end-customer login page.\n\nModifying existing SMS package and payment gateway integration. \n\nRegistered user (mobile number) should be able to select plan of his choice from enlisted plans and should make payment through payment gateway prior to using it. \n\n--\nCurrent Scenario\nUser’s will get a login page with a link to do free sign up, in free sign up page user can enter his/her mobile number and should create password. An SMS will be send to his/her mobile number containing an access code. Upon receiving the access code users will be able to login, using their mobile number as username and user will be placed inside a pre-set plan (mobile users). Forget password option is also present which will generate new access code so that user’s can reset the password. \n\nAfter modification\nUpon user registration, user will be able to select a plan of his/her choice from the enlisted plans and will be able to do payment through payment gateway.  For registered users once the initial plan gets expired he/she will be directed to a page where he/she can select a plan from enlisted one and can make payment for it through payment gateway.  Free signup link will be provided to the clients who will be providing free usage time to the end-customers (e.g.:- half hour free internet usage daily) on which users will be redirected to default plan upon registration.\n\n\n--------------------\nAttribute name 										sql table\n\nMax-all-session 									radgroupcheck\nMax-Daily-Session 								radgroupcheck\nSimultaneous-Use									radgroupcheck\nCS-Total-Octets-Daily 						radgroupcheck\nCS-Total-Octets-Daily							radgroupcheck\n \n\nIdle-Timeout											radgroupreply\nSession-Timeout										radgroupreply\nChilliSpot-Bandwidth-Max-Up				radgroupreply\nChilliSpot-Bandwidth-Max-Down			radgroupreply\n\nProfile                                                      Plan \n\n1.Chillispot-Bandwidth-Max-Down     -----    Download speed \n2.Chillispot-Bandwidth-Max-Up         -----    Upload speed\n3.CS-Total-Octets -----    Max data usage(Total Data consumption) \n4.Max-All-Session -----    Max all session (Total duration)\n5.Max-Daily-Session                        -----    Max daily session(Daily duration)\n6.Simultaneous use                         -----    Simultaneous use\n7.Idle time out                                -----    Idle time out \n\n\n  \n$sql = \"INSERT INTO $table (id, GroupName, Attribute, Op, Value) \".\n\n\nsample to set maximum daily usage time\n\nid - 1 (auto increment)\nGroupName - free_usage_plan {must be given by the user (plan/profile name)}\nAttribute -  Max-Daily-Session\nOp - :=      value must be statically inserted via sql query\nValue - 1800 ( user input ) value in seconds ...\n\n-----------------------------\n\n\n--\n\n1 create profile(plans)\n2 logo for coupons\n3 ads support\n4 bring plan selection on user(free + paid)\n5 payment gateway if selected plan not free\n6 sms\n\nid- autofill\n\nDownload Speed/Upload Speed    required drop-down kbps/Mbps  default_value = kbps \nso if administrator select kbps no conversion required.\nBut if he select Mbps then a conversion must be done ie final_value_to_database = input_value x 1000 [1 Mbps = 1000 kbps]\n\n\n\nMax data Usage : required drop-down MB/GB    default_value - Bytes \nso if administrator select MB then\n\nfinal_value_to_database = input_value x 1000000 [1 MB = 1000000 Bytes]\n\nif administrator select GB then\n\nfinal_value_to_database = input_value x 1000000000 [1 GB = 1000000000 Bytes]\n\nmax-all-session / max-daily-session minutes/hours/day(s)/week(s)/month(s) default_value = seconds\n\nif administrator select minutes then final_value_to_database = input_value x 60 [ 1 minute = 60 seconds ]\n\nif administrator select hours then final_value_to_database = input_value x 3600 [ 1 hour = 3600 seconds ]\n\nif administrator select days then final_value_to_database = input_value x 86400 [ 1 day = 86400 seconds ]\n\nif administrator select weeks then final_value_to_database = input_value x 604800 [ 1 week = 604800 seconds ]\n\nif administrator select months then final_value_to_database = input_value x 2628000 [ 1 month = 2628000 seconds ]\n\n\nsame for Edit plan settings page also\n\nSQL QUERY\n\nSELECT DISTINCT b.username, b.callingstationid, a.request_url, DATE(FROM_UNIXTIME(a.time_since_epoch)) FROM access_log a, radacct b where b.framedipaddress = a.client_src_ip_addr and FROM_UNIXTIME(a.time_since_epoch) BETWEEN b.acctstarttime AND b.acctstoptime;\n\nsample DB with data attached",
 			"file": "Customization-doc.txt",
-			"file_size": 4876,
-			"file_write_time": 130768361425539941,
 			"settings":
 			{
 				"buffer_size": 5064,
@@ -540,10 +537,18 @@
 			}
 		},
 		{
-			"file": "op-coupon-view.php",
+			"file": "views/admin/home.blade.php",
 			"settings":
 			{
-				"buffer_size": 2404,
+				"buffer_size": 5891,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "admin-weblog.php",
+			"settings":
+			{
+				"buffer_size": 1095,
 				"line_ending": "Windows"
 			}
 		},
@@ -551,15 +556,7 @@
 			"file": "views/admin/weblog.blade.php",
 			"settings":
 			{
-				"buffer_size": 1791,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/admin/home.blade.php",
-			"settings":
-			{
-				"buffer_size": 6486,
+				"buffer_size": 1061,
 				"line_ending": "Windows"
 			}
 		}
@@ -665,6 +662,7 @@
 	],
 	"file_history":
 	[
+		"/I/websites/oval/op-coupon-view.php",
 		"/I/websites/oval/admin-weblog.php",
 		"/C/Users/creatix/AppData/Local/Temp/fz3temp-2/error_log",
 		"/C/Users/creatix/AppData/Local/Temp/Rar$DRa0.873/phplibrary.php",
@@ -708,7 +706,6 @@
 		"/I/websites/sobg.com/esubscription-admin/inc/dbutil.php",
 		"/I/websites/sobg.com/esubscription-admin/model/common-function.php",
 		"/I/websites/oval/hotspotlogin/template/css/style.css",
-		"/I/websites/oval/op-coupon-view.php",
 		"/I/websites/oval/op-generate-coupon.php",
 		"/I/websites/oval/op-print-coupon.php",
 		"/I/websites/oval/composer.json",
@@ -903,7 +900,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -988,10 +985,10 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1674.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1007,8 +1004,8 @@
 						"selection":
 						[
 							[
-								279,
-								301
+								3636,
+								4032
 							]
 						],
 						"settings":
@@ -1021,41 +1018,41 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1066,13 +1063,280 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2403.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/admin/home.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5891,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5725,
+								5725
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
-								"bh_c_define_content"
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2765.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "admin-weblog.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1095,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								949,
+								949
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/admin/weblog.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1061,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								869,
+								869
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -1080,272 +1344,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "op-coupon-view.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2404,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2183,
-								2202
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1026.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "views/admin/weblog.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1791,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								737,
-								737
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "views/admin/home.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6486,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3548,
-								3557
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 131.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
