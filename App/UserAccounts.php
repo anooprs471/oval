@@ -10,6 +10,7 @@ class_alias('Cartalyst\Sentry\Facades\Native\Sentry', 'Sentry');
  */
 class UserAccounts {
 	private $capusle;
+	private $capusle2;
 	private $msg;
 	private $user;
 
@@ -37,6 +38,10 @@ class UserAccounts {
 
 	public function getCapsule() {
 		return $this->capsule;
+	}
+
+	public function getCapsule2() {
+
 	}
 
 	/**
