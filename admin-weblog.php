@@ -36,6 +36,7 @@ if ($user->isAdmin()) {
 		$date = $_POST['backup-date'];
 
 		$backup_file = 'weblog-backup-' . \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('Y-m-d') . '.sql.gz';
+
 		if (file_exists('backup-logs/' . $backup_file)) {
 
 			$capsule2 = new Illuminate\Database\Capsule\Manager;
