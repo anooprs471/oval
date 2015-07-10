@@ -55,7 +55,7 @@
 
         }
 
-       
+
         /*==Collapsible==*/
         $('.widget-head').click(function(e) {
             var widgetElem = $(this).children('.widget-collapse').children('i');
@@ -232,6 +232,42 @@
     }).on('changeDate', function(ev) {
         checkout.hide();
     }).data('datepicker');
+
+
+    //mobile number find ajax form
+    var options = {
+        beforeSubmit: showRequest, // pre-submit callback 
+        success: showResponse // post-submit callback 
+
+    };
+
+    //handle form submit
+    $('#find-mobilenumber').submit(function() {
+
+        $(this).ajaxSubmit(options);
+
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation 
+        return false;
+    });
+
+    function showRequest(formData, jqForm, options) {
+        // formData is an array; here we use $.param to convert it to a string to display it 
+        // but the form plugin does this for you automatically when it submits the data 
+        var queryString = $.param(formData);
+
+        // here we could return false to prevent the form from being submitted; 
+        // returning anything other than false will allow the form submit to continue 
+        return true;
+    }
+
+    // post-submit callback 
+    function showResponse(responseText, statusText, xhr, $form) {
+        var response =  JSON.parse(responseText);
+        var insertHTML = '<div class="alert alert-warning fade in"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><strong>'+response.mobile_number+'</strong></div>'
+       $("#output").html(insertHTML);
+
+    }
 
 
 })(jQuery);
