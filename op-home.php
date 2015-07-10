@@ -80,6 +80,11 @@ if ($user->isOperator()) {
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		if ($_POST['form-type'] == 'personel') {
+			/*
+			 *
+			 * OP Name
+			 *
+			 */
 
 			$firstname = $_POST['first-name'];
 			$lastname = $_POST['last-name'];
@@ -90,7 +95,11 @@ if ($user->isOperator()) {
 			$user->updateProfile($filtered_firstname, $filtered_lastname);
 
 		} elseif ($_POST['form-type'] == 'password') {
-
+			/*
+			 *
+			 * Change Password of OP
+			 *
+			 */
 			if (isset($_POST['old-password'])) {
 				$old_password = $_POST['old-password'];
 			} else {
@@ -115,7 +124,11 @@ if ($user->isOperator()) {
 			}
 
 		} elseif ($_POST['form-type'] == 'create-customer') {
-
+			/*
+			 *
+			 * Create New Customer
+			 *
+			 */
 			if (!isset($_POST['patient-id']) || empty($_POST['patient-id']) || strlen($_POST['patient-id']) == 0) {
 				$patient_id = 'NON-PATIENT';
 			} else {
@@ -206,10 +219,15 @@ if ($user->isOperator()) {
 			}
 
 		} elseif ($_POST['form-type'] == 'search-id-proof') {
+			/*
+			 *
+			 * Search ID in db
+			 *
+			 */
 
 			$search_id = strtoupper(filter_var(trim($_POST['search-id-number']), FILTER_SANITIZE_STRING));
 
-			if (strlen($search_id) > 6) {
+			if (strlen($search_id) > 0) {
 				$search_customer = $capsule::table('customers')
 					->where('id_proof_number', '=', $search_id)
 					->first();
