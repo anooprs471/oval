@@ -527,14 +527,6 @@
 				"line_ending": "Windows",
 				"name": "Customization"
 			}
-		},
-		{
-			"file": "op-home.php",
-			"settings":
-			{
-				"buffer_size": 7516,
-				"line_ending": "Windows"
-			}
 		}
 	],
 	"build_system": "",
@@ -628,21 +620,30 @@
 	},
 	"expanded_folders":
 	[
-		"/I/websites/oval"
+		"/I/websites/oval",
+		"/I/websites/oval/views",
+		"/I/websites/oval/views/admin"
 	],
 	"file_history":
 	[
+		"/I/websites/oval/admin-home.php",
+		"/I/websites/oval/views/admin/home.blade.php",
+		"/I/websites/oval/admin-username-details.php",
+		"/I/websites/oval/admin-find-mobilenumber.php",
+		"/I/websites/oval/js/scripts.js",
+		"/I/websites/oval/admin-user-detail.php",
+		"/I/websites/oval/views/layout.blade.php",
+		"/I/websites/oval/js/jquery.form.min.js",
+		"/I/websites/oval/js/advanced-form.js",
+		"/I/websites/oval/op-home.php",
 		"/I/websites/oval/admin-weblog.php",
 		"/I/websites/oval/js/dynamic_table_init.js",
 		"/I/websites/oval/views/admin/weblog.blade.php",
 		"/I/websites/oval/App/UserAccounts.php",
-		"/I/websites/oval/js/scripts.js",
 		"/I/websites/oval/config/database.php",
 		"/I/websites/oval/config/storage.php",
 		"/I/websites/oval/log-backup.php",
-		"/I/websites/oval/views/admin/home.blade.php",
 		"/I/websites/oval/admin-ads-upload.php",
-		"/I/websites/oval/admin-user-detail.php",
 		"/C/Users/creatix/AppData/Local/Temp/Rar$DRa0.229/559beb4ff251dweblog-backup-2015-07-05.sql",
 		"/I/websites/oval/vendor/backup-manager/backup-manager/src/Tasks/Database/RestoreDatabase.php",
 		"/I/websites/oval/admin-suspend-user.php",
@@ -654,7 +655,6 @@
 		"/C/Users/creatix/AppData/Local/Temp/fz3temp-2/error_log",
 		"/C/Users/creatix/AppData/Local/Temp/Rar$DRa0.873/phplibrary.php",
 		"/C/Users/creatix/AppData/Local/Temp/fz3temp-2/index.php",
-		"/I/websites/oval/admin-home.php",
 		"/C/Users/creatix/Downloads/radius_access_log.sql",
 		"/I/websites/sobg/php_integration_kit/redirecturl.php",
 		"/I/websites/oval/admin-coupon-usage.php",
@@ -672,7 +672,6 @@
 		"/I/websites/oval/views/admin/upload-logo.blade.php",
 		"/I/websites/oval/views/op/home.blade.php",
 		"/I/websites/oval/admin-change-op-password.php",
-		"/I/websites/oval/op-home.php",
 		"/I/websites/oval/views/op/customer-page.blade.php",
 		"/I/websites/oval/sign-up/index.php",
 		"/I/websites/oval/sign-up/verify-access-code.php",
@@ -719,13 +718,11 @@
 		"/I/websites/oval/op-profile.php",
 		"/I/websites/oval/.ignore",
 		"/I/websites/oval/.gitignore",
-		"/I/websites/oval/views/layout.blade.php",
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/Alignment/Base File.sublime-settings",
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/BracketHighlighter/bh_core.sublime-settings",
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/phpfmt/phpfmt.sublime-settings",
 		"/I/websites/ovallog/hotspotlogin/template/css/style.css",
 		"/I/websites/oval/admin-patient-usage.php",
-		"/I/websites/oval/admin-username-details.php",
 		"/I/websites/oval/views/admin/change-password.blade.php",
 		"/I/websites/oval/views/admin/create-plan.blade.php",
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/User/phpfmt.sublime-settings",
@@ -756,10 +753,7 @@
 		"/I/websites/oval/vendor/mpdf/mpdf/collations/Arabic_Pseudo_RTL.php",
 		"/I/websites/oval/App/Customer.php",
 		"/I/websites/oval/js/dashboard.js",
-		"/I/websites/oval/vendor/cartalyst/sentry/tests/EloquentGroupTest.php",
-		"/I/websites/oval/vendor/illuminate/support/Illuminate/Support/Facades/Route.php",
-		"/I/websites/oval/vendor/mpdf/mpdf/collations/English_Republic_of_the_Philippines.php",
-		"/I/websites/oval/js/bootstrap-daterangepicker/README.md"
+		"/I/websites/oval/vendor/cartalyst/sentry/tests/EloquentGroupTest.php"
 	],
 	"find":
 	{
@@ -871,7 +865,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -956,96 +950,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "op-home.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7516,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6420,
-								6420
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1458.0,
+						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1106,6 +1011,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"form.js",
+				"js\\advanced-form.js"
+			],
+			[
+				"scr",
+				"js\\scripts.js"
+			],
 			[
 				"scripts",
 				"js\\scripts.js"

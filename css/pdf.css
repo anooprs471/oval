@@ -30,16 +30,16 @@ hr {
     width: 100%;
 }
 .invoice-title {
-    background: #48a9ed none repeat scroll 0 0;
+    background: #F4F4F4 none repeat scroll 0 0;
     color: #fff;
     display: inline-block;
 }
 .coupon-header{
-	width: 30%;
+	width: 40%;
 	float: left;
 }
 .coupon-data{
-	width: 70%;
+	width: 60%;
 	float: left;
 }
 .invoice-title h1 {
@@ -50,7 +50,7 @@ hr {
     padding: 5px;
     text-align: center;
     text-transform: uppercase;
-    color: #FFF;
+    color: #505050;
 }
 
 .table-invoice {
@@ -78,4 +78,11 @@ hr {
 .table-invoice tbody tr td.value {
     text-align: left;
     padding-left: 15px;
+}
+.logo{
+    padding: 5px;
+    overflow: hidden;
+}
+.logo img{
+    width: 100%;
 }

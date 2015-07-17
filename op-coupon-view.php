@@ -75,7 +75,7 @@ if ($user->isOperator()) {
 		'type' => 'operator',
 		'site_url' => Config::$site_url,
 		'page_title' => $username,
-		'logo_file' => $images->getScreenLogo(),
+		'logo_file' => $images->getPrintLogo(),
 		'first_name' => $names['first-name'],
 		'last_name' => $names['last-name'],
 		'coupon_details' => $coupon_details,
@@ -89,7 +89,7 @@ if ($user->isOperator()) {
 	$mpdf->WriteHTML($stylesheet, 1);
 
 	$html = $blade->view()->make('coupon', $data);
-
+	//echo $html;
 	$mpdf->WriteHTML($html->__toString());
 
 	$mpdf->Output(Carbon::createFromFormat('Y-m-d H:i:s', $coupon['created_at'])->format('Y-m-d') . '-' . $username . '.pdf', 'I');

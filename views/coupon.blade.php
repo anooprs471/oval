@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{$page_title}}</title>
-    <!--Core CSS -->
+    <!--Core CSS
+    <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pdf.css" rel="stylesheet">-->
+
 
 </head>
 <body>
@@ -14,7 +17,10 @@
             <div class="coupon-header">
                 <div class="invoice-header">
                     <div class="invoice-title">
-                            <h1>Coupon</h1>
+                        <h1>Coupon</h1>
+                        <div class="logo">
+                            <img src="{{$site_url}}/images/client-files/{{ $logo_file }}">
+                        </div><!-- /.logo -->
                     </div>
                 </div>
             </div><!-- /.coupon-header -->
@@ -26,11 +32,11 @@
                     <tbody>
                         <tr>
                             <td class="title">Username</td>
-                            <td class="value"><strong>{{$coupon_details['username']}}</strong></td>
+                            <td class="value"><strong>{{strtoupper( $coupon_details['username'] )}}</strong></td>
                         </tr>
                         <tr>
                             <td class="title">Password</td>
-                            <td class="value"><strong>{{$coupon_details['password']}}</strong></td>
+                            <td class="value"><strong>{{strtoupper( $coupon_details['password'] )}}</strong></td>
                         </tr>
                         <tr>
                             <td class="title">Plan</td>
@@ -38,7 +44,7 @@
                         </tr>
                         <tr>
                             <td class="title">Price</td>
-                            <td class="value">{{$coupon_details['price']}}</td>
+                            <td class="value">Rs. {{$coupon_details['price']}} /-</td>
                         </tr>
                         <tr>
                             <td class="title">Date</td>
