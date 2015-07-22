@@ -134,6 +134,16 @@
                             <li><a href="{{$site_url}}admin-create-plan.php">Create Plan</a></li>
                         </ul>
                     </li>
+                    <li class="sub-menu">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Coupon Batch</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{$site_url}}admin-batch-create.php">Create Coupon Batch</a></li>
+                            <li><a href="{{$site_url}}admin-batch-list.php">List All Batch</a></li>
+                        </ul>
+                    </li>
 
                     <li class="sub-menu">
                         <a href="#">
