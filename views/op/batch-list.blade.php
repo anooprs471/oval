@@ -23,6 +23,7 @@
 		    <thead>
 		    <tr>
 		        <th>Batch Name</th>
+		        <th>Plan</th>
 		        <th>No of Coupons</th>
 		        <th>Printed</th>
 		        <th>Issued</th>
@@ -33,7 +34,10 @@
 		    @foreach ($batches as $batch)
 		      <tr class="gradeC">
 	          <td>
-	          	<a href="{{$site_url}}admin-batch-details.php?batch-id={{$batch['id']}}">{{$batch['batch_name']}}</a>
+	          	<a href="{{$site_url}}op-batch-details.php?batch-id={{$batch['id']}}">{{$batch['batch_name']}}</a>
+	          </td>
+	          <td>
+	          	{{$batch['plan']}}
 	          </td>
 	          <td>
 	          	{{$batch['no_of_coupons']}}

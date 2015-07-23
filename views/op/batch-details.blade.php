@@ -25,29 +25,31 @@
     @endif
 
     @if (count($coupons) > 0)
+    	<form method="POST" action="op-batch-print-template.php">
+
 			<table  class="display table table-bordered table-striped">
 		    <thead>
 		    <tr>
 		        <th>Coupon</th>
-		        <th>Used/Unused</th>
+		        <th>Status</th>
 		    </tr>
 		    </thead>
 		    <tbody>
 		    @foreach ($coupons as $coupon)
 		      <tr class="gradeC">
-	          <td>
-	          	@if ($coupon['used'] == 0)
-	          		{{$coupon['coupon']}}
-	          	@else
-	          		<a href="{{$site_url}}admin-username-details.php?username={{$coupon['coupon']}}">{{$coupon['coupon']}}</a>
-	          	@endif
 
+	          <td>
+	        		<label>
+	      				<input type="checkbox" name="coupon_id[]" value="{{ $coupon['id'] }}"> {{ strtoupper($coupon['coupon']) }}
+	        		</label>
 	          </td>
 	          <td>
-	          	@if ($coupon['used'] == 0)
+	          	@if ($coupon['status'] == 0)
 	          		Unused
-	          	@else
-	          		Used
+	          	@elseif ($coupon['status'] == 1)
+	          		Printed
+	          	@elseif ($coupon['status'] == 2)
+	          		Issued
 	          	@endif
 	          </td>
 		      </tr>
@@ -55,6 +57,10 @@
 
 
 	    </table>
+	    <p>check coupons to print</p>
+	    <button type="submit">Print Coupons</button>
+    	</form>
+
 	  @else
     	{{-- false expr --}}
     @endif

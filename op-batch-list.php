@@ -39,8 +39,9 @@ if ($user->isOperator()) {
 
 	$batches = $capsule::table('batch')
 		->join('batch_coupon', 'batch.id', '=', 'batch_coupon.batch_id')
+		->join('couponplans', 'batch.plan', '=', 'couponplans.id')
 		->where('batch_coupon.status', '=', 0)
-		->select('batch.batch_name', 'batch.id', 'batch.no_of_coupons', 'batch.created_at')
+		->select('batch.batch_name', 'batch.id', 'batch.no_of_coupons', 'batch.created_at', 'couponplans.planname')
 		->distinct()
 		->get();
 
@@ -61,6 +62,7 @@ if ($user->isOperator()) {
 		array_push($info, array(
 			'id' => $batch['id'],
 			'batch_name' => $batch['batch_name'],
+			'plan' => $batch['planname'],
 			'no_of_coupons' => $batch['no_of_coupons'],
 			'printed' => (count($coupons_printed) < count($coupons_issued)) ? count($coupons_issued) : count($coupons_printed),
 			'issued' => count($coupons_issued),
