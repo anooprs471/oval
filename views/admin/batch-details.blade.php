@@ -19,35 +19,42 @@
       <p></p>
     @endif
 
-			<table  class="display table table-bordered table-striped" id="dynamic-table">
+    @if (!empty($batch))
+    	<h2>{{strtoupper($batch[0]['batch_name'])}}</h2>
+    	<h3>Plan : {{strtoupper($batch[0]['planname'])}}</h3>
+    @endif
+
+    @if (count($coupons) > 0)
+			<table  class="display table table-bordered table-striped">
 		    <thead>
 		    <tr>
-		        <th>Batch Name</th>
-		        <th>No of Coupons</th>
-		        <th>Used</th>
-		        <th>Created</th>
+		        <th>Coupon</th>
+		        <th>Used/Unused</th>
 		    </tr>
 		    </thead>
 		    <tbody>
-		    @foreach ($batches as $batch)
+		    @foreach ($coupons as $coupon)
 		      <tr class="gradeC">
 	          <td>
-	          	<a href="{{$site_url}}admin-batch-details.php?batch-id={{$batch['id']}}">{{$batch['batch_name']}}</a>
+	          	<a href="{{$site_url}}admin-batch-details.php?batch-id={{$coupon['coupon']}}">{{$coupon['coupon']}}</a>
 	          </td>
 	          <td>
-	          	{{$batch['no_of_coupons']}}
-	          </td>
-	          <td>
-	          	{{$batch['used']}}
-	          </td>
-	          <td>
-	          	{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['created_at'])->format('Y M, d')}}
+	          	@if ($coupon['used'] == 0)
+	          		Unused
+	          	@else
+	          		Used
+	          	@endif
 	          </td>
 		      </tr>
 		    @endforeach
 
 
 	    </table>
+	  @else
+    	{{-- false expr --}}
+    @endif
+
+
 		</div><!-- /.panel-body -->
 </section><!-- /.panel -->
 </div><!-- /.col-md-8 -->

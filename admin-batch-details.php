@@ -25,7 +25,8 @@ $flash_msg = '';
 if ($flash->hasFlashMessage()) {
 	$flash_msg = $flash->show();
 }
-$info = array();
+$batch_coupons = array();
+$batch = array();
 $err = array();
 $msg = '';
 
@@ -37,23 +38,23 @@ $form_data = array(
 
 if ($user->isAdmin()) {
 
-	$batches = $capsule::table('batch')
-		->orderBy('created_at', 'DESC')
-		->get();
+	if (isset($_GET['batch-id']) && is_numeric($_GET['batch-id'])) {
 
-	foreach ($batches as $batch) {
-		$coupons = $capsule::table('batch_coupon')
-			->where('used', '=', 1)
-			->where('batch_id', '=', $batch['id'])
+		$batch_id = $_GET['batch-id'];
+
+		$batch = $capsule::table('batch')
+			->where('batch.id', '=', $batch_id)
+			->join('couponplans', 'couponplans.id', '=', 'batch.plan')
 			->get();
 
-		array_push($info, array(
-			'id' => $batch['id'],
-			'batch_name' => $batch['batch_name'],
-			'no_of_coupons' => $batch['no_of_coupons'],
-			'used' => count($coupons),
-			'created_at' => $batch['created_at'],
-		));
+		$batch_coupons = $capsule::table('batch_coupon')
+			->where('batch_id', '=', $batch_id)
+			->orderBy('used', 'ASC')
+			->get();
+		//var_dump($batch);die;
+
+	} else {
+		$msg = 'invalid batch id';
 	}
 
 	$data = array(
@@ -65,9 +66,10 @@ if ($user->isAdmin()) {
 		'msg' => $msg,
 		'flash' => $flash_msg,
 		'errors' => $err,
-		'batches' => $info,
+		'coupons' => $batch_coupons,
+		'batch' => $batch,
 	);
-	echo $blade->view()->make('admin.batch-list', $data);
+	echo $blade->view()->make('admin.batch-details', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }
