@@ -35,14 +35,25 @@ $form_data = array(
 	'batch-plan' => '',
 );
 
-if ($user->isAdmin()) {
+if ($user->isOperator()) {
 
 	$batches = $capsule::table('batch')
-		->orderBy('created_at', 'DESC')
+		->join('batch_coupon', 'batch.id', '=', 'batch_coupon.batch_id')
+		->where('batch_coupon.status', '=', 0)
+		->select('batch.batch_name', 'batch.id', 'batch.no_of_coupons', 'batch.created_at')
+		->distinct()
 		->get();
 
+	// $batches = $capsule::table('batch')
+	// 	->orderBy('created_at', 'DESC')
+	// 	->get();
+
 	foreach ($batches as $batch) {
-		$coupons = $capsule::table('batch_coupon')
+		$coupons_printed = $capsule::table('batch_coupon')
+			->where('status', '=', 1)
+			->where('batch_id', '=', $batch['id'])
+			->get();
+		$coupons_issued = $capsule::table('batch_coupon')
 			->where('status', '=', 2)
 			->where('batch_id', '=', $batch['id'])
 			->get();
@@ -51,23 +62,25 @@ if ($user->isAdmin()) {
 			'id' => $batch['id'],
 			'batch_name' => $batch['batch_name'],
 			'no_of_coupons' => $batch['no_of_coupons'],
-			'issued' => count($coupons),
+			'printed' => (count($coupons_printed) < count($coupons_issued)) ? count($coupons_issued) : count($coupons_printed),
+			'issued' => count($coupons_issued),
 			'created_at' => $batch['created_at'],
 		));
-	}
 
+	}
+	//var_dump($info);die;
 	$data = array(
-		'type' => 'admin',
+		'type' => 'operator',
 		'site_url' => Config::$site_url,
 		'page_title' => "Coupon Batch",
 		'logo_file' => $images->getScreenLogo(),
-		'name' => 'Administrator',
+		'name' => 'Operator',
 		'msg' => $msg,
 		'flash' => $flash_msg,
 		'errors' => $err,
 		'batches' => $info,
 	);
-	echo $blade->view()->make('admin.batch-list', $data);
+	echo $blade->view()->make('op.batch-list', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

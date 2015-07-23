@@ -162,6 +162,16 @@
                             <span>Change Password</span>
                         </a>
                     </li>
+                @else
+                    <li class="sub-menu">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Coupon Batch</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{$site_url}}op-batch-list.php">List All Batch</a></li>
+                        </ul>
+                    </li>
                 @endif
             </ul>
        </div>

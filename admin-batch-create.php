@@ -130,7 +130,7 @@ if ($user->isAdmin()) {
 				array_push($batch_coupon, array(
 					'batch_id' => $batch_id,
 					'coupon' => $username,
-					'used' => 0,
+					'status' => 0,
 				));
 
 			}

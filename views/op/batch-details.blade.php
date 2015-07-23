@@ -29,14 +29,14 @@
 		    <thead>
 		    <tr>
 		        <th>Coupon</th>
-		        <th>Status</th>
+		        <th>Used/Unused</th>
 		    </tr>
 		    </thead>
 		    <tbody>
 		    @foreach ($coupons as $coupon)
 		      <tr class="gradeC">
 	          <td>
-	          	@if ($coupon['status'] == 2)
+	          	@if ($coupon['used'] == 0)
 	          		{{$coupon['coupon']}}
 	          	@else
 	          		<a href="{{$site_url}}admin-username-details.php?username={{$coupon['coupon']}}">{{$coupon['coupon']}}</a>
@@ -44,12 +44,10 @@
 
 	          </td>
 	          <td>
-	          	@if ($coupon['status'] == 0)
+	          	@if ($coupon['used'] == 0)
 	          		Unused
-	          	@elseif ($coupon['status'] == 1)
-	          		Printed
-	          	@elseif ($coupon['status'] == 2)
-	          		Issued
+	          	@else
+	          		Used
 	          	@endif
 	          </td>
 		      </tr>

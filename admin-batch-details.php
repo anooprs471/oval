@@ -49,7 +49,7 @@ if ($user->isAdmin()) {
 
 		$batch_coupons = $capsule::table('batch_coupon')
 			->where('batch_id', '=', $batch_id)
-			->orderBy('used', 'ASC')
+			->orderBy('status', 'DESC')
 			->get();
 		//var_dump($batch);die;
 
