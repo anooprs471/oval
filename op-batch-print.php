@@ -3,7 +3,6 @@
 include_once "vendor/autoload.php";
 
 // Import the necessary classes
-use Carbon\Carbon;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Philo\Blade\Blade;
 
@@ -96,8 +95,15 @@ if ($user->isOperator()) {
 	//echo $html;
 	$mpdf->WriteHTML($html->__toString());
 
-	$mpdf->Output('batch-' . Carbon::now()->format('Y-M-d') . '.pdf', 'I');
+	//$mpdf->Output('batch-' . Carbon::now()->format('Y-M-d') . '.pdf', 'I');
+
+	//set the ids as printed
+	$effected = $capsule::table('batch_coupon')
+		->whereIn('id', $coupon_ids)
+		->update(array('status' => 1));
 	//echo $blade->view()->make('op.batch-print-template', $data);
+	$flash->add('Batch Generated');
+	header('Location: ' . Config::$site_url . 'op-batch-list.php');
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

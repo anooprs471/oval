@@ -170,6 +170,7 @@
                         </a>
                         <ul class="sub">
                             <li><a href="{{$site_url}}op-batch-list.php">List All Batch</a></li>
+                            <li><a href="{{$site_url}}op-batch-issue.php">Issue Coupon</a></li>
                         </ul>
                     </li>
                 @endif
