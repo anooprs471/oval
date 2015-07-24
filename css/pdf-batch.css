@@ -1,0 +1,18 @@
+body {
+    background: #f1f2f7 none repeat scroll 0 0;
+    color: #767676;
+    font-family: "Open Sans",sans-serif;
+    font-size: 13px;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-rendering: optimizelegibility;
+
+}
+
+hr { 
+	display: block; 
+	height: 1px;
+	border: 0; 
+	border-top: 1px solid #ddd;
+	margin: 1em 0; padding: 0; 
+}

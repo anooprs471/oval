@@ -112,34 +112,35 @@ if ($user->isAdmin()) {
 				}
 				$password = $generator->generatePassword();
 
-				array_push($radcheck, array(
-					'username' => $username,
-					'attribute' => 'Cleartext-Password',
-					'op' => ':=',
-					'value' => $password,
-				));
+				// array_push($radcheck, array(
+				// 	'username' => $username,
+				// 	'attribute' => 'Cleartext-Password',
+				// 	'op' => ':=',
+				// 	'value' => $password,
+				// ));
 
-				array_push($radusergroup, array(
-					'username' => $username,
-					'groupname' => $plan['planname'],
-					'priority' => 0,
-				));
+				// array_push($radusergroup, array(
+				// 	'username' => $username,
+				// 	'groupname' => $plan['planname'],
+				// 	'priority' => 0,
+				// ));
 
 				array_push($new_usernames, $username);
 
 				array_push($batch_coupon, array(
 					'batch_id' => $batch_id,
 					'coupon' => $username,
+					'password' => $password,
 					'status' => 0,
 				));
 
 			}
 
-			$capsule::table('radcheck')
-				->insert($radcheck);
+			// $capsule::table('radcheck')
+			// 	->insert($radcheck);
 
-			$capsule::table('radusergroup')
-				->insert($radusergroup);
+			// $capsule::table('radusergroup')
+			// 	->insert($radusergroup);
 
 			$capsule::table('batch_coupon')
 				->insert($batch_coupon);

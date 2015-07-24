@@ -3,11 +3,14 @@
 include_once "vendor/autoload.php";
 
 // Import the necessary classes
+use Carbon\Carbon;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Philo\Blade\Blade;
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
+
+$mpdf = new \mPDF('utf-8', 'A4');
 
 $blade = new Blade($views, $cache);
 
@@ -82,7 +85,19 @@ if ($user->isOperator()) {
 		'cols' => $COLS,
 		'coupon_ids' => $coupon_ids,
 	);
-	echo $blade->view()->make('op.batch-print-template', $data);
+	$bootstrap_css = file_get_contents('bs3/css/bootstrap.min.css');
+
+	$stylesheet = file_get_contents('css/pdf-batch.css');
+
+	$mpdf->WriteHTML($bootstrap_css, 1);
+	$mpdf->WriteHTML($stylesheet, 1);
+
+	$html = $blade->view()->make('batch', $data);
+	//echo $html;
+	$mpdf->WriteHTML($html->__toString());
+
+	$mpdf->Output('batch-' . Carbon::now()->format('Y-M-d') . '.pdf', 'I');
+	//echo $blade->view()->make('op.batch-print-template', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }
