@@ -3,6 +3,7 @@
 include_once "vendor/autoload.php";
 
 // Import the necessary classes
+use Carbon\Carbon;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Philo\Blade\Blade;
 
@@ -74,7 +75,7 @@ if ($user->isOperator()) {
 		'type' => 'operator',
 		'site_url' => Config::$site_url,
 		'page_title' => "Coupon Batch",
-		'logo_file' => $images->getScreenLogo(),
+		'logo_file' => $images->getPrintLogo(),
 		'name' => 'Operator',
 		'msg' => $msg,
 		'flash' => $flash_msg,
@@ -95,7 +96,7 @@ if ($user->isOperator()) {
 	//echo $html;
 	$mpdf->WriteHTML($html->__toString());
 
-	//$mpdf->Output('batch-' . Carbon::now()->format('Y-M-d') . '.pdf', 'I');
+	$mpdf->Output('batch-' . Carbon::now()->format('Y-M-d') . '.pdf', 'I');
 
 	//set the ids as printed
 	$effected = $capsule::table('batch_coupon')

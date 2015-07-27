@@ -24,7 +24,10 @@ $total_count = 0;?>
 
                     <div style="width: 19%; float: left; margin: .5%">
                         <div style="border: 1px solid #E3E3E3; padding: 5px;">
-                            <p>Logo</p>
+                            <div style="overflow:hidden">
+                                 <img src="{{$site_url}}/images/client-files/{{ $logo_file }}" style="width=100%">
+                            </div>
+                            <p>&nbsp;</p>
                             <p>Username : {{ strtoupper($coupon['coupon']) }}</p>
                             <p>Password : {{ strtoupper($coupon['password']) }}</p>
                             <p>Plan : {{ strtoupper($coupon['planname']) }}</p>

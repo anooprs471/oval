@@ -74,6 +74,19 @@
         });
 
 
+        /*
+        * check all uncheck all
+         */
+         $('.batch-coupon-checkall').click(function(e) {
+            $('.check-coupon').prop('checked', true);
+            e.preventDefault();
+         })
+         $('.batch-coupon-uncheckall').click(function(e) {
+            $('.check-coupon').prop('checked', false);
+            e.preventDefault();
+         })
+
+
 
         /*==Sidebar Toggle==*/
 

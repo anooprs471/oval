@@ -26,6 +26,7 @@
 
     @if (count($coupons) > 0)
     	<form method="POST" action="op-batch-print-template.php">
+    	<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
 
 			<table  class="display table table-bordered table-striped">
 		    <thead>
@@ -40,7 +41,7 @@
 
 	          <td>
 	        		<label>
-	      				<input type="checkbox" name="coupon_id[]" value="{{ $coupon['id'] }}"> {{ strtoupper($coupon['coupon']) }}
+	      				<input type="checkbox" name="coupon_id[]" value="{{ $coupon['id'] }}" class="check-coupon" > {{ strtoupper($coupon['coupon']) }}
 	        		</label>
 	          </td>
 	          <td>
@@ -57,8 +58,13 @@
 
 
 	    </table>
-	    <p>check coupons to print</p>
-	    <button type="submit">Print Coupons</button>
+	    <p>
+
+	    	<a href="" class="batch-coupon-checkall"><i class="fa fa-check"></i> Check All</a> | <a href="" class="batch-coupon-uncheckall"><i class="fa fa-times"></i> Uncheck All</a>
+
+	    </p>
+	    <hr />
+	    <button type="submit" class="btn btn-primary"><i class="fa fa-print"> </i> Print Coupons</button>
     	</form>
 
 	  @else

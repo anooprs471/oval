@@ -42,6 +42,12 @@ $form_data = array(
 if ($user->isOperator()) {
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if (!isset($_POST['batch-id']) || empty($_POST['batch-id']) || !is_numeric($_POST['batch-id'])) {
+			header('Location: ' . Config::$site_url . 'op-batch-list.php');
+		}
+		if (!isset($_POST['coupon_id']) || empty($_POST['coupon_id'])) {
+			header('Location: ' . Config::$site_url . 'op-batch-details.php?batch-id=' . $_POST['batch-id']);
+		}
 		foreach ($_POST['coupon_id'] as $id) {
 			if (is_numeric($id)) {
 				array_push($coupon_ids, $id);
@@ -73,6 +79,7 @@ if ($user->isOperator()) {
 		'site_url' => Config::$site_url,
 		'page_title' => "Coupon Batch",
 		'logo_file' => $images->getScreenLogo(),
+		'print_logo' => $images->getPrintLogo(),
 		'name' => 'Operator',
 		'msg' => $msg,
 		'flash' => $flash_msg,

@@ -36,6 +36,9 @@ $form_data = array(
 );
 
 if ($user->isOperator()) {
+	if (!isset($_GET['batch-id']) || empty($_GET['batch-id']) || !is_numeric($_GET['batch-id'])) {
+		header('Location: ' . Config::$site_url . 'op-batch-list.php');
+	}
 
 	if (isset($_GET['batch-id']) && is_numeric($_GET['batch-id'])) {
 		$batch_id = $_GET['batch-id'];
@@ -65,6 +68,7 @@ if ($user->isOperator()) {
 		'errors' => $err,
 		'coupons' => $batch_coupons,
 		'batch' => $batch,
+		'batch_id' => $batch_id,
 	);
 	echo $blade->view()->make('op.batch-details', $data);
 } else {
