@@ -45,7 +45,7 @@
 
 						<div class="form-group">
 								<div class="col-sm-6 col-sm-offset-3">
-										<button type="submit" class="btn btn-success">Save Plan</button>
+										<button type="submit" class="btn btn-success">Create Batch</button>
 								</div>
 						</div><!-- /.form-group -->
 				</form>

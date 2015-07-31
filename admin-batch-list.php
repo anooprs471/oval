@@ -42,8 +42,12 @@ if ($user->isAdmin()) {
 		->get();
 
 	foreach ($batches as $batch) {
-		$coupons = $capsule::table('batch_coupon')
+		$issued_coupons = $capsule::table('batch_coupon')
 			->where('status', '=', 2)
+			->where('batch_id', '=', $batch['id'])
+			->get();
+		$printed_coupons = $capsule::table('batch_coupon')
+			->where('status', '>', 0)
 			->where('batch_id', '=', $batch['id'])
 			->get();
 
@@ -51,7 +55,8 @@ if ($user->isAdmin()) {
 			'id' => $batch['id'],
 			'batch_name' => $batch['batch_name'],
 			'no_of_coupons' => $batch['no_of_coupons'],
-			'issued' => count($coupons),
+			'issued' => count($issued_coupons),
+			'printed' => count($printed_coupons),
 			'created_at' => $batch['created_at'],
 		));
 	}

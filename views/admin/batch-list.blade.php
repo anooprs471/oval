@@ -24,6 +24,7 @@
 		    <tr>
 		        <th>Batch Name</th>
 		        <th>No of Coupons</th>
+		        <th>Printed</th>
 		        <th>Issued</th>
 		        <th>Created</th>
 		    </tr>
@@ -33,9 +34,14 @@
 		      <tr class="gradeC">
 	          <td>
 	          	<a href="{{$site_url}}admin-batch-details.php?batch-id={{$batch['id']}}">{{$batch['batch_name']}}</a>
+	          	<br />
+
 	          </td>
 	          <td>
 	          	{{$batch['no_of_coupons']}}
+	          </td>
+	          <td>
+	          	{{$batch['printed']}}
 	          </td>
 	          <td>
 	          	{{$batch['issued']}}
