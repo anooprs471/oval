@@ -37,6 +37,7 @@ $batch = array();
 $err = array();
 $msg = '';
 $selected = 0;
+$selected_coupons = array();
 
 $form_data = array(
 	'batch-name' => '',
@@ -54,7 +55,7 @@ if ($user->isAdmin()) {
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if ($segment->get('coupon_ids') != '') {
 			$coupon_ids = $segment->get('coupon_ids');
-			$selected = count($coupon_ids);
+			$segment->set('coupon_ids', array());
 		}
 		foreach ($_POST['coupon_id'] as $id) {
 			if (is_numeric($id)) {
@@ -62,6 +63,7 @@ if ($user->isAdmin()) {
 			}
 		}
 		$segment->set('coupon_ids', $coupon_ids);
+		header('Location: ' . Config::$site_url . 'admin-batch-details.php?batch-id=' . $_GET['batch-id']);
 	}
 
 	if (isset($_GET['batch-id']) && is_numeric($_GET['batch-id']) && !empty($_GET['batch-id'])) {
@@ -71,11 +73,13 @@ if ($user->isAdmin()) {
 				array_push($coupon_ids, $id);
 			}
 			$selected = count($coupon_ids);
+
 		}
 
-		var_dump($coupon_ids);die;
+		//var_dump($selected);die;
 
 		$batch_id = $_GET['batch-id'];
+
 		$all_batch = $capsule::table('batch_coupon')
 			->where('batch_id', '=', $batch_id)
 			->whereNotIn('id', $coupon_ids)
@@ -125,6 +129,7 @@ if ($user->isAdmin()) {
 		'current_page' => $current_page,
 		'total_pages' => $total_pages,
 		'selected' => $selected,
+		'selected_coupons' => $segment->get('coupon_ids'),
 	);
 	echo $blade->view()->make('admin.batch-details', $data);
 } else {

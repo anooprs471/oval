@@ -3,14 +3,11 @@
 include_once "vendor/autoload.php";
 
 // Import the necessary classes
-use Carbon\Carbon;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Philo\Blade\Blade;
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
-
-$mpdf = new \mPDF('utf-8', 'A4');
 
 $blade = new Blade($views, $cache);
 
@@ -42,9 +39,17 @@ $form_data = array(
 	'batch-plan' => '',
 );
 
-if ($user->isOperator()) {
+if ($user->isAdmin()) {
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if (!isset($_POST['batch-id']) || empty($_POST['batch-id']) || !is_numeric($_POST['batch-id'])) {
+			header('Location: ' . Config::$site_url . 'op-batch-list.php');
+		} else {
+			$batch_id = $_POST['batch-id'];
+		}
+		if (!isset($_POST['coupon_id']) || empty($_POST['coupon_id'])) {
+			header('Location: ' . Config::$site_url . 'op-batch-details.php?batch-id=' . $_POST['batch-id']);
+		}
 		foreach ($_POST['coupon_id'] as $id) {
 			if (is_numeric($id)) {
 				array_push($coupon_ids, $id);
@@ -64,9 +69,9 @@ if ($user->isOperator()) {
 			->join('couponplans', 'couponplans.id', '=', 'batch.plan')
 			->get();
 
-		if (ceil(count($coupons) / $COLS) > 5) {
-			$COLS = 2;
-		}
+		// if (ceil(count($coupons) / $COLS) > 5) {
+		// 	$COLS = 2;
+		// }
 
 	}
 
@@ -75,7 +80,8 @@ if ($user->isOperator()) {
 		'type' => 'operator',
 		'site_url' => Config::$site_url,
 		'page_title' => "Coupon Batch",
-		'logo_file' => $images->getPrintLogo(),
+		'logo_file' => $images->getScreenLogo(),
+		'print_logo' => $images->getPrintLogo(),
 		'name' => 'Operator',
 		'msg' => $msg,
 		'flash' => $flash_msg,
@@ -84,27 +90,9 @@ if ($user->isOperator()) {
 		'rows' => ceil(count($coupons) / $COLS),
 		'cols' => $COLS,
 		'coupon_ids' => $coupon_ids,
+		'batch_id' => $batch_id,
 	);
-	$bootstrap_css = file_get_contents('bs3/css/bootstrap.min.css');
-
-	$stylesheet = file_get_contents('css/pdf-batch.css');
-
-	$mpdf->WriteHTML($bootstrap_css, 1);
-	$mpdf->WriteHTML($stylesheet, 1);
-
-	$html = $blade->view()->make('batch', $data);
-	//echo $html;
-	$mpdf->WriteHTML($html->__toString());
-
-	$mpdf->Output('batch-' . Carbon::now()->format('Y-M-d') . '.pdf', 'I');
-
-	//set the ids as printed
-	$effected = $capsule::table('batch_coupon')
-		->whereIn('id', $coupon_ids)
-		->update(array('status' => 1));
-	//echo $blade->view()->make('op.batch-print-template', $data);
-	$flash->add('Batch Generated');
-	header('Location: ' . Config::$site_url . 'op-batch-list.php');
+	echo $blade->view()->make('admin.batch-print-template', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

@@ -24,7 +24,17 @@
     	<h3>Plan : {{strtoupper($batch[0]['planname'])}}</h3>
     @endif
 
-    @if (count($coupons) > 0)
+
+    	@if ($selected > 0)
+    		<div class="alert alert-info fade in">
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            <strong>You have selected</strong> {{ $selected }} coupons to print.
+        </div>
+    	@endif
+    	@if (count($coupons) > 0)
+    <?php $check = 0;?>
     	<form method="POST" action="">
 			<table  class="display table table-bordered table-striped">
 		    <thead>
@@ -53,6 +63,7 @@
 	          <td>
 	          	@if ($coupon['status'] == 0)
 	          		Unused
+	          		<?php $check = 1;?>
 	          	@elseif ($coupon['status'] == 1)
 	          		Printed
 	          	@elseif ($coupon['status'] == 2)
@@ -62,7 +73,7 @@
 		      </tr>
 		    @endforeach
 
-
+			</tbody>
 	    </table>
 	    <hr />
 	    @if($total_pages > 2)
@@ -79,20 +90,33 @@
 		  </div>
 		  @endif
 		  <p>
-
+			@if ($check > 0)
 	    	<a href="" class="batch-coupon-checkall"><i class="fa fa-check"></i> Check All</a> | <a href="" class="batch-coupon-uncheckall"><i class="fa fa-times"></i> Uncheck All</a>
 
 	    </p>
 	    <hr />
 	    <input type="hidden" value="{{ $batch_id }}" name="batch-id" />
 	    <button type="submit" class="btn btn-primary">Add Coupons To Print</button>
-	    @if ($selected > 0)
-	    	<button type="submit" class="btn btn-success"><i class="fa fa-print"> </i> Print Coupons</button>
+	    <a href="admin-clear-selection.php?batch-id={{ $batch_id }}" class="btn btn-primary">Clear All Selected Coupons</a>
+			@endif
+
+	    </form>
+		  @else
+	    	no coupons
 	    @endif
-    	</form>
-	  @else
-    	no coupons
-    @endif
+	    @if ($selected > 0)
+	    	<hr />
+	    	<form method="post" action="admin-batch-print-template.php">
+		    	<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
+	    		@foreach ($selected_coupons as $coupon_id)
+	    			<input type="hidden" name="coupon_id[]" value="{{ $coupon_id }}" />
+	    		@endforeach
+	    		<button type="submit" class="btn btn-success"><i class="fa fa-print"> </i> Print Coupons</button>
+
+	    	</form>
+	    @endif
+
+
 
 
 		</div><!-- /.panel-body -->
