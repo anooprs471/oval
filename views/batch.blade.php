@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{$page_title}}</title>
-    <!--Core CSS
+    <!--Core CSS-->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/pdf.css" rel="stylesheet">-->
+    <link href="css/pdf-batch.css" rel="stylesheet">
 
 
 </head>
@@ -22,35 +22,29 @@ $row = 0;
             @foreach ($coupons as $coupon)
 
                 @if ($count == 0)
-                    <div style="overflow: hidden;">
+                    <div class="coupons-wrap">
             @endif
 
-                    <div style="width: 19%; float: left; margin: .5%">
-                        <div style="border: 1px solid #E3E3E3; padding: 5px;">
-                            <div style="overflow:hidden">
-                                 <img src="{{$site_url}}/images/client-files/{{ $logo_file }}" style="width=100%">
+                    <div class="coupon">
+                        <div class="coupon-inner">
+                            <div class="coupon-logo">
+                                 <img src="{{$site_url}}/images/client-files/{{ $logo_file }}">
                             </div>
-                            <p>&nbsp;</p>
-                            <p style="text-align: center ">
-                                Username<br />
-                                <span style="font-weight: bold">
-                                {{ strtoupper($coupon['coupon']) }}
-                                </span>
+                            <p>
+                                User id : <span>{{ strtoupper($coupon['coupon']) }}</span>
                             </p>
-                            <p style="text-align: center">
-                                Password<br />
-                                <span style="font-weight: bold">{{ strtoupper($coupon['password']) }}</span>
+                            <p>
+                                Pass : <span>{{ strtoupper($coupon['password']) }}</span>
                             </p>
-                            <p style="text-align: center">
+                            <p>
                                 Plan<br />
-                                <span style="font-weight: bold">{{ strtoupper($coupon['planname']) }}</span>
+
+                                {{ strtoupper($coupon['planname']) }}
+
                             </p>
-                            <p style="text-align: center">
-                                Price<br />
-                                Rs.
-                                <span style="font-weight: bold">
-                                {{ strtoupper($coupon['price']) }} /-
-                                </span>
+                            <p>
+                                Price : Rs. <span>{{ strtoupper($coupon['price']) }}</span> /-
+
                             </p>
                         </div>
                     </div>
@@ -63,8 +57,8 @@ $total_count++;?>
 $row++;?>
                 @endif
 
-                @if ($row == 3)
-                    <div style="padding-top:20px;">&nbsp;</div>
+                @if ($row == 5)
+                    <div class="spacer">&nbsp; -|-</div>
                     <?php $row = 0;?>
                 @endif
 

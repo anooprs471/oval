@@ -53,7 +53,8 @@ if ($user->isAdmin()) {
 	$coupon_ids = array();
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		if ($segment->get('coupon_ids') != '') {
+		if ($segment->get('coupon_ids') != null) {
+
 			$coupon_ids = $segment->get('coupon_ids');
 			$segment->set('coupon_ids', array());
 		}
@@ -68,7 +69,18 @@ if ($user->isAdmin()) {
 
 	if (isset($_GET['batch-id']) && is_numeric($_GET['batch-id']) && !empty($_GET['batch-id'])) {
 
-		if ($segment->get('coupon_ids') != '') {
+		if ($segment->get('batch_id') == null) {
+			$segment->set('batch_id', $_GET['batch-id']);
+			$segment->set('coupon_ids', array());
+
+		} else {
+			if ($segment->get('batch_id') != $_GET['batch-id']) {
+				$segment->set('coupon_ids', array());
+				$segment->set('batch_id', $_GET['batch-id']);
+			}
+		}
+
+		if ($segment->get('coupon_ids') != null) {
 			foreach ($segment->get('coupon_ids') as $id) {
 				array_push($coupon_ids, $id);
 			}
@@ -76,7 +88,7 @@ if ($user->isAdmin()) {
 
 		}
 
-		//var_dump($selected);die;
+		//var_dump($segment->get('coupon_ids'));die;
 
 		$batch_id = $_GET['batch-id'];
 

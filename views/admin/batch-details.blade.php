@@ -76,7 +76,7 @@
 			</tbody>
 	    </table>
 	    <hr />
-	    @if($total_pages > 2)
+	    @if($total_pages > 1)
 	     <div class="text-center">
 		      <ul class="pagination">
 		      	@for ($i = 0; $i < $total_pages; $i++)

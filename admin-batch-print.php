@@ -82,15 +82,15 @@ if ($user->isAdmin()) {
 		'cols' => $COLS,
 		'coupon_ids' => $coupon_ids,
 	);
-	$bootstrap_css = file_get_contents('bs3/css/bootstrap.min.css');
+	// $bootstrap_css = file_get_contents('bs3/css/bootstrap.min.css');
 
-	$stylesheet = file_get_contents('css/pdf-batch.css');
+	// $stylesheet = file_get_contents('css/pdf-batch.css');
 
-	$mpdf->WriteHTML($bootstrap_css, 1);
-	$mpdf->WriteHTML($stylesheet, 1);
+	// $mpdf->WriteHTML($bootstrap_css, 1);
+	// $mpdf->WriteHTML($stylesheet, 1);
 
 	$html = $blade->view()->make('batch', $data);
-	//echo $html;
+	//echo $html;die;
 	$mpdf->WriteHTML($html->__toString());
 
 	$mpdf->Output('batch-' . \Carbon\Carbon::now()->format('Y-M-d-s') . '.pdf', 'I');
