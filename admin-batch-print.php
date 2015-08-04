@@ -104,7 +104,7 @@ if ($user->isAdmin()) {
 	$segment->set('coupon_ids', array());
 
 	//echo $blade->view()->make('op.batch-print-template', $data);
-	//header('Location: ' . Config::$site_url . 'op-batch-list.php');
+	header('Location: ' . Config::$site_url . 'op-batch-list.php');
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }
