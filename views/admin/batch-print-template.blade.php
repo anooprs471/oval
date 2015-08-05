@@ -25,25 +25,38 @@
     @endif
 
 		<?php $count = 0;
-$total_count = 0;?>
+$total_count = 0;
+$row = 0;
+$page = 1;?>
     @if (count($coupons) > 0)
 
 
 			@foreach ($coupons as $coupon)
 				@if ($count == 0)
-					<div style="overflow: hidden;">
+					<div  class="coupons-wrap">
 	    	@endif
 
-					<div style="width: 19%; float: left; margin: .5%">
-						<div style="border: 1px solid #E3E3E3; padding: 10px;">
-							<div>
-                   <img src="{{$site_url}}/images/client-files/{{ $print_logo }}" style="width:100%">
+					<div class="coupon">
+						<div class="coupon-inner">
+							<div class="coupon-logo">
+                   <img src="{{$site_url}}/images/client-files/{{ $print_logo }}">
               </div>
-              <p>&nbsp;</p>
-							<p>Username : {{ strtoupper($coupon['coupon']) }}</p>
-							<p>Password : {{ strtoupper($coupon['password']) }}</p>
-							<p>Plan : {{ strtoupper($coupon['planname']) }}</p>
-							<p>Price : {{ strtoupper($coupon['price']) }}</p>
+              <p>
+                  User id : <span>{{ strtoupper($coupon['coupon']) }}</span>
+              </p>
+              <p>
+                  Pass : <span>{{ strtoupper($coupon['password']) }}</span>
+              </p>
+              <p>
+                  Plan<br />
+
+                  {{ strtoupper($coupon['planname']) }}
+
+              </p>
+              <p>
+                  Price : Rs. <span>{{ strtoupper($coupon['price']) }}</span> /-
+
+              </p>
 						</div>
 					</div>
 				<?php $count++;
@@ -51,8 +64,15 @@ $total_count++?>
 				@if ($count == $cols || $total_count == count($coupons))
 					<!--{{$count}}-->
 					</div>
-					<?php $count = 0;?>
+					<?php $count = 0;
+$row++;?>
 				@endif
+				@if ($row == 5)
+            <div>&nbsp; page {{ $page }}</div>
+            <hr />
+            <?php $row = 0;
+$page++?>
+        @endif
 
 			@endforeach
 	  @else

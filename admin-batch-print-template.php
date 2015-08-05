@@ -77,7 +77,7 @@ if ($user->isAdmin()) {
 
 	//var_dump($info);die;
 	$data = array(
-		'type' => 'operator',
+		'type' => 'admin',
 		'site_url' => Config::$site_url,
 		'page_title' => "Coupon Batch",
 		'logo_file' => $images->getScreenLogo(),
