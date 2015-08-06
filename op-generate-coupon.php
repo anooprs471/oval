@@ -66,8 +66,8 @@ if ($user->isOperator()) {
 					'customer_id' => $customer_id,
 					'op_id' => $user->getCurrentId(),
 					'patient_id' => $customer['patient_id'],
-					'username' => $username,
-					'password' => $password,
+					'username' => strtoupper($username),
+					'password' => strtoupper($password),
 					'coupon_type' => $plan_type,
 					'complementary' => $complementary,
 					'created_at' => Carbon::now(),
@@ -76,22 +76,22 @@ if ($user->isOperator()) {
 
 			$capsule::table('radcheck')
 				->insert(array(
-					'username' => $username,
+					'username' => strtoupper($username),
 					'attribute' => 'Cleartext-Password',
 					'op' => ':=',
-					'value' => $password,
+					'value' => strtoupper($password),
 				));
 
 			$capsule::table('radusergroup')
 				->insert(array(
-					'username' => $username,
+					'username' => strtoupper($username),
 					'groupname' => $customer_plan_name,
 					'priority' => 0,
 				));
 
 			$capsule::table('userinfo')
 				->insert(array(
-					'username' => $username,
+					'username' => strtoupper($username),
 					'firstname' => $customer['customer_name'],
 					'mobilephone' => $customer['mobile_number'],
 					'mobilephone' => $customer['mobile_number'],

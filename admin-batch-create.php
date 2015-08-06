@@ -129,8 +129,8 @@ if ($user->isAdmin()) {
 
 				array_push($batch_coupon, array(
 					'batch_id' => $batch_id,
-					'coupon' => $username,
-					'password' => $password,
+					'coupon' => strtoupper($username),
+					'password' => strtoupper($password),
 					'status' => 0,
 				));
 
