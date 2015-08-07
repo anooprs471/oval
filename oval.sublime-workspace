@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"ba",
+				"batch_id"
+			],
+			[
+				"for",
+				"foreach	blade-foreach"
+			],
+			[
+				"select",
+				"selected_coupons"
+			],
+			[
+				"selec",
+				"selected"
+			],
+			[
 				"s",
 				"style	Attr"
 			],
@@ -32,16 +64,8 @@
 				"form_stage"
 			],
 			[
-				"font",
-				"font-size: 〔property〕"
-			],
-			[
 				"if",
 				"if	blade-if"
-			],
-			[
-				"for",
-				"foreach	blade-foreach"
 			],
 			[
 				"cou",
@@ -50,10 +74,6 @@
 			[
 				"arra_p",
 				"array_push〔function〕"
-			],
-			[
-				"ba",
-				"$batches〔variable〕"
 			],
 			[
 				"bath",
@@ -494,26 +514,6 @@
 			[
 				"us",
 				"$user〔variable〕"
-			],
-			[
-				"re",
-				"ret	return"
-			],
-			[
-				"Route",
-				"Route::get"
-			],
-			[
-				"su",
-				"sub_page_active"
-			],
-			[
-				"page",
-				"page_data"
-			],
-			[
-				"me",
-				"meta_data"
 			]
 		]
 	},
@@ -626,45 +626,52 @@
 		"/I/websites/oval",
 		"/I/websites/oval/App",
 		"/I/websites/oval/css",
+		"/I/websites/oval/vendor",
 		"/I/websites/oval/views",
-		"/I/websites/oval/views/op"
+		"/I/websites/oval/views/admin"
 	],
 	"file_history":
 	[
+		"/I/websites/oval/views/admin/batch-details.blade.php",
 		"/I/websites/oval/views/layout.blade.php",
-		"/I/websites/oval/op-batch-issue.php",
+		"/I/websites/oval/views/batch.blade.php",
+		"/I/websites/oval/App/Images.php",
+		"/I/websites/oval/admin-logo-upload.php",
+		"/I/websites/oval/views/admin/batch-print-template.blade.php",
+		"/I/websites/oval/admin-batch-print-template.php",
+		"/I/websites/oval/admin-batch-list.php",
+		"/I/websites/oval/admin-batch-details.php",
+		"/I/websites/oval/op-generate-coupon.php",
+		"/I/websites/oval/admin-batch-create.php",
+		"/I/websites/oval/admin-batch-print.php",
+		"/I/websites/oval/css/pdf-batch.css",
+		"/I/websites/oval/views/admin/batch-list.blade.php",
+		"/I/websites/oval/op-coupon-view.php",
+		"/I/websites/oval/admin-clear-selection.php",
 		"/I/websites/oval/op-batch-print.php",
 		"/I/websites/oval/op-batch-details.php",
+		"/I/websites/oval/views/op/batch-details.blade.php",
+		"/I/websites/oval/views/op/batch-list.blade.php",
+		"/I/websites/oval/views/admin/batch-create.blade.php",
+		"/I/websites/oval/op-batch-issue.php",
 		"/I/websites/oval/op-batch-print-template.php",
 		"/I/websites/oval/views/op/batch-print-template.blade.php",
-		"/I/websites/oval/views/batch.blade.php",
-		"/I/websites/oval/views/op/batch-details.blade.php",
 		"/I/websites/oval/js/scripts.js",
 		"/I/websites/oval/views/op/batch-issue.blade.php",
 		"/I/websites/oval/.gitignore",
-		"/I/websites/oval/admin-batch-details.php",
-		"/I/websites/oval/admin-batch-create.php",
-		"/I/websites/oval/admin-batch-list.php",
-		"/I/websites/oval/views/op/batch-list.blade.php",
 		"/I/websites/oval/css/pdf.css",
-		"/I/websites/oval/css/pdf-batch.css",
 		"/I/websites/oval/op-batch-list.php",
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/User/Package Syncing.sublime-settings",
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/Package Syncing/Package Syncing.sublime-settings",
-		"/I/websites/oval/views/admin/batch-create.blade.php",
 		"/I/websites/oval/admin-username-details.php",
 		"/I/websites/oval/admin-coupon-usage.php",
 		"/I/websites/oval/views/admin/plan-usage.blade.php",
 		"/I/websites/oval/admin-user-detail.php",
 		"/I/websites/oval/admin-patient-usage.php",
-		"/I/websites/oval/admin-logo-upload.php",
 		"/I/websites/oval/views/admin/patient-usage.blade.php",
-		"/I/websites/oval/op-generate-coupon.php",
 		"/I/websites/oval/admin-customer-plans.php",
 		"/I/websites/oval/views/admin/create-plan.blade.php",
-		"/I/websites/oval/op-coupon-view.php",
 		"/I/websites/oval/views/coupon.blade.php",
-		"/I/websites/oval/App/Images.php",
 		"/I/websites/oval/op-print-coupon.php",
 		"/I/websites/oval/op-customer.php",
 		"/I/websites/oval/admin-home.php",
@@ -752,13 +759,7 @@
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/User/phpfmt.sublime-settings",
 		"/C/Users/creatix/Downloads/pages_common.js",
 		"/I/websites/oval/vendor/composer/autoload_files.php",
-		"/C/Users/creatix/Downloads/productive_funcs.js",
-		"/C/Users/creatix/Downloads/mng-new-quick.php",
-		"/I/websites/oval/views/admin/username-details.blade.php",
-		"/I/websites/templates/bucketadmin/html/form_component.html",
-		"/C/Users/creatix/AppData/Local/Temp/Rar$DRa0.020/hotspotlogin w SMS/smspre/register.php",
-		"/C/Users/creatix/AppData/Local/Temp/Rar$DRa0.533/hotspotlogin w SMS/smspre/loginprocess.php",
-		"/C/Users/creatix/Downloads/mng-rad-profiles-new.php"
+		"/C/Users/creatix/Downloads/productive_funcs.js"
 	],
 	"find":
 	{
@@ -779,6 +780,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"strong",
 			"$form[",
 			"<select",
 			"data",
@@ -845,6 +847,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"span",
 			"$form_data[",
 			"$flash = new FlashMessages;",
 			"'upload'",
@@ -900,56 +903,56 @@
 							"auto_name": "Customization",
 							"bh_regions":
 							[
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -959,7 +962,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 662.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1020,6 +1023,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"pdf-batch",
+				"css\\pdf-batch.css"
+			],
 			[
 				"script",
 				"js\\scripts.js"

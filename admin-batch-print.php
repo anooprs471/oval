@@ -3,6 +3,7 @@
 include_once "vendor/autoload.php";
 
 // Import the necessary classes
+use Aura\Session\SessionFactory;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Philo\Blade\Blade;
 
@@ -19,6 +20,11 @@ $images = new Images;
 
 $flash = new Flash_Messages();
 $generator = new ComputerPasswordGenerator();
+//manage session
+$session_factory = new SessionFactory;
+$session = $session_factory->newInstance($_COOKIE);
+$session->setCookieParams(array('lifetime' => '1800')); //30 seconds
+$segment = $session->getSegment('admin/batch');
 
 $capsule = $user->getCapsule();
 
@@ -104,7 +110,7 @@ if ($user->isAdmin()) {
 	$segment->set('coupon_ids', array());
 
 	//echo $blade->view()->make('op.batch-print-template', $data);
-	header('Location: ' . Config::$site_url . 'op-batch-list.php');
+	header('Location: ' . Config::$site_url . 'admin-batch-list.php');
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }
