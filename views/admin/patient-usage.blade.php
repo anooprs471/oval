@@ -19,18 +19,38 @@
 	              <th>Issued by</th>
 	              <th>ID proof number</th>
 	              <th>ID proof file</th>
+	              <th>disable/enable</th>
 	          </tr>
 	          </thead>
 	          <tbody>
 	          @foreach($patient_details as $detail)
 		          <tr>
-		          	<td>{{$detail['username']}}</td>
+		          	<td>
+		          		@if ($detail['disabled'] == 1)
+			        			<span class = "label label-info">{{$detail['username']}}</span>
+			        			<br />
+			        			<br />
+			        			<span class = "label label-warning">Status : Disabled</span>
+			        		@else
+			        			<span class = "label label-info">{{$detail['username']}}</span>
+			        			<br />
+			        			<br />
+			        			<span class = "label label-success">Status : Enabled</span>
+			        		@endif
+		          	</td>
 		          	<td>{{$detail['name']}}</td>
 		          	<td>{{$detail['date']}}</td>
 		          	<td>{{$detail['plan_name']}}</td>
 		          	<td>{{$detail['operator']}}</td>
 		          	<td>{{$detail['id_proof_number']}}</td>
 		          	<td><a data-toggle="lightbox" href="{{$site_url}}images/id-proofs/{{$detail['filename']}}">View Proof</a></td>
+		          	<td>
+		          		@if ($detail['disabled'] == 1)
+		          			[<a href="admin-username-toggle-access.php?username={{$detail['username']}}&patient-id={{$patient_id}}" class="text-info">enable</a>]
+		          		@else
+			        			[<a href="admin-username-toggle-access.php?username={{$detail['username']}}&patient-id={{$patient_id}}" class="text-info">disable</a>]
+			        		@endif
+		          	</td>
 		          </tr>
 	          @endforeach
 

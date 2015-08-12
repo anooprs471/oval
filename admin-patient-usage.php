@@ -17,6 +17,7 @@ $images = new Images;
 $capsule = $user->getCapsule();
 
 $patient_details = array();
+$details_data = array();
 
 $msg = '';
 
@@ -48,8 +49,20 @@ if ($user->isAdmin()) {
 				'coupons.created_at as date'
 			)
 			->get();
+		foreach ($patient_details as $key => $details) {
+			$coupon_attr = $capsule::table('radcheck')
+				->where('username', '=', $details['username'])
+				->where('attribute', '=', 'Auth-Type')
+				->where('value', '=', 'Reject')
+				->get();
+			if (empty($coupon_attr)) {
+				$patient_details[$key]['disabled'] = 0;
+			} else {
+				$patient_details[$key]['disabled'] = 1;
+			}
+		}
 
-		//var_dump($patient_details);
+		//var_dump($patient_details);die;
 	}
 
 	$data = array(
