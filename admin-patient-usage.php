@@ -60,6 +60,16 @@ if ($user->isAdmin()) {
 			} else {
 				$patient_details[$key]['disabled'] = 1;
 			}
+			$coupon_xpr = $capsule::table('radcheck')
+				->where('username', '=', $details['username'])
+				->where('attribute', '=', 'Expiration')
+				->first();
+
+			if (empty($coupon_xpr)) {
+				$patient_details[$key]['expiry'] = '---';
+			} else {
+				$patient_details[$key]['expiry'] = $coupon_xpr['value'];
+			}
 		}
 
 		//var_dump($patient_details);die;

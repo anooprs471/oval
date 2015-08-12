@@ -13,6 +13,7 @@
 	          <thead>
 	          <tr>
 	              <th>Username(s)</th>
+	              <th>Expr</th>
 	              <th>Received by</th>
 	              <th>Date</th>
 	              <th>Plan</th>
@@ -37,6 +38,13 @@
 			        			<br />
 			        			<span class = "label label-success">Status : Enabled</span>
 			        		@endif
+		          	</td>
+		          	<td>
+		          		@if ($detail['expiry'] != '---')
+		          			{{\Carbon\Carbon::createFromFormat('d M Y',$detail['expiry'])->format('Y M, d')}}
+		          		@else
+		          			{{$detail['expiry']}}
+		          		@endif
 		          	</td>
 		          	<td>{{$detail['name']}}</td>
 		          	<td>{{$detail['date']}}</td>
