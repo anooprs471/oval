@@ -33,6 +33,7 @@ $form_stage = 1;
 $file_err = false;
 
 $form_data = array(
+	'coupon_valid_till' => '',
 	'username' => '',
 	'password' => '',
 	'customer_name' => '',
@@ -43,6 +44,8 @@ $form_data = array(
 );
 
 if ($user->isOperator()) {
+
+	//var_dump($coupon_valid_till);die;
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if (isset($_POST['username']) && strlen($_POST['username']) > 4) {
@@ -55,10 +58,12 @@ if ($user->isOperator()) {
 					->where('coupon', '=', $username)
 					->where('status', '=', 1)
 					->get();
-				$plan = $capsule::table('batch')
-					->where('batch.id', '=', $coupon[0]['batch_id'])
-					->join('couponplans', 'batch.plan', '=', 'couponplans.id')
-					->get();
+				if (!empty($coupon)) {
+					$plan = $capsule::table('batch')
+						->where('batch.id', '=', $coupon[0]['batch_id'])
+						->join('couponplans', 'batch.plan', '=', 'couponplans.id')
+						->get();
+				}
 
 				if (empty($coupon)) {
 					array_push($err, 'No username found. try again');
@@ -80,6 +85,19 @@ if ($user->isOperator()) {
 				//process customer form
 				//
 
+				//check date validity
+				//
+				if (!isset($_POST['coupon-valid-till']) || strlen($_POST['coupon-valid-till']) < 10) {
+					array_push($err, 'Invalid date');
+				} else {
+					try {
+						$coupon_valid_till = \Carbon\Carbon::createFromFormat('m-d-Y', $_POST['coupon-valid-till']);
+						$form_data['coupon_valid_till'] = $coupon_valid_till->format('m-d-Y');
+					} catch (exception $e) {
+						array_push($err, $e->getMessage());
+					}
+				}
+
 				if (!isset($_POST['customer-name']) || strlen($_POST['customer-name']) < 3) {
 					array_push($err, 'Customer Name not provided or too small');
 				} else {
@@ -99,16 +117,16 @@ if ($user->isOperator()) {
 				} else {
 					$id_proof_number = filter_var($_POST['id-proof-number'], FILTER_SANITIZE_STRING);
 					$form_data['id_proof_number'] = strtoupper($id_proof_number);
-				}
 
-				$form_data['id_proof_type'] = $_POST['id-proof-type'];
+					$form_data['id_proof_type'] = $_POST['id-proof-type'];
 
-				if ($id_proof_type == 'Others') {
+					if ($id_proof_type == 'Others') {
 
-					if (!isset($_POST['other-id-proof']) || strlen($_POST['other-id-proof']) == 0) {
-						array_push($err, 'Enter proof type as you have selected other as id proof');
-					} else {
-						$id_proof_type = filter_var($_POST['other-id-proof'], FILTER_SANITIZE_STRING);
+						if (!isset($_POST['other-id-proof']) || strlen($_POST['other-id-proof']) == 0) {
+							array_push($err, 'Enter proof type as you have selected other as id proof');
+						} else {
+							$id_proof_type = filter_var($_POST['other-id-proof'], FILTER_SANITIZE_STRING);
+						}
 					}
 				}
 
@@ -169,13 +187,23 @@ if ($user->isOperator()) {
 									'updated_at' => Carbon::now(),
 								));
 
-							$capsule::table('radcheck')
-								->insert(array(
+							$radcheck_data = array(
+								array(
 									'username' => $form_data['username'],
 									'attribute' => 'Cleartext-Password',
 									'op' => ':=',
 									'value' => $form_data['password'],
-								));
+								),
+								array(
+									'username' => $form_data['username'],
+									'attribute' => 'Expiration',
+									'op' => ':=',
+									'value' => $coupon_valid_till->format('d M Y'),
+								),
+							);
+
+							$capsule::table('radcheck')
+								->insert($radcheck_data);
 
 							$capsule::table('radusergroup')
 								->insert(array(

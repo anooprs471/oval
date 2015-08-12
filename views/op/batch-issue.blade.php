@@ -63,6 +63,13 @@
 				         <label for="name" class="col-lg-2 control-label"><strong>{{$form['username']}}</strong></label>
 				      </div>
 				  </div>
+				  <div class="form-group">
+				      <label for="name" class="col-lg-4 col-sm-2 control-label">Coupon Valid till</label>
+				      <div class="col-lg-8">
+				          <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="{{$form['coupon_valid_till']}}" name="coupon-valid-till" />
+                  <span class="help-block">Select date</span>
+				      </div>
+				  </div>
 
 				  <div class="form-group">
 				      <label for="name" class="col-lg-4 col-sm-2 control-label">Name</label>
