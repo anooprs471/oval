@@ -41,6 +41,7 @@ $form_data = array(
 	'id_proof_type' => '',
 	'id_proof_number' => '',
 	'planname' => '',
+	'customer_id' => '',
 );
 
 if ($user->isOperator()) {
@@ -96,6 +97,13 @@ if ($user->isOperator()) {
 					} catch (exception $e) {
 						array_push($err, $e->getMessage());
 					}
+				}
+
+				if (!isset($_POST['customer-id']) || strlen($_POST['customer-id']) < 1) {
+					array_push($err, 'Customer ID not provided or too small');
+				} else {
+					$customer_id = ucwords(filter_var($_POST['customer-id'], FILTER_SANITIZE_STRING));
+					$form_data['customer_id'] = $customer_id;
 				}
 
 				if (!isset($_POST['customer-name']) || strlen($_POST['customer-name']) < 3) {
@@ -162,9 +170,11 @@ if ($user->isOperator()) {
 
 							move_uploaded_file($_FILES['id-proof']['tmp_name'], $uploaddir);
 
+							//fill tables - coupons, customers,
+
 							$customer = new Customers;
 
-							$customer->patient_id = str_replace(' ', '-', $form_data['customer_name']);
+							$customer->patient_id = $form_data['customer_id'];
 							$customer->customer_name = ucwords($form_data['customer_name']);
 							$customer->mobile_number = $form_data['mobile_number'];
 							$customer->id_proof_type = $form_data['id_proof_type'];
@@ -178,7 +188,7 @@ if ($user->isOperator()) {
 								->insertGetId(array(
 									'customer_id' => $customer->id,
 									'op_id' => $user->getCurrentId(),
-									'patient_id' => '',
+									'patient_id' => $form_data['customer_id'],
 									'username' => $form_data['username'],
 									'password' => $form_data['password'],
 									'coupon_type' => $form_data['planname'],

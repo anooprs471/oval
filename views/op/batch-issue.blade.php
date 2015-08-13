@@ -72,6 +72,13 @@
 				  </div>
 
 				  <div class="form-group">
+				      <label for="name" class="col-lg-4 col-sm-2 control-label">Customer ID</label>
+				      <div class="col-lg-8">
+				          <input type="text" class="form-control" name="customer-id" value="{{$form['customer_id']}}">
+				      </div>
+				  </div>
+
+				  <div class="form-group">
 				      <label for="name" class="col-lg-4 col-sm-2 control-label">Name</label>
 				      <div class="col-lg-8">
 				          <input type="text" class="form-control" name="customer-name" value="{{$form['customer_name']}}">
