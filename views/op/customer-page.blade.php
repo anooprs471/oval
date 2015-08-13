@@ -1,3 +1,4 @@
+
 @extends('layout')
 
 @section('content')
@@ -7,11 +8,8 @@
           <div class="alert alert-danger">{{$msg}}</div>
           <p></p>
         @endif
-        @if($flash != '')
-          <div class="alert alert-success ">{{$flash}}</div>
-          <p></p>
-        @endif
-	      
+
+
 	  </div>
 	  <div class="col-md-12">
 	      <section class="panel">
@@ -116,12 +114,12 @@
 														            </div>
 														        </section>
 														    </div>
-														  </div>          
+														  </div>
 
 
 		                      		</div><!-- /.pre-coupons -->
 
-                                
+
 
 		                      	</div><!-- /.col-md-6 -->
 		                      	<div class="col-md-6">
@@ -132,20 +130,40 @@
 		                      					Available Plans
 		                      				</header><!-- /.panel-heading -->
 		                      				<div class="panel-body">
+		                      				@if($flash != '')
+													          <div class="alert alert-danger">{{$flash}}</div>
+													          <p></p>
+													        @endif
 		                      					<form method="POST" action="op-generate-coupon.php">
 					                      		@if(!empty($coupon_plans))
 
-					                      			@foreach($coupon_plans as $plan)
-					                      				<div class="radio">
-						                                <label>
-						                                    <input type="radio" checked="" value="{{$plan['plan']}}" name="plan-type">
-						                                    {{$plan['plan']}} <strong>Rs {{$plan['price']}} /-</strong>
-						                                </label>
-						                            </div>
-					                      			@endforeach
-					                      			
+					                      		<div class="form-group">
+																			<label class="col-lg-4 col-sm-2 control-label text-right" style="margin-top:10px">Plans</label>
+																			<div class="col-lg-8">
+						                      			@foreach($coupon_plans as $plan)
+						                      				<div class="radio">
+							                                <label>
+							                                    <input type="radio" checked="" value="{{$plan['plan']}}" name="plan-type">
+							                                    {{$plan['plan']}} <strong>Rs {{$plan['price']}} /-</strong>
+							                                </label>
+							                            </div>
+						                      			@endforeach
+					                      			</div>
+				                      			</div>
+
+					                      			<div class="form-group">
+																		      <label class="col-lg-4 col-sm-2 control-label text-right">Coupon Valid till</label>
+																		      <div class="col-lg-8">
+																		          <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" name="coupon-valid-till" />
+														                  <span class="help-block">Select date</span>
+																		      </div>
+																		  </div>
+
 					                      			<input type="hidden" name="customer-id" value="{{$customer_id}}" />
-					                      			<button class="btn btn-primary btn-lg" type="submit">Generate Coupon</button>
+					                      			<div class="form-group">
+					                      				<button class="btn btn-primary btn-lg pull-right" type="submit">
+					                      			Generate Coupon</button>
+					                      			</div>
 					                      			@else
 					                      			<p>Sorry no coupons plans made available now</p>
 					                      			@endif
@@ -155,14 +173,14 @@
 		                      			</section><!-- /.panel -->
 		                      		</div><!-- /.col-md-12 -->
 		                      	</div><!-- /.row -->
-		                      		
+
 		                      	</div><!-- /.col-md-6 -->
 		                      </div><!-- /.row -->
 		                  </div>
 
 		              </div>
 		          </div>
-		        @endif  
+		        @endif
 	      </section>
 	  </div>
 	</div>

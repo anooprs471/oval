@@ -50,6 +50,10 @@
                             <td class="title">Date</td>
                             <td class="value">{{$coupon_details['coupon_date']}}</td>
                         </tr>
+                        <tr>
+                            <td class="title">Valid Till</td>
+                            <td class="value">{{$coupon_details['expiration']}}</td>
+                        </tr>
 
 
                     </tbody>

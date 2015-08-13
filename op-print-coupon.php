@@ -64,6 +64,11 @@ if ($user->isOperator()) {
 				->where('id', '=', $customer_id)
 				->first();
 
+			$expr = $capsule::table('radcheck')
+				->where('username', '=', $username)
+				->where('attribute', '=', 'Expiration')
+				->first();
+
 			$coupon_detail = $capsule::table('couponplans')
 				->where('planname', '=', $plan_type)
 				->first();
@@ -81,6 +86,7 @@ if ($user->isOperator()) {
 				'plan_name' => $plan_name,
 				'price' => $plan_price,
 				'coupon_date' => $date,
+				'expiration' => $expr['value'],
 			);
 
 		} else {

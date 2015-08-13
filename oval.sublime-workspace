@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"if",
+				"ife	blade-if_else"
+			],
+			[
+				"va",
+				"var_dump($info);die"
+			],
+			[
+				"c",
+				"createFromFormat〔function〕"
+			],
+			[
+				"patient",
+				"patient_id"
+			],
+			[
+				"i",
+				"insert〔function〕"
+			],
+			[
+				"d",
+				"delete〔function〕"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
 				"padding",
 				"padding-top"
 			],
@@ -22,10 +50,6 @@
 			[
 				"ba",
 				"batch_id"
-			],
-			[
-				"for",
-				"foreach	blade-foreach"
 			],
 			[
 				"select",
@@ -48,10 +72,6 @@
 				"batch_id"
 			],
 			[
-				"i",
-				"i	Tag"
-			],
-			[
 				"coupon",
 				"coupon"
 			],
@@ -62,10 +82,6 @@
 			[
 				"form",
 				"form_stage"
-			],
-			[
-				"if",
-				"if	blade-if"
 			],
 			[
 				"cou",
@@ -320,10 +336,6 @@
 				"urlencode"
 			],
 			[
-				"va",
-				"var_dump($form_data"
-			],
-			[
 				"ma",
 				"max_all_session"
 			],
@@ -460,10 +472,6 @@
 				"$radcheck〔variable〕"
 			],
 			[
-				"patient",
-				"patient_id"
-			],
-			[
 				"patine",
 				"patient_id"
 			],
@@ -506,29 +514,53 @@
 			[
 				"log",
 				"logout"
-			],
-			[
-				"had",
-				"header	Tag"
-			],
-			[
-				"us",
-				"$user〔variable〕"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "Customization\nAdministrator should be able to create plans (profile).\nAdministrator should be able to specify attribute values under the section settings.\nAttributes are\n\n	Download speed.\n	Upload speed.\n	Max-data-usage (Total Data consumption).\n	Max-all-session (Total duration).\n	Max-daily-session (Daily duration).\n	Simultaneous use.\n	Idle time out.\n\nCreated plans should be listed under list plans tab along with number of users created under that plan.\n\nSpace for Administrator to upload logo in end-customer login page and logo in the coupon.\n\nSpace for Administrator to upload Advertisement images which will be visible on end-customer login page.\n\nModifying existing SMS package and payment gateway integration. \n\nRegistered user (mobile number) should be able to select plan of his choice from enlisted plans and should make payment through payment gateway prior to using it. \n\n--\nCurrent Scenario\nUser’s will get a login page with a link to do free sign up, in free sign up page user can enter his/her mobile number and should create password. An SMS will be send to his/her mobile number containing an access code. Upon receiving the access code users will be able to login, using their mobile number as username and user will be placed inside a pre-set plan (mobile users). Forget password option is also present which will generate new access code so that user’s can reset the password. \n\nAfter modification\nUpon user registration, user will be able to select a plan of his/her choice from the enlisted plans and will be able to do payment through payment gateway.  For registered users once the initial plan gets expired he/she will be directed to a page where he/she can select a plan from enlisted one and can make payment for it through payment gateway.  Free signup link will be provided to the clients who will be providing free usage time to the end-customers (e.g.:- half hour free internet usage daily) on which users will be redirected to default plan upon registration.\n\n\n--------------------\nAttribute name 										sql table\n\nMax-all-session 									radgroupcheck\nMax-Daily-Session 								radgroupcheck\nSimultaneous-Use									radgroupcheck\nCS-Total-Octets-Daily 						radgroupcheck\nCS-Total-Octets-Daily							radgroupcheck\n \n\nIdle-Timeout											radgroupreply\nSession-Timeout										radgroupreply\nChilliSpot-Bandwidth-Max-Up				radgroupreply\nChilliSpot-Bandwidth-Max-Down			radgroupreply\n\nProfile                                                      Plan \n\n1.Chillispot-Bandwidth-Max-Down     -----    Download speed \n2.Chillispot-Bandwidth-Max-Up         -----    Upload speed\n3.CS-Total-Octets -----    Max data usage(Total Data consumption) \n4.Max-All-Session -----    Max all session (Total duration)\n5.Max-Daily-Session                        -----    Max daily session(Daily duration)\n6.Simultaneous use                         -----    Simultaneous use\n7.Idle time out                                -----    Idle time out \n\n\n  \n$sql = \"INSERT INTO $table (id, GroupName, Attribute, Op, Value) \".\n\n\nsample to set maximum daily usage time\n\nid - 1 (auto increment)\nGroupName - free_usage_plan {must be given by the user (plan/profile name)}\nAttribute -  Max-Daily-Session\nOp - :=      value must be statically inserted via sql query\nValue - 1800 ( user input ) value in seconds ...\n\n-----------------------------\n\n\n--\n\n1 create profile(plans)\n2 logo for coupons\n3 ads support\n4 bring plan selection on user(free + paid)\n5 payment gateway if selected plan not free\n6 sms\n\nid- autofill\n\nDownload Speed/Upload Speed    required drop-down kbps/Mbps  default_value = kbps \nso if administrator select kbps no conversion required.\nBut if he select Mbps then a conversion must be done ie final_value_to_database = input_value x 1000 [1 Mbps = 1000 kbps]\n\n\n\nMax data Usage : required drop-down MB/GB    default_value - Bytes \nso if administrator select MB then\n\nfinal_value_to_database = input_value x 1000000 [1 MB = 1000000 Bytes]\n\nif administrator select GB then\n\nfinal_value_to_database = input_value x 1000000000 [1 GB = 1000000000 Bytes]\n\nmax-all-session / max-daily-session minutes/hours/day(s)/week(s)/month(s) default_value = seconds\n\nif administrator select minutes then final_value_to_database = input_value x 60 [ 1 minute = 60 seconds ]\n\nif administrator select hours then final_value_to_database = input_value x 3600 [ 1 hour = 3600 seconds ]\n\nif administrator select days then final_value_to_database = input_value x 86400 [ 1 day = 86400 seconds ]\n\nif administrator select weeks then final_value_to_database = input_value x 604800 [ 1 week = 604800 seconds ]\n\nif administrator select months then final_value_to_database = input_value x 2628000 [ 1 month = 2628000 seconds ]\n\n\nsame for Edit plan settings page also\n\nSQL QUERY\n\nSELECT DISTINCT b.username, b.callingstationid, a.request_url, DATE(FROM_UNIXTIME(a.time_since_epoch)) FROM access_log a, radacct b where b.framedipaddress = a.client_src_ip_addr and FROM_UNIXTIME(a.time_since_epoch) BETWEEN b.acctstarttime AND b.acctstoptime;\n\nsample DB with data attached\n\n*****************************\n///////////////////////////\n*****************************\n\nCreate batch coupons \n\nBatch name:\n\nNumber of coupons  to create:\n\nOption to choose from available Plans : \n\nList batches\n\nBatch Summary\n\nid | batch name | Total no: of coupons |  Total no: available Coupons | Total no: of Used Coupons \n\nBatch name (clickable format):\n\nTotal number of coupons:\n\nAvailable/remaining number of coupons\n\nOn clicking batch name it should go to another page containing usernames coming under that batch\n\nBatch Details\n\nBatch Name & Plan Name\n\nUsername | Password | Status [printed / available/ issued]\n\nPrinting option should be provided over here with the ability to select coupon printing template\n\nBatch Coupon Printing & Selective Coupon Printing \n\nOn clicking each username we can get their details like\n\nFirst name:\n\nLast name:\n\nMobile number/id proof/registration id/room number\n\n [Data for above fields will be available only after the coupon is issued\n\nOperator Dashboard\n\nBatch Coupon management\n\nIssue Pre-printed Coupon Tab like Sign-up Customer, list plans etc\n\nEnter Username printed in the coupon:   <username> | search button\n\nOn the search field to search username’s should be provided, operators can search username’s which \n\nwill be provided to them via coupons and can enter basic registration details [don't make it mandatory]\n\nCustomer id/patient id/room number/\n\nCustomer name:\n\nMobile number:\n\nId proof number:\n\nId proof document type: Drop down\n\nUpdate info button should be there, upon clicking update info button all the details should be entered \n\nagainst that username and status of that username in list batches should change to provided . \n\nfor ACCOUNTING purposes\n\nAlso make sure to update the info that operatorX has sold a coupon under a particular plan\n\n [should be aligned with previous accounting which involves sign-up a customer / re-issue coupon]\n\nAdmin dashboard\n\nCoupon printing template \n\nCreate coupon template\n\nCoupon template name: \n\nNumber of coupons per row on page:\n\nNumber of coupons per column on page: \n\nManage coupon templates – will list created coupon templates with its name, number of \n\ncoupon per row and number coupons per column and an option to delete it\n\nAdministrator will be able to print coupons using any of the available coupon printing templates and can \n\ndistribute it to operators/reception",
+			"contents": "Customization\nAdministrator should be able to create plans (profile).\nAdministrator should be able to specify attribute values under the section settings.\nAttributes are\n\n	Download speed.\n	Upload speed.\n	Max-data-usage (Total Data consumption).\n	Max-all-session (Total duration).\n	Max-daily-session (Daily duration).\n	Simultaneous use.\n	Idle time out.\n\nCreated plans should be listed under list plans tab along with number of users created under that plan.\n\nSpace for Administrator to upload logo in end-customer login page and logo in the coupon.\n\nSpace for Administrator to upload Advertisement images which will be visible on end-customer login page.\n\nModifying existing SMS package and payment gateway integration. \n\nRegistered user (mobile number) should be able to select plan of his choice from enlisted plans and should make payment through payment gateway prior to using it. \n\n--\nCurrent Scenario\nUser’s will get a login page with a link to do free sign up, in free sign up page user can enter his/her mobile number and should create password. An SMS will be send to his/her mobile number containing an access code. Upon receiving the access code users will be able to login, using their mobile number as username and user will be placed inside a pre-set plan (mobile users). Forget password option is also present which will generate new access code so that user’s can reset the password. \n\nAfter modification\nUpon user registration, user will be able to select a plan of his/her choice from the enlisted plans and will be able to do payment through payment gateway.  For registered users once the initial plan gets expired he/she will be directed to a page where he/she can select a plan from enlisted one and can make payment for it through payment gateway.  Free signup link will be provided to the clients who will be providing free usage time to the end-customers (e.g.:- half hour free internet usage daily) on which users will be redirected to default plan upon registration.\n\n\n--------------------\nAttribute name 										sql table\n\nMax-all-session 									radgroupcheck\nMax-Daily-Session 								radgroupcheck\nSimultaneous-Use									radgroupcheck\nCS-Total-Octets-Daily 						radgroupcheck\nCS-Total-Octets-Daily							radgroupcheck\n \n\nIdle-Timeout											radgroupreply\nSession-Timeout										radgroupreply\nChilliSpot-Bandwidth-Max-Up				radgroupreply\nChilliSpot-Bandwidth-Max-Down			radgroupreply\n\nProfile                                                      Plan \n\n1.Chillispot-Bandwidth-Max-Down     -----    Download speed \n2.Chillispot-Bandwidth-Max-Up         -----    Upload speed\n3.CS-Total-Octets -----    Max data usage(Total Data consumption) \n4.Max-All-Session -----    Max all session (Total duration)\n5.Max-Daily-Session                        -----    Max daily session(Daily duration)\n6.Simultaneous use                         -----    Simultaneous use\n7.Idle time out                                -----    Idle time out \n\n\n  \n$sql = \"INSERT INTO $table (id, GroupName, Attribute, Op, Value) \".\n\n\nsample to set maximum daily usage time\n\nid - 1 (auto increment)\nGroupName - free_usage_plan {must be given by the user (plan/profile name)}\nAttribute -  Max-Daily-Session\nOp - :=      value must be statically inserted via sql query\nValue - 1800 ( user input ) value in seconds ...\n\n-----------------------------\n\n\n--\n\n1 create profile(plans)\n2 logo for coupons\n3 ads support\n4 bring plan selection on user(free + paid)\n5 payment gateway if selected plan not free\n6 sms\n\nid- autofill\n\nDownload Speed/Upload Speed    required drop-down kbps/Mbps  default_value = kbps \nso if administrator select kbps no conversion required.\nBut if he select Mbps then a conversion must be done ie final_value_to_database = input_value x 1000 [1 Mbps = 1000 kbps]\n\n\n\nMax data Usage : required drop-down MB/GB    default_value - Bytes \nso if administrator select MB then\n\nfinal_value_to_database = input_value x 1000000 [1 MB = 1000000 Bytes]\n\nif administrator select GB then\n\nfinal_value_to_database = input_value x 1000000000 [1 GB = 1000000000 Bytes]\n\nmax-all-session / max-daily-session minutes/hours/day(s)/week(s)/month(s) default_value = seconds\n\nif administrator select minutes then final_value_to_database = input_value x 60 [ 1 minute = 60 seconds ]\n\nif administrator select hours then final_value_to_database = input_value x 3600 [ 1 hour = 3600 seconds ]\n\nif administrator select days then final_value_to_database = input_value x 86400 [ 1 day = 86400 seconds ]\n\nif administrator select weeks then final_value_to_database = input_value x 604800 [ 1 week = 604800 seconds ]\n\nif administrator select months then final_value_to_database = input_value x 2628000 [ 1 month = 2628000 seconds ]\n\n\nsame for Edit plan settings page also\n\nSQL QUERY\n\nSELECT DISTINCT b.username, b.callingstationid, a.request_url, DATE(FROM_UNIXTIME(a.time_since_epoch)) FROM access_log a, radacct b where b.framedipaddress = a.client_src_ip_addr and FROM_UNIXTIME(a.time_since_epoch) BETWEEN b.acctstarttime AND b.acctstoptime;\n\nsample DB with data attached\n\n*****************************\n///////////////////////////\n*****************************\n\nCreate batch coupons \n\nBatch name:\n\nNumber of coupons  to create:\n\nOption to choose from available Plans : \n\nList batches\n\nBatch Summary\n\nid | batch name | Total no: of coupons |  Total no: available Coupons | Total no: of Used Coupons \n\nBatch name (clickable format):\n\nTotal number of coupons:\n\nAvailable/remaining number of coupons\n\nOn clicking batch name it should go to another page containing usernames coming under that batch\n\nBatch Details\n\nBatch Name & Plan Name\n\nUsername | Password | Status [printed / available/ issued]\n\nPrinting option should be provided over here with the ability to select coupon printing template\n\nBatch Coupon Printing & Selective Coupon Printing \n\nOn clicking each username we can get their details like\n\nFirst name:\n\nLast name:\n\nMobile number/id proof/registration id/room number\n\n [Data for above fields will be available only after the coupon is issued\n\nOperator Dashboard\n\nBatch Coupon management\n\nIssue Pre-printed Coupon Tab like Sign-up Customer, list plans etc\n\nEnter Username printed in the coupon:   <username> | search button\n\nOn the search field to search username’s should be provided, operators can search username’s which \n\nwill be provided to them via coupons and can enter basic registration details [don't make it mandatory]\n\nCustomer id/patient id/room number/\n\nCustomer name:\n\nMobile number:\n\nId proof number:\n\nId proof document type: Drop down\n\nUpdate info button should be there, upon clicking update info button all the details should be entered \n\nagainst that username and status of that username in list batches should change to provided . \n\nfor ACCOUNTING purposes\n\nAlso make sure to update the info that operatorX has sold a coupon under a particular plan\n\n [should be aligned with previous accounting which involves sign-up a customer / re-issue coupon]\n\nAdmin dashboard\n\nCoupon printing template \n\nCreate coupon template\n\nCoupon template name: \n\nNumber of coupons per row on page:\n\nNumber of coupons per column on page: \n\nManage coupon templates – will list created coupon templates with its name, number of \n\ncoupon per row and number coupons per column and an option to delete it\n\nAdministrator will be able to print coupons using any of the available coupon printing templates and can \n\ndistribute it to operators/reception\n\nAdmin view \nAdmin should have an option to disable an issued username/coupon from admin-patient-usage.php\nDisable button next to print button (an option to select/check username) \nDISABLE USERNAME BY SETTING \nATTRIBUTE   	OP	VALUE  	  	table	 \nAuth-Type          :=           Reject	            radcheck\nEnable button also req  (by removing attribute Auth-Type) \nCOUPON CURRENT STATUS - DISABLED / ENABLED   \n(can be checked if username has Auth-Type Reject set in radcheck table) can be shown by color changes in usernames like green for enabled users and red for disabled users.\ntotal duration of that coupon usage (value of Max all session attribute) should also be displayed in the same page/table.  \n\nOption to disconnect online users\n\n\nOperator view\nWhen operator is issuing a coupon, he/she should have an option to specify duration of that coupon usage op-batch-issue.php\nWe should include Max all session attribute at registration of coupons so that operator can specify the duration of usage like 30 mins, 3 hours, 3 days,3 months etc.\nWe can keep this field alone as mandatory so that when operator creates a coupon he/she is forced to give total coupon usage before issuing it to end customer (please remove mandatory type from rest of fields)\n\nradgroupcheck\nAttribute Expiration := 04 mar 2015",
 			"file": "Customization-doc.txt",
 			"file_size": 5185,
 			"file_write_time": 130791732040173174,
 			"settings":
 			{
-				"buffer_size": 7444,
+				"buffer_size": 8752,
 				"line_ending": "Windows",
 				"name": "Customization"
+			}
+		},
+		{
+			"file": "views/op/batch-issue.blade.php",
+			"settings":
+			{
+				"buffer_size": 5143,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "admin-patient-usage.php",
+			"settings":
+			{
+				"buffer_size": 2359,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "op-batch-issue.php",
+			"settings":
+			{
+				"buffer_size": 11651,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/admin/patient-usage.blade.php",
+			"settings":
+			{
+				"buffer_size": 3446,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -628,24 +660,30 @@
 		"/I/websites/oval/css",
 		"/I/websites/oval/vendor",
 		"/I/websites/oval/views",
-		"/I/websites/oval/views/admin"
+		"/I/websites/oval/views/op"
 	],
 	"file_history":
 	[
+		"/I/websites/oval/views/admin/home.blade.php",
+		"/I/websites/oval/views/op/batch-issue.blade.php",
+		"/I/websites/oval/op-batch-issue.php",
+		"/I/websites/oval/admin-username-toggle-access.php",
+		"/I/websites/oval/views/admin/patient-usage.blade.php",
+		"/I/websites/oval/admin-patient-usage.php",
+		"/I/websites/oval/admin-batch-details.php",
+		"/I/websites/oval/admin-batch-print.php",
 		"/I/websites/oval/views/admin/batch-details.blade.php",
+		"/I/websites/oval/views/admin/batch-list.blade.php",
+		"/I/websites/oval/views/admin/batch-print-template.blade.php",
 		"/I/websites/oval/views/layout.blade.php",
 		"/I/websites/oval/views/batch.blade.php",
 		"/I/websites/oval/App/Images.php",
 		"/I/websites/oval/admin-logo-upload.php",
-		"/I/websites/oval/views/admin/batch-print-template.blade.php",
 		"/I/websites/oval/admin-batch-print-template.php",
 		"/I/websites/oval/admin-batch-list.php",
-		"/I/websites/oval/admin-batch-details.php",
 		"/I/websites/oval/op-generate-coupon.php",
 		"/I/websites/oval/admin-batch-create.php",
-		"/I/websites/oval/admin-batch-print.php",
 		"/I/websites/oval/css/pdf-batch.css",
-		"/I/websites/oval/views/admin/batch-list.blade.php",
 		"/I/websites/oval/op-coupon-view.php",
 		"/I/websites/oval/admin-clear-selection.php",
 		"/I/websites/oval/op-batch-print.php",
@@ -653,11 +691,9 @@
 		"/I/websites/oval/views/op/batch-details.blade.php",
 		"/I/websites/oval/views/op/batch-list.blade.php",
 		"/I/websites/oval/views/admin/batch-create.blade.php",
-		"/I/websites/oval/op-batch-issue.php",
 		"/I/websites/oval/op-batch-print-template.php",
 		"/I/websites/oval/views/op/batch-print-template.blade.php",
 		"/I/websites/oval/js/scripts.js",
-		"/I/websites/oval/views/op/batch-issue.blade.php",
 		"/I/websites/oval/.gitignore",
 		"/I/websites/oval/css/pdf.css",
 		"/I/websites/oval/op-batch-list.php",
@@ -667,15 +703,12 @@
 		"/I/websites/oval/admin-coupon-usage.php",
 		"/I/websites/oval/views/admin/plan-usage.blade.php",
 		"/I/websites/oval/admin-user-detail.php",
-		"/I/websites/oval/admin-patient-usage.php",
-		"/I/websites/oval/views/admin/patient-usage.blade.php",
 		"/I/websites/oval/admin-customer-plans.php",
 		"/I/websites/oval/views/admin/create-plan.blade.php",
 		"/I/websites/oval/views/coupon.blade.php",
 		"/I/websites/oval/op-print-coupon.php",
 		"/I/websites/oval/op-customer.php",
 		"/I/websites/oval/admin-home.php",
-		"/I/websites/oval/views/admin/home.blade.php",
 		"/I/websites/oval/admin-find-mobilenumber.php",
 		"/I/websites/oval/js/jquery.form.min.js",
 		"/I/websites/oval/js/advanced-form.js",
@@ -758,8 +791,7 @@
 		"/I/websites/oval/views/admin/change-password.blade.php",
 		"/C/Users/creatix/AppData/Roaming/Sublime Text 3/Packages/User/phpfmt.sublime-settings",
 		"/C/Users/creatix/Downloads/pages_common.js",
-		"/I/websites/oval/vendor/composer/autoload_files.php",
-		"/C/Users/creatix/Downloads/productive_funcs.js"
+		"/I/websites/oval/vendor/composer/autoload_files.php"
 	],
 	"find":
 	{
@@ -877,7 +909,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -886,15 +918,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7444,
+						"buffer_size": 8752,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6468,
-								6468
+								8703,
+								8703
 							]
 						],
 						"settings":
@@ -903,11 +935,6 @@
 							"auto_name": "Customization",
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -918,36 +945,11 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
@@ -957,15 +959,401 @@
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
 							],
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3929.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/op/batch-issue.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5143,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2537,
+								2537
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "admin-patient-usage.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2359,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1753,
+								1753
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "op-batch-issue.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6054,
+								6054
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2916.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/admin/patient-usage.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3446,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1521,
+								1521
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 162.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

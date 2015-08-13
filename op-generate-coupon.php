@@ -20,6 +20,24 @@ $usernames = array();
 if ($user->isOperator()) {
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+		$plan_type = $_POST['plan-type'];
+		$customer_id = $_POST['customer-id'];
+
+		if (!isset($_POST['coupon-valid-till']) || strlen($_POST['coupon-valid-till']) < 10) {
+			$flash->add('Invalid date');
+			header('Location: ' . Config::$site_url . 'op-customer.php?customer-id=' . $customer_id);
+			die;
+		} else {
+			try {
+				$coupon_valid_till = \Carbon\Carbon::createFromFormat('m-d-Y', $_POST['coupon-valid-till']);
+
+			} catch (exception $e) {
+				$flash->add('Invalid date');
+				header('Location: ' . Config::$site_url . 'op-customer.php?customer-id=' . $customer_id);
+				die;
+			}
+		}
+
 		$generator
 			->setUppercase(false)
 			->setLowercase(true)
@@ -30,9 +48,15 @@ if ($user->isOperator()) {
 		$coupon_usernames = $capsule::table('coupons')
 			->select('username')
 			->get();
+		$batch_usernames = $capsule::table('batch_coupon')
+			->select('coupon')
+			->get();
 
 		foreach ($coupon_usernames as $usr) {
 			array_push($usernames, $usr['username']);
+		}
+		foreach ($batch_usernames as $usr) {
+			array_push($usernames, $usr['coupon']);
 		}
 
 		$username = $generator->generatePassword();
@@ -42,9 +66,6 @@ if ($user->isOperator()) {
 		}
 
 		$password = $generator->generatePassword();
-
-		$plan_type = $_POST['plan-type'];
-		$customer_id = $_POST['customer-id'];
 
 		$customer_plan = $capsule::table('couponplans')
 			->where('planname', '=', $plan_type)
@@ -74,13 +95,23 @@ if ($user->isOperator()) {
 					'updated_at' => Carbon::now(),
 				));
 
-			$capsule::table('radcheck')
-				->insert(array(
+			$radcheck_data = array(
+				array(
 					'username' => strtoupper($username),
 					'attribute' => 'Cleartext-Password',
 					'op' => ':=',
 					'value' => strtoupper($password),
-				));
+				),
+				array(
+					'username' => strtoupper($username),
+					'attribute' => 'Expiration',
+					'op' => ':=',
+					'value' => $coupon_valid_till->format('d M Y'),
+				),
+			);
+
+			$capsule::table('radcheck')
+				->insert($radcheck_data);
 
 			$capsule::table('radusergroup')
 				->insert(array(
