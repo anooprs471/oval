@@ -17,7 +17,7 @@ class Images {
 		$this->capsule->addConnection([
 			'driver' => 'mysql',
 			'host' => 'localhost',
-			'database' => 'ovalinfo',
+			'database' => 'oval',
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
@@ -153,10 +153,16 @@ class Images {
 			//Get the temp file path
 			$tmpFilePath = $_FILES[$file]['tmp_name'][$i];
 
+			$name_splt = explode(".", $tmpFilePath);
+
+			$file_ext = end($name_splt);
+
+			$filename = 'scroll-add-' . $i . '.' . $file_ext;
+
 			//Make sure we have a filepath
 			if ($tmpFilePath != "") {
 				//Setup our new file path
-				$newFilePath = $this->uploaddir . $_FILES[$file]['name'][$i];
+				$newFilePath = $this->uploaddir . $filename;
 
 				//Upload the file into the temp dir
 				if (move_uploaded_file($tmpFilePath, $newFilePath)) {
@@ -169,7 +175,7 @@ class Images {
 					     ->save($newFilePath);
 
 					//Handle other code here
-					array_push($insert, array('image_name' => $_FILES[$file]['name'][$i], 'type' => 'scroll-ad'));
+					array_push($insert, array('image_name' => $filename, 'type' => 'scroll-ad'));
 
 				}
 			}

@@ -11,34 +11,32 @@ $blade = new Blade($views, $cache);
 
 $user = new UserAccounts;
 $msg = '';
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-	
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$remember = false;
-	if (isset($_POST['remember']) && $_POST['remember'] == 'remember'){
+	if (isset($_POST['remember']) && $_POST['remember'] == 'remember') {
 		$remember = true;
 	}
 
 	$filtered_username = filter_var($username, FILTER_SANITIZE_STRING);
 	$filtered_password = filter_var($password, FILTER_SANITIZE_STRING);
 
+	$msg = $user->login($filtered_username, $filtered_password, $remember);
 
-	$msg = $user->login($filtered_username,$filtered_password,$remember);
-
-	if($user->isLoggedIn()){
-		if($user->isOperator()) {
-			header('Location: '.Config::$site_url.'op-home.php');
-		}elseif ($user->isAdmin()) {
-			header('Location: '.Config::$site_url.'admin-home.php');
+	if ($user->isLoggedIn()) {
+		if ($user->isOperator()) {
+			header('Location: ' . Config::$site_url . 'op-home.php');
+		} elseif ($user->isAdmin()) {
+			header('Location: ' . Config::$site_url . 'admin-home.php');
 		}
 	}
 
 }
 
 $data = array(
-	'msg'	=>	$msg
+	'msg' => $msg,
 );
-		
-echo $blade->view()->make('login',$data);
 
+echo $blade->view()->make('login', $data);

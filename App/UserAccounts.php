@@ -20,7 +20,7 @@ class UserAccounts {
 		$this->capsule->addConnection([
 			'driver' => 'mysql',
 			'host' => 'localhost',
-			'database' => 'ovalinfo',
+			'database' => 'oval',
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
@@ -209,7 +209,7 @@ class UserAccounts {
 		try {
 			$throttle = Sentry::findThrottlerByUserId($user_id);
 
-			if ($banned = $throttle->isSuspended()) {
+			if ($banned = $throttle->isBanned()) {
 				return true;
 			} else {
 				return false;
@@ -231,14 +231,14 @@ class UserAccounts {
 			$throttle = Sentry::findThrottlerByUserId($user_id);
 
 			// Suspend the user
-			$throttle->suspend();
+			$throttle->ban();
 		} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
 			//echo 'User was not found.';
 		}
 	}
 
 	/**
-	 * suspend user
+	 * activate banned user
 	 *
 	 * @return void
 	 **/
@@ -249,7 +249,7 @@ class UserAccounts {
 			$throttle = Sentry::findThrottlerByUserId($user_id);
 
 			// Unsuspend the user
-			$throttle->unsuspend();
+			$throttle->unban();
 		} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
 			//echo 'User was not found.';
 		}
@@ -314,7 +314,18 @@ class UserAccounts {
 	}
 
 	/**
-	 * change password by admin
+	 * return a passcode
+	 *
+	 * @return string
+	 * @author
+	 **/
+	public function UserPasscode() {
+		return $this->user->getResetPasswordCode();
+
+	}
+
+	/**
+	 * change password for all the users
 	 *
 	 * @return string
 	 * @author

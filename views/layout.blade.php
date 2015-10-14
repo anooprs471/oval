@@ -46,86 +46,116 @@
     <![endif]-->
 </head>
 <body>
-<section id="container">
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
+    <section id="container">
+        <!--header start-->
+        <header class="header fixed-top clearfix">
+            <!--logo start-->
+            <div class="brand">
 
-    @if($type == 'admin')
-    <a href="{{$site_url}}admin-home.php" class="logo">
-        <img src="{{ $site_url }}images/client-files/{{ $logo_file }}" alt="">
-    </a>
-    @endif
-    @if($type == 'operator')
-    <a href="{{$site_url}}op-home.php" class="logo">
-        <img src="{{ $site_url }}images/client-files/{{ $logo_file }}" alt="">
-    </a>
-    @endif
-
-
-
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-</div>
-<!--logo end-->
-
-
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/avatar1_small.jpg">
-                <span class="username">{{$name}}</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="{{$site_url}}logout.php"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-<!--sidebar start-->
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->
-        <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    @if($type == 'admin')
-                        <a class="active" href="{{$site_url}}admin-home.php">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    @elseif($type == 'operator')
-                        <a class="active" href="{{$site_url}}op-home.php">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    @endif
-                </li>
                 @if($type == 'admin')
+                <a href="{{$site_url}}admin-home.php" class="logo">
+                    <img src="{{ $site_url }}images/client-files/{{ $logo_file }}" alt="">
+                </a>
+                @endif
+                @if($type == 'operator')
+                <a href="{{$site_url}}op-home.php" class="logo">
+                    <img src="{{ $site_url }}images/client-files/{{ $logo_file }}" alt="">
+                </a>
+                @endif
 
-                    <li class="sub-menu">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>Users</span>
+
+
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars"></div>
+                </div>
+            </div>
+            <!--logo end-->
+
+
+            <div class="top-nav clearfix">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="images/avatar1_small.jpg">
+                            <span class="username">{{$name}}</span>
+                            <b class="caret"></b>
                         </a>
-                        <ul class="sub">
-                            <li><a href="{{$site_url}}admin-list-users.php">All Users</a></li>
-                            <li><a href="{{$site_url}}admin-create-user.php">Create User</a></li>
+                        <ul class="dropdown-menu extended logout">
+                            <li><a href="{{$site_url}}logout.php"><i class="fa fa-key"></i> Log Out</a></li>
                         </ul>
                     </li>
 
-                    <li class="sub-menu">
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse">
+                <!-- sidebar menu start-->
+                <div class="leftside-navigation">
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        <li>
+                            @if($type == 'admin')
+                            <a class="active" href="{{$site_url}}admin-home.php">
+                                <i class="fa fa-dashboard"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            @elseif($type == 'operator')
+                            <a class="active" href="{{$site_url}}op-home.php">
+                                <i class="fa fa-dashboard"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            @endif
+                        </li>
+                        @if($type == 'admin')
+
+                        <li class="sub-menu">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>Users</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="{{$site_url}}admin-list-users.php">All Users</a></li>
+                                <li><a href="{{$site_url}}admin-create-user.php">Create User</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>Plans</span>
+                            </a>
+                            <ul class="sub">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-laptop"></i>
+                                        <span>Pre-paid</span>
+                                    </a>
+                                    <ul class="sub">
+                                        <li><a href="{{$site_url}}admin-customer-plans.php">Plan Pricing</a></li>
+                                        <li><a href="{{$site_url}}admin-create-plan.php">Create Plan</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-laptop"></i>
+                                        <span>Post-paid</span>
+                                    </a>
+                                    <ul class="sub">
+                                        <li><a href="#">Plan Pricing</a></li>
+                                        <li><a href="#">Create Plan</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </li>
+
+                    <!--<li class="sub-menu">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
                             <span>Plans</span>
@@ -134,7 +164,7 @@
                             <li><a href="{{$site_url}}admin-customer-plans.php">Plan Pricing</a></li>
                             <li><a href="{{$site_url}}admin-create-plan.php">Create Plan</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li class="sub-menu">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
@@ -163,7 +193,7 @@
                             <span>Change Password</span>
                         </a>
                     </li>
-                @else
+                    @else
                     <li class="sub-menu">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
@@ -174,25 +204,25 @@
                             <li><a href="{{$site_url}}op-batch-issue.php">Issue Coupon</a></li>
                         </ul>
                     </li>
-                @endif
-            </ul>
-       </div>
-        <!-- sidebar menu end-->
-    </div>
-</aside>
-<!--sidebar end-->
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper">
+                    @endif
+                </ul>
+            </div>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
 
-    @yield('content')
+            @yield('content')
 
+        </section>
     </section>
-</section>
-<!--main content end-->
-<!--right sidebar start-->
+    <!--main content end-->
+    <!--right sidebar start-->
 
-<!--right sidebar end-->
+    <!--right sidebar end-->
 </section>
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
