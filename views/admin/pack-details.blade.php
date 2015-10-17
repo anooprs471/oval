@@ -70,6 +70,8 @@
 	          		Printed
 	          	@elseif ($coupon['status'] == 2)
 	          		Issued
+          		@elseif ($coupon['status'] == 4)
+	          		Cancelled
 	          	@endif
 	          </td>
 		      </tr>
@@ -100,6 +102,12 @@
 	    <input type="hidden" value="{{ $batch_id }}" name="batch-id" />
 	    <button type="submit" class="btn btn-primary">Add Coupons To Print</button>
 	    <a href="admin-clear-selection.php?batch-id={{ $batch_id }}" class="btn btn-primary">Clear All Selected Coupons</a>
+	    <hr />
+	    <form method="post" action="admin-pack-print-template.php">
+	    <input type="text" name="from-serial" />
+	    <input type="text" name="to-serial" />
+	    <button type="submit">Print</button>
+	    </form>
 			@endif
 
 	    </form>
@@ -108,7 +116,7 @@
 	    @endif
 	    @if ($selected > 0)
 	    	<hr />
-	    	<form method="post" action="admin-batch-print-template.php">
+	    	<form method="post" action="admin-pack-print-template.php">
 		    	<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
 	    		@foreach ($selected_coupons as $coupon_id)
 	    			<input type="hidden" name="coupon_id[]" value="{{ $coupon_id }}" />

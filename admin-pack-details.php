@@ -64,7 +64,7 @@ if ($user->isAdmin()) {
 			}
 		}
 		$segment->set('coupon_ids', $coupon_ids);
-		header('Location: ' . Config::$site_url . 'admin-batch-details.php?batch-id=' . $_GET['batch-id']);
+		header('Location: ' . Config::$site_url . 'admin-pack-details.php?batch-id=' . $_GET['batch-id']);
 	}
 
 	if (isset($_GET['batch-id']) && is_numeric($_GET['batch-id']) && !empty($_GET['batch-id'])) {
@@ -123,13 +123,13 @@ if ($user->isAdmin()) {
 		//var_dump($batch);die;
 
 	} else {
-		header('Location: ' . Config::$site_url . 'admin-batch-list.php');
+		header('Location: ' . Config::$site_url . 'admin-pack-list.php');
 	}
 
 	$data = array(
 		'type' => 'admin',
 		'site_url' => Config::$site_url,
-		'page_title' => "Coupon Batch",
+		'page_title' => "Coupon Pack Details",
 		'logo_file' => $images->getScreenLogo(),
 		'name' => 'Administrator',
 		'msg' => $msg,
@@ -143,7 +143,7 @@ if ($user->isAdmin()) {
 		'selected' => $selected,
 		'selected_coupons' => $segment->get('coupon_ids'),
 	);
-	echo $blade->view()->make('admin.batch-details', $data);
+	echo $blade->view()->make('admin.pack-details', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

@@ -179,6 +179,17 @@
                     <li class="sub-menu">
                         <a href="#">
                             <i class="fa fa-laptop"></i>
+                            <span>Coupon Packs</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{$site_url}}admin-pack-create.php">Create Pack Batch</a></li>
+                            <li><a href="{{$site_url}}admin-pack-list.php">List All Pack</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
                             <span>Images</span>
                         </a>
                         <ul class="sub">

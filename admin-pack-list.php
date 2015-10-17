@@ -70,7 +70,7 @@ if ($user->isAdmin()) {
 	$data = array(
 		'type' => 'admin',
 		'site_url' => Config::$site_url,
-		'page_title' => "Coupon Batch",
+		'page_title' => "Coupon Packs",
 		'logo_file' => $images->getScreenLogo(),
 		'name' => 'Administrator',
 		'msg' => $msg,
@@ -78,7 +78,7 @@ if ($user->isAdmin()) {
 		'errors' => $err,
 		'batches' => $info,
 	);
-	echo $blade->view()->make('admin.batch-list', $data);
+	echo $blade->view()->make('admin.pack-list', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }
