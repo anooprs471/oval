@@ -116,7 +116,7 @@ if ($user->isAdmin()) {
 		$batch_coupons = $capsule::table('batch_coupon')
 			->where('batch_id', '=', $batch_id)
 			->whereNotIn('id', $coupon_ids)
-			->orderBy('status', 'DESC')
+			->orderBy('batch_serial_number', 'ASC')
 			->take($per_page)
 			->skip($skip)
 			->get();
