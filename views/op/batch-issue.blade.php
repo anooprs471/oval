@@ -52,7 +52,7 @@
 
         @endif
 
-        @if ($form_stage == 2)
+        @if ($form_stage == 2 && !$expired)
 				<input type="hidden" name="username" value="{{$form['username']}}" />
 				<input type="hidden" name="password" value="{{$form['password']}}" />
 

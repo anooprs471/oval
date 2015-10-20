@@ -65,6 +65,10 @@ if ($user->isOperator()) {
 						->join('couponplans', 'batch.plan', '=', 'couponplans.id')
 						->get();
 				}
+				$expired = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('M d Y', $plan[0]['expiry_on']));
+				if ($expired) {
+					array_push($err, 'This Coupon Pack has expired. Get another coupon');
+				}
 
 				if (empty($coupon)) {
 					array_push($err, 'No username found. try again');
@@ -356,6 +360,7 @@ if ($user->isOperator()) {
 		'errors' => $err,
 		'form' => $form_data,
 		'form_stage' => $form_stage,
+		'expired' => $expired,
 	);
 	echo $blade->view()->make('op.batch-issue', $data);
 } else {
