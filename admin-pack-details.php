@@ -51,6 +51,7 @@ if ($user->isAdmin()) {
 	$page = 0;
 	$skip = 0;
 	$coupon_ids = array();
+	$expired = false;
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if ($segment->get('coupon_ids') != null) {
@@ -120,7 +121,12 @@ if ($user->isAdmin()) {
 			->take($per_page)
 			->skip($skip)
 			->get();
-		//var_dump($batch);die;
+
+		$batch = $capsule::table('batch')
+			->where('batch.id', '=', $batch_id)
+			->join('couponplans', 'couponplans.id', '=', 'batch.plan')
+			->get();
+		$expired = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('M d Y', $batch[0]['expiry_on']));
 
 	} else {
 		header('Location: ' . Config::$site_url . 'admin-pack-list.php');
@@ -142,6 +148,7 @@ if ($user->isAdmin()) {
 		'total_pages' => $total_pages,
 		'selected' => $selected,
 		'selected_coupons' => $segment->get('coupon_ids'),
+		'expired' => $expired,
 	);
 	echo $blade->view()->make('admin.pack-details', $data);
 } else {

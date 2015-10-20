@@ -33,6 +33,7 @@
 				<strong>You have selected</strong> {{ $selected }} coupons to print.
 			</div>
 			@endif
+
 			@if (count($coupons) > 0)
 			<?php $check = 0;?>
 			<form method="POST" action="">
@@ -93,22 +94,31 @@
 					</ul>
 				</div>
 				@endif
-				<p>
+
+				@if ($expired)
+				<p>This Pack has Expired</p>
+
+				@else
+
+
 					@if ($check > 0)
-					<a href="" class="batch-coupon-checkall"><i class="fa fa-check"></i> Check All</a> | <a href="" class="batch-coupon-uncheckall"><i class="fa fa-times"></i> Uncheck All</a>
+					<p>
+						<a href="" class="batch-coupon-checkall"><i class="fa fa-check"></i> Check All</a> | <a href="" class="batch-coupon-uncheckall"><i class="fa fa-times"></i> Uncheck All</a>
 
-				</p>
-				<hr />
-				<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
-				<button type="submit" class="btn btn-primary">Add Coupons To Print</button>
-				<a href="admin-clear-selection.php?batch-id={{ $batch_id }}" class="btn btn-primary">Clear All Selected Coupons</a>
+					</p>
+					<hr />
+					<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
+					<button type="submit" class="btn btn-primary">Add Coupons To Print</button>
+					<a href="admin-clear-selection.php?batch-id={{ $batch_id }}" class="btn btn-primary">Clear All Selected Coupons</a>
 
+					@endif
 				@endif
 
 			</form>
+			@if (!$expired)
 			<hr />
 			<form method="post" action="admin-pack-print-template.php" class="form-horizontal">
-			<div class="col-md-2">
+				<div class="col-md-2">
 					<div class="form-group">
 						<label>Serials From</label>
 						<input type="text" name="from-serial" class="form-control" />
@@ -123,8 +133,8 @@
 				</div>
 				<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
 				<div class="col-md-2">
-				<label>&nbsp;</label><br />
-								<button type="submit" class="btn btn-danger">Print</button>
+					<label>&nbsp;</label><br />
+					<button type="submit" class="btn btn-danger">Print</button>
 				</div>
 			</form>
 			@else
@@ -141,6 +151,8 @@
 
 			</form>
 			@endif
+			@endif
+
 
 
 
