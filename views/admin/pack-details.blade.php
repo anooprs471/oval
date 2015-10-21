@@ -71,7 +71,7 @@
 								Printed
 								@elseif ($coupon['status'] == 2)
 								Issued
-								@elseif ($coupon['status'] == 4)
+								@elseif ($coupon['status'] == 3)
 								Cancelled
 								@endif
 							</td>
@@ -115,7 +115,7 @@
 				@endif
 
 			</form>
-			@if (!$expired)
+			@if (!$expired && $coupon_available > 0)
 			<hr />
 			<form method="post" action="admin-pack-print-template.php" class="form-horizontal">
 				<div class="col-md-2">
@@ -140,17 +140,17 @@
 			@else
 			no coupons
 			@endif
-			@if ($selected > 0)
-			<hr />
-			<form method="post" action="admin-pack-print-template.php">
-				<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
-				@foreach ($selected_coupons as $coupon_id)
-				<input type="hidden" name="coupon_id[]" value="{{ $coupon_id }}" />
-				@endforeach
-				<button type="submit" class="btn btn-success"><i class="fa fa-print"> </i> Print Coupons</button>
+				@if ($selected > 0)
+				<hr />
+				<form method="post" action="admin-pack-print-template.php">
+					<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
+					@foreach ($selected_coupons as $coupon_id)
+					<input type="hidden" name="coupon_id[]" value="{{ $coupon_id }}" />
+					@endforeach
+					<button type="submit" class="btn btn-success"><i class="fa fa-print"> </i> Print Coupons</button>
 
-			</form>
-			@endif
+				</form>
+				@endif
 			@endif
 
 

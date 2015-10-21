@@ -53,6 +53,10 @@ if ($user->isAdmin()) {
 	$coupon_ids = array();
 	$expired = false;
 
+	$coupon_available = $capsule::table('batch_coupon')
+		->where('status', '=', 0)
+		->where('batch_id', '=', $_GET['batch-id'])
+		->count();
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if ($segment->get('coupon_ids') != null) {
 
@@ -114,6 +118,7 @@ if ($user->isAdmin()) {
 			$skip = 0;
 			$current_page = 1;
 		}
+
 		$batch_coupons = $capsule::table('batch_coupon')
 			->where('batch_id', '=', $batch_id)
 			->whereNotIn('id', $coupon_ids)
@@ -149,6 +154,7 @@ if ($user->isAdmin()) {
 		'selected' => $selected,
 		'selected_coupons' => $segment->get('coupon_ids'),
 		'expired' => $expired,
+		'coupon_available' => $coupon_available,
 	);
 	echo $blade->view()->make('admin.pack-details', $data);
 } else {
