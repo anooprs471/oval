@@ -4,7 +4,8 @@
 
 <div class="col-md-12">
 
-	<section class="panel">
+	<section clas
+	s="panel">
 		<header class="panel-heading">
 			Pack List
 
@@ -87,7 +88,7 @@ $page++?>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="row">
-						<form action="admin-batch-print-template.php" method="POST" role="form" >
+						<form action="admin-pack-print-template.php" method="POST" role="form" >
 
 							@foreach ($coupon_ids as $id)
 							<input type="hidden" name="coupon_id[]" value="{{$id}}" />

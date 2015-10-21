@@ -33,6 +33,7 @@ $msg = '';
 //default row colum
 $ROWS = 5;
 $COLS = 5;
+$from = $to = 0;
 
 $form_data = array(
 	'batch-name' => '',
@@ -67,7 +68,19 @@ if ($user->isAdmin()) {
 				->where('batch_coupon.batch_id', '=', $batch_id)
 				->join('batch', 'batch_coupon.batch_id', '=', 'batch.id')
 				->join('couponplans', 'couponplans.id', '=', 'batch.plan')
+				->select(
+					'batch_coupon.id as coupon_id',
+					'batch_coupon.batch_serial_number as batch_serial_number',
+					'batch_coupon.coupon as coupon',
+					'batch_coupon.password as password',
+					'couponplans.planname as planname',
+					'couponplans.price as price'
+
+				)
 				->get();
+			foreach ($coupons as $coupon) {
+				array_push($coupon_ids, $coupon['coupon_id']);
+			}
 		} else {
 
 			if (!isset($_POST['coupon_id']) || empty($_POST['coupon_id'])) {
@@ -116,6 +129,8 @@ if ($user->isAdmin()) {
 		'cols' => $COLS,
 		'coupon_ids' => $coupon_ids,
 		'batch_id' => $batch_id,
+		'from-serial' => $from,
+		'from-serial' => $to,
 	);
 	echo $blade->view()->make('admin.pack-print-template', $data);
 } else {
