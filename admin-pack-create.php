@@ -83,7 +83,7 @@ if ($user->isAdmin()) {
 				'batch_name' => $batch_name,
 				'no_of_coupons' => $no_of_coupons,
 				'plan' => $batch_plan,
-				'expiry_on' => Carbon::now()->addDays($expires_on)->format('M d Y'),
+				'expiry_on' => Carbon::now()->addDays($expires_on)->format('Y-m-d H:i:s'),
 				'created_at' => Carbon::now(),
 			);
 

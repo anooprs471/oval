@@ -45,9 +45,9 @@ $form_data = array(
 	'batch-plan' => '',
 );
 
-if ($user->isAdmin()) {
+if ($user->isOperator()) {
 
-	$per_page = 25;
+	$per_page = 5;
 	$page = 0;
 	$skip = 0;
 	$coupon_ids = array();
@@ -99,6 +99,7 @@ if ($user->isAdmin()) {
 
 		$all_batch = $capsule::table('batch_coupon')
 			->where('batch_id', '=', $batch_id)
+			->where('status', '=', 1)
 			->whereNotIn('id', $coupon_ids)
 			->get();
 		$total_records = count($all_batch);
@@ -121,6 +122,8 @@ if ($user->isAdmin()) {
 
 		$batch_coupons = $capsule::table('batch_coupon')
 			->where('batch_id', '=', $batch_id)
+			->where('status', '=', 1)
+
 			->whereNotIn('id', $coupon_ids)
 			->orderBy('batch_serial_number', 'ASC')
 			->take($per_page)
@@ -138,7 +141,7 @@ if ($user->isAdmin()) {
 	}
 
 	$data = array(
-		'type' => 'admin',
+		'type' => 'operator',
 		'site_url' => Config::$site_url,
 		'page_title' => "Coupon Pack Details",
 		'logo_file' => $images->getScreenLogo(),
@@ -156,7 +159,7 @@ if ($user->isAdmin()) {
 		'expired' => $expired,
 		'coupon_available' => $coupon_available,
 	);
-	echo $blade->view()->make('admin.pack-details', $data);
+	echo $blade->view()->make('op.pack-details', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

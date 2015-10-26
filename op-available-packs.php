@@ -25,19 +25,19 @@ $flash_msg = '';
 if ($flash->hasFlashMessage()) {
 	$flash_msg = $flash->show();
 }
-$info = array();
 $err = array();
 $msg = '';
+$form_stage = 1;
+$file_err = false;
 
 $form_data = array(
-	'batch-name' => '',
-	'no-of-coupons' => '',
-	'batch-plan' => '',
 );
+$info = array();
 
-if ($user->isAdmin()) {
+if ($user->isOperator()) {
 
 	$batches = $capsule::table('batch')
+		->where('expiry_on', '>', \Carbon\Carbon::now())
 		->orderBy('created_at', 'DESC')
 		->get();
 
@@ -66,18 +66,21 @@ if ($user->isAdmin()) {
 		));
 	}
 
+	//die(var_dump($info));
+
 	$data = array(
-		'type' => 'admin',
+		'type' => 'operator',
 		'site_url' => Config::$site_url,
-		'page_title' => "Coupon Packs",
+		'page_title' => "Coupon Batch",
 		'logo_file' => $images->getScreenLogo(),
-		'name' => 'Administrator',
+		'name' => 'Operator',
 		'msg' => $msg,
 		'flash' => $flash_msg,
 		'errors' => $err,
+		'form' => $form_data,
 		'batches' => $info,
 	);
-	echo $blade->view()->make('admin.pack-list', $data);
+	echo $blade->view()->make('op.pack-list', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }
