@@ -37,7 +37,7 @@ $batch = array();
 $err = array();
 $msg = '';
 $selected = 0;
-$selected_coupons = array();
+$serials = array();
 
 $form_data = array(
 	'batch-name' => '',
@@ -54,6 +54,8 @@ if ($user->isOperator()) {
 			$from = $_POST['from-serial'];
 			$to = $_POST['to-serial'];
 
+			$batch_id = $_POST['batch-id'];
+
 			if ($to <= $from) {
 				$to = $from;
 			}
@@ -62,60 +64,57 @@ if ($user->isOperator()) {
 				array_push($serials, $i);
 			}
 
+			$batch = $capsule::table('batch')
+				->where('id', '=', $batch_id)
+				->first();
+
+			$plan = $capsule::table('couponplans')
+				->where('id', '=', $batch['plan'])
+				->first();
+
 			$coupons = $capsule::table('batch_coupon')
 				->whereIn('batch_serial_number', $serials)
 				->where('status', '=', 1)
 				->where('batch_id', '=', $batch_id)
 				->get();
 
+			//die(var_dump($coupons));
+
+			foreach ($coupons as $coupon) {
+
+				$radcheck_data = array(
+					array(
+						'username' => $coupon['coupon'],
+						'attribute' => 'Cleartext-Password',
+						'op' => ':=',
+						'value' => $coupon['password'],
+					),
+					array(
+						'username' => $coupon['coupon'],
+						'attribute' => 'Expiration',
+						'op' => ':=',
+						'value' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])->format('d M Y'),
+					),
+				);
+
+				$capsule::table('radcheck')
+					->insert($radcheck_data);
+
+				$capsule::table('radusergroup')
+					->insert(array(
+						'username' => $coupon['coupon'],
+						'groupname' => $plan['planname'],
+						'priority' => 0,
+					));
+
+				$capsule::table('batch_coupon')
+					->where('id', '=', $coupon['id'])
+					->update(array('status' => 2));
+			}
+
 		}
 
-		$coupon_id = $_POST['coupon-id'];
-
-		$batch_id = $_POST['batch-id'];
-
-		$batch = $capsule::table('batch')
-			->where('id', '=', $batch_id)
-			->first();
-
-		$coupon = $capsule::table('batch_coupon')
-			->where('id', '=', $coupon_id)
-			->first();
-
-		$plan = $capsule::table('couponplans')
-			->where('id', '=', $batch['plan'])
-			->first();
-
-		$radcheck_data = array(
-			array(
-				'username' => $coupon['coupon'],
-				'attribute' => 'Cleartext-Password',
-				'op' => ':=',
-				'value' => $coupon['password'],
-			),
-			array(
-				'username' => $coupon['coupon'],
-				'attribute' => 'Expiration',
-				'op' => ':=',
-				'value' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])->format('d M Y'),
-			),
-		);
-
-		$capsule::table('radcheck')
-			->insert($radcheck_data);
-
-		$capsule::table('radusergroup')
-			->insert(array(
-				'username' => $coupon['coupon'],
-				'groupname' => $plan['planname'],
-				'priority' => 0,
-			));
-
-		$capsule::table('batch_coupon')
-			->where('id', '=', $coupon_id)
-			->update(array('status' => 2));
-
-		$flash->add('Successfully activated coupon');
+		$flash->add('Successfully activated coupons');
 		header('Location: ' . Config::$site_url . 'op-pack-details.php?batch-id=' . $batch_id);
 	}
 
