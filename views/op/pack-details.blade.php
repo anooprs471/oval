@@ -64,16 +64,11 @@
 
 							</td>
 							<td>
-								@if ($coupon['status'] == 0)
-								Unused
-								<?php $check = 1;?>
-								@elseif ($coupon['status'] == 1)
-								Printed
-								@elseif ($coupon['status'] == 2)
-								Issued
-								@elseif ($coupon['status'] == 3)
-								Cancelled
-								@endif
+								<form method="post">
+									<input type="hidden" name="batch-id" value="{{ $batch_id }}" />
+									<input type="hidden" name="coupon-id" value="{{ $coupon['id'] }}" />
+									<button>Issue Coupon</button>
+								</form>
 							</td>
 						</tr>
 						@endforeach
@@ -95,29 +90,11 @@
 				</div>
 				@endif
 
-				@if ($expired)
-				<p>This Pack has Expired</p>
-
-				@else
-
-
-				@if ($check > 0)
-				<p>
-					<a href="" class="batch-coupon-checkall"><i class="fa fa-check"></i> Check All</a> | <a href="" class="batch-coupon-uncheckall"><i class="fa fa-times"></i> Uncheck All</a>
-
-				</p>
-				<hr />
-				<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
-				<button type="submit" class="btn btn-primary">Add Coupons To Print</button>
-				<a href="admin-clear-selection.php?batch-id={{ $batch_id }}" class="btn btn-primary">Clear All Selected Coupons</a>
-
-				@endif
-				@endif
 
 			</form>
-			@if (!$expired && $coupon_available > 0)
+
 			<hr />
-			<form method="post" action="admin-pack-print-template.php" class="form-horizontal">
+			<form method="post" action="op-pack-activate-serial.php" class="form-horizontal">
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Serials From</label>
@@ -134,12 +111,10 @@
 				<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
 				<div class="col-md-2">
 					<label>&nbsp;</label><br />
-					<button type="submit" class="btn btn-danger">Print</button>
+					<button type="submit" class="btn btn-danger">Activate</button>
 				</div>
 			</form>
-			@else
-			no coupons
-			@endif
+
 
 			@endif
 
