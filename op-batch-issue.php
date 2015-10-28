@@ -31,7 +31,7 @@ $err = array();
 $msg = '';
 $form_stage = 1;
 $file_err = false;
-
+$expired = true;
 $form_data = array(
 	'coupon_valid_till' => '',
 	'username' => '',
