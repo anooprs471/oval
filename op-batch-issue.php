@@ -65,7 +65,7 @@ if ($user->isOperator()) {
 						->join('couponplans', 'batch.plan', '=', 'couponplans.id')
 						->get();
 				}
-				$expired = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('M d Y', $plan[0]['expiry_on']));
+				$expired = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $plan[0]['expiry_on']));
 				if ($expired) {
 					array_push($err, 'This Coupon Pack has expired. Get another coupon');
 				}

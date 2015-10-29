@@ -153,7 +153,11 @@
 				@endif
 			@endif
 
-
+		<hr />
+		<form method="post" action="admin-pack-cancel-coupons.php" id="pack-cancel-form">
+					<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
+					<button type="submit" class="btn btn-success">Cancel This Pack</button>
+		</form>
 
 
 

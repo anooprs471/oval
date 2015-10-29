@@ -86,6 +86,18 @@
             e.preventDefault();
          })
 
+         $('#pack-cancel-form .btn').click(function(e){
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to cancel this pack?", function(result) {
+              if(result === true){
+                console.log(result);
+                $('#pack-cancel-form').submit();
+              }
+            }); 
+         })
+
+         
+
 
 
         /*==Sidebar Toggle==*/

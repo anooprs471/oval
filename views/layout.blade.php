@@ -283,7 +283,7 @@
 
 <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/jquery.form.min.js"></script>
-
+<script type="text/javascript" src="js/bootbox.min.js"></script>
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 
