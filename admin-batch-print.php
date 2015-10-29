@@ -95,7 +95,7 @@ if ($user->isAdmin()) {
 	// $mpdf->WriteHTML($bootstrap_css, 1);
 	// $mpdf->WriteHTML($stylesheet, 1);
 
-	$html = $blade->view()->make('batch', $data);
+	$html = $blade->view()->make('pack', $data);
 	//echo $html;die;
 	$mpdf->WriteHTML($html->__toString());
 

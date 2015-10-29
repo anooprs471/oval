@@ -64,10 +64,13 @@ if ($user->isOperator()) {
 						->where('batch.id', '=', $coupon[0]['batch_id'])
 						->join('couponplans', 'batch.plan', '=', 'couponplans.id')
 						->get();
-				}
-				$expired = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $plan[0]['expiry_on']));
-				if ($expired) {
-					array_push($err, 'This Coupon Pack has expired. Get another coupon');
+
+					///var_dump($plan);die;
+
+					$expired = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $plan[0]['expiry_on']));
+					if ($expired) {
+						array_push($err, 'This Coupon Pack has expired. Get another coupon');
+					}
 				}
 
 				if (empty($coupon)) {
