@@ -63,6 +63,7 @@ if ($user->isAdmin()) {
 			'printed' => count($printed_coupons),
 			'created_at' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['created_at'])->format('Y M, d'),
 			'expires' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])->format('Y M, d'),
+			'expiry_status' => \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])),
 		));
 	}
 

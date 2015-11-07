@@ -5720,3 +5720,14 @@ right: -1px;
 .form-control {
     color: #000;
 }
+
+tr.expired,
+tr.expired a {
+    color: #fa8564;
+}
+
+tr.not-expired,
+tr.not-expired a {
+    color: #95b75d;
+    font-weight: bold;
+}

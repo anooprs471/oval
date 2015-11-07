@@ -157,7 +157,7 @@ if ($user->isAdmin()) {
 
 			$flash->add('Successfully Created A Batch');
 
-			header('Location: ' . Config::$site_url . 'admin-batch-list.php');
+			header('Location: ' . Config::$site_url . 'admin-pack-list.php');
 
 		}
 
@@ -175,7 +175,7 @@ if ($user->isAdmin()) {
 		'errors' => $err,
 		'plans' => $current_coupon_plans,
 	);
-	echo $blade->view()->make('admin.batch-create', $data);
+	echo $blade->view()->make('admin.pack-create', $data);
 } else {
 	header('Location: ' . Config::$site_url . 'logout.php');
 }

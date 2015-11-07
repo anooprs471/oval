@@ -38,7 +38,7 @@ $err = array();
 $msg = '';
 $selected = 0;
 $selected_coupons = array();
-
+$serials = array();
 $form_data = array(
 	'batch-name' => '',
 	'no-of-coupons' => '',
@@ -49,9 +49,25 @@ if ($user->isAdmin()) {
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+		if (isset($_POST['from-serial']) && !empty($_POST['from-serial']) && is_numeric($_POST['from-serial']) && isset($_POST['to-serial']) && !empty($_POST['to-serial']) && is_numeric($_POST['to-serial'])) {
+
+			$from = $_POST['from-serial'];
+			$to = $_POST['to-serial'];
+
+		}
+
+		if ($to <= $from) {
+			$to = $from;
+		}
+
+		for ($i = $from; $i <= $to; $i++) {
+			array_push($serials, $i);
+		}
+
 		$batch_id = $_POST['batch-id'];
 
 		$capsule::table('batch_coupon')
+			->whereIn('batch_serial_number', $serials)
 			->where('status', '<', 2)
 			->where('batch_id', '=', $batch_id)
 			->delete();
@@ -73,11 +89,37 @@ if ($user->isAdmin()) {
 						'no_of_coupons' => $batch_count,
 					)
 				);
+
+			$issued_coupons = $capsule::table('batch_coupon')
+				->where('batch_id', '=', $batch_id)
+				->where('status', '>', 1)
+				->get();
+
+			//var_dump($issued_coupons);die;
+
+			foreach ($issued_coupons as $coupon) {
+				$capsule::table('radcheck')
+					->insert(array(
+						'username' => $coupon['coupon'],
+						'attribute' => 'Auth-Type',
+						'op' => ':=',
+						'value' => 'Reject',
+					));
+
+				$capsule::table('batch_coupon')
+					->where('batch_id', '=', $batch_id)
+					->where('coupon', '=', $coupon['coupon'])
+					->update(
+						array(
+							'status' => 3,
+						)
+					);
+			}
 		}
 
 		$flash->add('Successfully Updated');
 
-		header('Location: ' . Config::$site_url . 'admin-pack-list.php');
+		header('Location: ' . Config::$site_url . 'admin-pack-details.php?batch-id=' . $batch_id);
 
 	}
 } else {

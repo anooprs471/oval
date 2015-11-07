@@ -33,9 +33,9 @@
 				</thead>
 				<tbody>
 					@foreach ($batches as $batch)
-					<tr class="gradeC">
+					<tr class="gradeC {{ ($batch['expiry_status'])?'expired':'not-expired' }}">
 						<td>
-						<a href="{{$site_url}}admin-pack-details.php?batch-id={{$batch['id']}}">{{$batch['batch_name']}}</a>
+						<a href="{{$site_url}}admin-pack-details.php?batch-id={{$batch['id']}}">{{ucwords($batch['batch_name'])}}</a>
 							<br />
 
 						</td>

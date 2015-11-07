@@ -110,6 +110,37 @@ if ($user->isOperator()) {
 				$capsule::table('batch_coupon')
 					->where('id', '=', $coupon['id'])
 					->update(array('status' => 2));
+
+				$dummy_customer = array(
+					'patient_id' => 'DCID_' . \Carbon\Carbon::now()->format('Ymd_his'),
+					'customer_name' => 'PACK_SERIAL_ACTV',
+					'mobile_number' => 'NO DATA',
+					'id_proof_type' => 'NO DATA',
+					'id_proof_number' => 'NO DATA',
+					'id_proof_filename' => 'NO DATA',
+					'operator_id' => $user->getCurrentId(),
+					'created_at' => \Carbon\Carbon::now(),
+					'updated_at' => \Carbon\Carbon::now(),
+				);
+
+				$dummy_cust_id = $capsule::table('customers')
+					->insertGetId($dummy_customer);
+
+				$coupon_data = array(
+					'customer_id' => $dummy_cust_id,
+					'op_id' => $user->getCurrentId(),
+					'patient_id' => $dummy_customer['patient_id'],
+					'username' => $coupon['coupon'],
+					'password' => $coupon['password'],
+					'coupon_type' => $plan['planname'],
+					'complementary' => 0,
+					'created_at' => \Carbon\Carbon::now(),
+					'updated_at' => \Carbon\Carbon::now(),
+				);
+
+				$capsule::table('coupons')
+					->insert($coupon_data);
+
 			}
 
 		}
