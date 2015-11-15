@@ -80,6 +80,8 @@ if ($user->isAdmin()) {
 			$capsule::table('batch')
 				->where('id', '=', $batch_id)
 				->delete();
+			$flash->add('Pack List Updated');
+			header('Location: ' . Config::$site_url . 'admin-pack-list.php');
 
 		} else {
 			$capsule::table('batch')
@@ -92,7 +94,8 @@ if ($user->isAdmin()) {
 
 			$issued_coupons = $capsule::table('batch_coupon')
 				->where('batch_id', '=', $batch_id)
-				->where('status', '>', 1)
+				->where('status', '=', 2)
+				->whereIn('batch_serial_number', $serials)
 				->get();
 
 			//var_dump($issued_coupons);die;

@@ -118,7 +118,9 @@
 					</form>
 					@if (!$expired && $coupon_available > 0)
 					<div class="row">
-						<hr />
+					<hr />
+						<h4>Print Coupons</h4>
+
 						<form method="post" action="admin-pack-print-template.php">
 							<div class="col-md-2">
 								<div class="form-group">
@@ -160,7 +162,9 @@
 					@endif
 
 					<div class="row">
+
 						<hr />
+						<h4>Cancel Coupons</h4>
 						<form method="post" action="admin-pack-cancel-coupons.php" id="pack-cancel-form">
 							<input type="hidden" value="{{ $batch_id }}" name="batch-id" />
 							<div class="col-md-2">

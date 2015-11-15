@@ -43,13 +43,13 @@ if ($user->isAdmin()) {
 
 	foreach ($batches as $batch) {
 		$issued_coupons = $capsule::table('batch_coupon')
-			->where('status', '=', 2)
+			->where('status', '>', 1)
 			->where('batch_id', '=', $batch['id'])
-			->get();
+			->count();
 		$printed_coupons = $capsule::table('batch_coupon')
 			->where('status', '>', 0)
 			->where('batch_id', '=', $batch['id'])
-			->get();
+			->count();
 		$planname = $capsule::table('couponplans')
 			->where('id', '=', $batch['plan'])
 			->first();
@@ -58,9 +58,9 @@ if ($user->isAdmin()) {
 			'id' => $batch['id'],
 			'batch_name' => $batch['batch_name'],
 			'no_of_coupons' => $batch['no_of_coupons'],
-			'issued' => count($issued_coupons),
+			'issued' => $issued_coupons,
 			'plan' => $planname['planname'],
-			'printed' => count($printed_coupons),
+			'printed' => $printed_coupons,
 			'created_at' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['created_at'])->format('Y M, d'),
 			'expires' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])->format('Y M, d'),
 			'expiry_status' => \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])),

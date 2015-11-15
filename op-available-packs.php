@@ -42,28 +42,36 @@ if ($user->isOperator()) {
 		->get();
 
 	foreach ($batches as $batch) {
+		$avail = 0;
 		$issued_coupons = $capsule::table('batch_coupon')
-			->where('status', '=', 2)
+			->where('status', '>=', 2)
 			->where('batch_id', '=', $batch['id'])
-			->get();
+			->count();
 		$printed_coupons = $capsule::table('batch_coupon')
 			->where('status', '>', 0)
 			->where('batch_id', '=', $batch['id'])
-			->get();
+			->count();
 		$planname = $capsule::table('couponplans')
 			->where('id', '=', $batch['plan'])
 			->first();
 
-		array_push($info, array(
-			'id' => $batch['id'],
-			'batch_name' => $batch['batch_name'],
-			'no_of_coupons' => $batch['no_of_coupons'],
-			'issued' => count($issued_coupons),
-			'plan' => $planname['planname'],
-			'printed' => count($printed_coupons),
-			'created_at' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['created_at'])->format('Y M, d'),
-			'expires' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])->format('Y M, d'),
-		));
+		$avail = $printed_coupons - ($issued_coupons);
+
+		//echo $batch['id'] . 'P : ' . $printed_coupons . ' I : ' . $issued_coupons . '<br />';
+
+		if ($avail > 0) {
+			array_push($info, array(
+				'id' => $batch['id'],
+				'batch_name' => $batch['batch_name'],
+				'no_of_coupons' => $batch['no_of_coupons'],
+				'issued' => $issued_coupons,
+				'plan' => $planname['planname'],
+				'printed' => $printed_coupons,
+				'created_at' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['created_at'])->format('Y M, d'),
+				'expires' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['expiry_on'])->format('Y M, d'),
+			));
+		}
+
 	}
 
 	//die(var_dump($info));
